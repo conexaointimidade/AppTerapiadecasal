@@ -404,12 +404,12 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
 </style>
 
 <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
-  import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, collection, addDoc, getDocs, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js';
-  import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-messaging.js';
-
+<!-- Firebase SDK Compat (mais estável para PWA) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
+<script>
   const firebaseConfig = {
     apiKey: "AIzaSyADaWVvsl13Oqi0zM-RcUByWB8535WC184",
     authDomain: "casamento-em-graca.firebaseapp.com",
@@ -422,30 +422,66 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
 
   const VAPID_KEY = "BBbzSMvl0f94BWZukShdN9M5L7u8xbtbPVKfePPhur42xt084U4_kCalqoBJD_Zs7R8uTYPMwlLQMLKHgKrNEs4";
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  const googleProvider = new GoogleAuthProvider();
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const _auth = firebase.auth();
+  const _db = firebase.firestore();
+  const _googleProvider = new firebase.auth.GoogleAuthProvider();
 
-  // Expose to global scope for use in non-module scripts
-  window.FB_AUTH = auth;
-  window.FB_DB = db;
-  window.FB_GOOGLE = googleProvider;
+  // Expose to global scope — mesma interface que antes
+  window.FB_AUTH = _auth;
+  window.FB_DB = _db;
+  window.FB_GOOGLE = _googleProvider;
   window.FB_VAPID = VAPID_KEY;
+
+  // FB_FUNCS — adaptado para API compat
   window.FB_FUNCS = {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-    sendPasswordResetEmail,
-    signInWithPopup,
-    doc, setDoc, getDoc, updateDoc, deleteDoc,
-    collection, addDoc, getDocs, query, where, orderBy,
-    getMessaging, getToken, onMessage
+    // Auth
+    createUserWithEmailAndPassword: (auth, email, senha) => auth.createUserWithEmailAndPassword(email, senha),
+    signInWithEmailAndPassword: (auth, email, senha) => auth.signInWithEmailAndPassword(email, senha),
+    signOut: (auth) => auth.signOut(),
+    sendPasswordResetEmail: (auth, email) => auth.sendPasswordResetEmail(email),
+    signInWithPopup: (auth, provider) => auth.signInWithPopup(provider),
+    onAuthStateChanged: (auth, cb) => auth.onAuthStateChanged(cb),
+    // Firestore
+    doc: (db, ...path) => {
+      let ref = db;
+      for (let i = 0; i < path.length; i++) {
+        if (i % 2 === 0) ref = ref.collection(path[i]);
+        else ref = ref.doc(path[i]);
+      }
+      return ref;
+    },
+    setDoc: (ref, data) => ref.set(data),
+    getDoc: async (ref) => {
+      const snap = await ref.get();
+      return { exists: () => snap.exists, data: () => snap.data(), id: snap.id };
+    },
+    updateDoc: (ref, data) => ref.update(data),
+    deleteDoc: (ref) => ref.delete(),
+    collection: (db, ...path) => {
+      let ref = db;
+      for (let i = 0; i < path.length; i++) {
+        if (i % 2 === 0) ref = ref.collection(path[i]);
+        else ref = ref.doc(path[i]);
+      }
+      return ref;
+    },
+    addDoc: (ref, data) => ref.add(data),
+    getDocs: async (ref) => {
+      const snap = await ref.get();
+      return { docs: snap.docs.map(d => ({ id: d.id, data: () => d.data() })) };
+    },
+    query: (ref) => ref,
+    where: (field, op, val) => ({ field, op, val }),
+    orderBy: (field, dir) => ({ field, dir }),
+    getMessaging: () => null,
+    getToken: () => null,
+    onMessage: () => null,
   };
 
   // Auth state observer
-  onAuthStateChanged(auth, (user) => {
+  _auth.onAuthStateChanged((user) => {
     if (user) {
       window.FB_USER = user;
       if (window.onFirebaseUserReady) window.onFirebaseUserReady(user);
@@ -454,6 +490,8 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
       if (window.onFirebaseUserSignedOut) window.onFirebaseUserSignedOut();
     }
   });
+
+  console.log('Firebase initialized ✅');
 </script>
 </head>
 <body>
@@ -997,9 +1035,7 @@ function checkTerms(){
   if (fbUser) {
     currentUser = { email: fbUser.email, uid: fbUser.uid };
     localStorage.setItem('ceg_user', JSON.stringify(currentUser));
-    loadUserDataFromFirebase(fbUser.uid).then(() => {
-      enterAppLoggedIn();
-    });
+    loadUserDataFromFirebase(fbUser.uid).then(() => enterAppLoggedIn());
     return;
   }
   // Check localStorage for saved session
@@ -1377,10 +1413,7 @@ async function deleteFrase(i) {
   const user = window.FB_USER || window.FB_AUTH?.currentUser;
   if (window.FB_DB && window.FB_FUNCS && user && frase.id) {
     try {
-      const { deleteDoc, doc } = window.FB_FUNCS;
-      if (deleteDoc) {
-        await deleteDoc(doc(window.FB_DB, 'usuarios', user.uid, 'frases', String(frase.id)));
-      }
+      await window.FB_DB.collection('usuarios').doc(user.uid).collection('frases').doc(String(frase.id)).delete();
     } catch(e) { console.log('Delete frase Firebase error:', e); }
   }
 }
@@ -1805,7 +1838,7 @@ async function doLogin() {
   btn.textContent = 'Entrando...'; btn.disabled = true;
   try {
     if (window.FB_AUTH && window.FB_FUNCS) {
-      const cred = await window.FB_FUNCS.signInWithEmailAndPassword(window.FB_AUTH, email, senha);
+      const cred = await window.FB_AUTH.signInWithEmailAndPassword(email, senha);
       currentUser = { email: cred.user.email, uid: cred.user.uid };
       localStorage.setItem('ceg_user', JSON.stringify(currentUser));
       await loadUserDataFromFirebase(cred.user.uid);
@@ -1852,19 +1885,17 @@ async function doCadastro() {
       // Busca código na coleção Convites — tenta lowercase, uppercase e exato
       const codigoLower = codigo.toLowerCase();
       const codigoUpper = codigo.toUpperCase();
-      let conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigoLower);
-      let conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
-      // Se não achou em minúsculo, tenta maiúsculo
-      if (!conviteSnap.exists()) {
-        conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigoUpper);
-        conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
+      let conviteRef = window.FB_DB.collection('Convites').doc(codigoLower);
+      let conviteSnap = await conviteRef.get();
+      if (!conviteSnap.exists) {
+        conviteRef = window.FB_DB.collection('Convites').doc(codigoUpper);
+        conviteSnap = await conviteRef.get();
       }
-      // Se não achou em maiúsculo, tenta exato como digitado
-      if (!conviteSnap.exists()) {
-        conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigo);
-        conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
+      if (!conviteSnap.exists) {
+        conviteRef = window.FB_DB.collection('Convites').doc(codigo);
+        conviteSnap = await conviteRef.get();
       }
-      if (!conviteSnap.exists()) {
+      if (!conviteSnap.exists) {
         document.getElementById('cadCodigoErr').textContent = 'Código inválido. Solicite ao Psicólogo Gabriel.';
         document.getElementById('cadCodigoErr').classList.add('show');
         return;
@@ -1888,10 +1919,10 @@ async function doCadastro() {
       }
 
       btn.textContent = 'Criando conta...';
-      const cred = await window.FB_FUNCS.createUserWithEmailAndPassword(window.FB_AUTH, email, senha);
+      const cred = await window.FB_AUTH.createUserWithEmailAndPassword(email, senha);
       const uid = cred.user.uid;
 
-      await window.FB_FUNCS.setDoc(window.FB_FUNCS.doc(window.FB_DB, 'usuarios', uid), {
+      await window.FB_DB.collection('usuarios').doc(uid).set({
         nome, email,
         codigoUsado: codigo,
         casal: cd.casal || nome,
@@ -1899,7 +1930,7 @@ async function doCadastro() {
         accessExpiry: cd.validade || null
       });
 
-      await window.FB_FUNCS.updateDoc(conviteRef, {
+      await conviteRef.update({
         usado: true,
         usadoPor: email,
         usadoEm: new Date().toISOString()
@@ -1938,7 +1969,7 @@ async function doForgot() {
   if (!email || !email.includes('@')) { showToast('Digite um e-mail válido'); return; }
   try {
     if (window.FB_AUTH && window.FB_FUNCS) {
-      await window.FB_FUNCS.sendPasswordResetEmail(window.FB_AUTH, email);
+      await window.FB_AUTH.sendPasswordResetEmail(email);
       showToast('✓ Link enviado para ' + email);
     } else {
       showToast('✓ Link enviado para ' + email);
@@ -1975,7 +2006,7 @@ async function doLogout() {
   if (!confirm('Deseja sair da sua conta?')) return;
   try {
     if (window.FB_AUTH && window.FB_FUNCS) {
-      await window.FB_FUNCS.signOut(window.FB_AUTH);
+      await window.FB_AUTH.signOut();
     }
   } catch(e) {}
   currentUser = null;
@@ -2375,12 +2406,11 @@ function requestAndScheduleNotifications() {
 
 async function saveModuloToFirebase(modulo, data) {
   const user = window.FB_USER || window.FB_AUTH?.currentUser;
-  if (!window.FB_DB || !window.FB_FUNCS || !user) return;
+  if (!window.FB_DB || !user) return;
   try {
-    await window.FB_FUNCS.setDoc(
-      window.FB_FUNCS.doc(window.FB_DB, 'usuarios', user.uid, 'modulos', modulo),
-      { data, updatedAt: new Date().toISOString() }
-    );
+    await window.FB_DB.collection('usuarios').doc(user.uid).collection('modulos').doc(modulo).set({
+      data, updatedAt: new Date().toISOString()
+    });
   } catch(e) { console.log('Save modulo error:', e); }
 }
 
@@ -2392,14 +2422,13 @@ async function loginComGoogle() {
     return;
   }
   try {
-    const result = await window.FB_FUNCS.signInWithPopup(window.FB_AUTH, window.FB_GOOGLE);
+    const result = await window.FB_AUTH.signInWithPopup(window.FB_GOOGLE);
     const user = result.user;
     currentUser = { email: user.email, uid: user.uid, nome: user.displayName };
     localStorage.setItem('ceg_user', JSON.stringify(currentUser));
-    const userRef = window.FB_FUNCS.doc(window.FB_DB, 'usuarios', user.uid);
-    const userSnap = await window.FB_FUNCS.getDoc(userRef);
-    if (!userSnap.exists()) {
-      await window.FB_FUNCS.setDoc(userRef, {
+    const userSnap = await window.FB_DB.collection('usuarios').doc(user.uid).get();
+    if (!userSnap.exists) {
+      await window.FB_DB.collection('usuarios').doc(user.uid).set({
         nome: user.displayName || 'Casal',
         email: user.email,
         createdAt: new Date().toISOString(),
