@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Casamento em Graça">
+<meta name="application-name" content="Casamento em Graça">
+<meta name="theme-color" content="#1C1A2E">
+<meta name="description" content="App de terapia de casal - Psicólogo Gabriel Aguilar">
+<link rel="manifest" href="/AppTerapiadecasal/manifest.json">
+<link rel="apple-touch-icon" href="/AppTerapiadecasal/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/AppTerapiadecasal/icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/AppTerapiadecasal/icons/icon-144.png">
+<link rel="apple-touch-icon" sizes="128x128" href="/AppTerapiadecasal/icons/icon-128.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/AppTerapiadecasal/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/AppTerapiadecasal/icons/icon-96.png">
+<title>Casamento em Graça</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose:#C17B8A;--rose-light:#F5E8EC;--rose-dark:#8B4F5E;
+  --gold:#C9A96E;--gold-light:#F7F0E3;--gold-dark:#8B7040;
+  --sage:#7A9E8E;--sage-light:#EAF2EF;
+  --navy:#2C3E50;--cream:#FDFAF6;
+  --text:#2C2C2C;--text-muted:#7A7A7A;
+  --border:rgba(0,0,0,0.08);--white:#FFFFFF;
+  --radius:16px;--radius-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;max-width:420px;margin:0 auto;}
+/* SPLASH */
+#splash{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2.5rem 2rem;text-align:center;background:linear-gradient(175deg,#1C1A2E 0%,#2D1F35 45%,#3A2040 100%);position:relative;overflow:hidden;}
+#splash::before{content:'';position:absolute;top:-100px;left:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(193,123,138,0.14) 0%,transparent 70%);pointer-events:none;}
+#splash::after{content:'';position:absolute;bottom:-80px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.12) 0%,transparent 70%);pointer-events:none;}
+.splash-logo-wrap{position:relative;width:150px;height:150px;margin-bottom:2rem;display:flex;align-items:center;justify-content:center;}
+.spl-circle{position:absolute;border-radius:50%;}
+.spl-c1{width:150px;height:150px;border:1px solid rgba(201,169,110,0.2);}
+.spl-c2{width:118px;height:118px;border:1px solid rgba(201,169,110,0.4);}
+.spl-c3{width:88px;height:88px;background:rgba(255,255,255,0.04);border:1.5px solid rgba(201,169,110,0.65);}
+.spl-ring-a{position:absolute;width:54px;height:54px;border-radius:50%;border:3.5px solid #C9A96E;top:48px;left:26px;box-shadow:0 0 18px rgba(201,169,110,0.6);}
+.spl-ring-b{position:absolute;width:54px;height:54px;border-radius:50%;border:3.5px solid #C17B8A;top:48px;left:70px;box-shadow:0 0 18px rgba(193,123,138,0.6);}
+.spl-gem{position:absolute;width:11px;height:11px;background:linear-gradient(135deg,#E8D5A0,#C9A96E);top:37px;left:71px;transform:rotate(45deg);box-shadow:0 0 12px rgba(201,169,110,1);}
+.splash-eyebrow{font-size:11px;color:rgba(201,169,110,0.7);letter-spacing:.28em;text-transform:uppercase;margin-bottom:10px;display:block;}
+.splash-title{font-family:'Playfair Display',serif;font-size:36px;color:#FDFAF6;line-height:1.15;margin-bottom:0;font-weight:400;}
+.splash-title em{font-style:italic;color:#C9A96E;}
+.splash-divider{width:52px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.7),transparent);margin:18px auto;}
+.splash-sub{font-size:11.5px;color:rgba(253,250,246,0.45);letter-spacing:.14em;text-transform:uppercase;margin-bottom:2.2rem;}
+.splash-btn{background:linear-gradient(135deg,#C17B8A,#8B4F5E);color:white;border:none;padding:15px 48px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;letter-spacing:.05em;box-shadow:0 6px 24px rgba(193,123,138,0.5);}
+.splash-credit{margin-top:2rem;display:flex;flex-direction:column;gap:9px;align-items:center;}
+.splash-credit a{font-size:12px;color:rgba(253,250,246,0.4);text-decoration:none;letter-spacing:.04em;display:flex;align-items:center;gap:6px;}
+.ic-globe{font-size:12px;opacity:0.7;}
+.ic-insta{width:14px;height:14px;border-radius:4px;border:1.5px solid currentColor;display:inline-flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;}
+.ic-insta::before{content:'';width:5px;height:5px;border-radius:50%;border:1.5px solid currentColor;display:block;}
+.ic-insta::after{content:'';position:absolute;top:1.5px;right:1.5px;width:2.5px;height:2.5px;border-radius:50%;background:currentColor;}
+/* SCREENS */
+.screen{display:none;min-height:100vh;padding-bottom:80px;}
+.screen.active{display:block;}
+/* HEADER */
+.app-header{background:white;padding:16px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.back-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text-muted);}
+.header-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);}
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:white;border-top:1px solid var(--border);display:none;grid-template-columns:repeat(6,1fr);padding:8px 4px;z-index:200;}
+.bottom-nav.visible{display:grid;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;cursor:pointer;border-radius:10px;border:none;background:none;}
+.nav-item.active .nav-label{color:var(--rose);}
+.nav-icon{font-size:20px;}
+.nav-label{font-size:9px;color:var(--text-muted);}
+/* HOME */
+.home-hero{background:linear-gradient(150deg,#F5E8EC,#FDFAF6);padding:28px 20px 20px;}
+.couple-greeting{font-size:13px;color:var(--text-muted);margin-bottom:4px;}
+.couple-name{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:16px;}
+.today-mood-card{background:white;border-radius:var(--radius);padding:16px;border:1px solid var(--border);}
+.mood-label{font-size:12px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;}
+.mood-faces{display:flex;justify-content:space-between;align-items:center;}
+.mood-face{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:all .15s;background:white;}
+.mood-face.selected{border-color:var(--rose);background:var(--rose-light);}
+.home-modules{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.module-card{background:white;border-radius:var(--radius);padding:16px;border:1px solid var(--border);cursor:pointer;transition:all .2s;text-align:left;}
+.module-card:hover{transform:translateY(-2px);border-color:var(--rose);}
+.module-icon{font-size:28px;margin-bottom:8px;display:block;}
+.module-name{font-size:13px;font-weight:500;color:var(--navy);margin-bottom:3px;}
+.module-desc{font-size:11px;color:var(--text-muted);line-height:1.4;}
+/* CARDS */
+.card{background:white;border-radius:var(--radius);padding:18px;border:1px solid var(--border);margin-bottom:12px;}
+.card-title{font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;}
+.section-pad{padding:20px;}
+/* EMOCIONAL */
+.mood-big-face{text-align:center;font-size:56px;margin-bottom:8px;}
+.mood-desc{text-align:center;font-size:14px;color:var(--text-muted);margin-bottom:16px;}
+input[type=range].mood-range{width:100%;accent-color:var(--rose);}
+.feelings-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
+.feeling-chip{padding:6px 12px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:white;transition:all .15s;color:var(--text);}
+.feeling-chip.selected{background:var(--rose);border-color:var(--rose);color:white;}
+textarea.note-input{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;font-family:'DM Sans',sans-serif;font-size:14px;resize:vertical;min-height:80px;color:var(--text);background:var(--cream);outline:none;}
+textarea.note-input:focus{border-color:var(--rose);}
+.btn-primary{width:100%;background:var(--rose);color:white;border:none;padding:14px;border-radius:50px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-secondary{width:100%;background:transparent;color:var(--rose);border:1.5px solid var(--rose);padding:12px;border-radius:50px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;}
+/* HISTORICO EMOCIONAL */
+.hist-tabs{display:flex;gap:8px;margin-bottom:16px;}
+.hist-tab{flex:1;padding:10px;border:1.5px solid var(--border);border-radius:50px;font-size:13px;cursor:pointer;background:white;font-family:'DM Sans',sans-serif;color:var(--text-muted);text-align:center;}
+.hist-tab.active{border-color:var(--rose);background:var(--rose-light);color:var(--rose-dark);font-weight:500;}
+.chart-wrap{height:160px;position:relative;overflow:hidden;margin-bottom:8px;}
+canvas#moodChart{width:100%!important;height:160px!important;}
+canvas#moodChartMonth{width:100%!important;height:160px!important;}
+.chart-legend{display:flex;justify-content:center;gap:16px;font-size:11px;color:var(--text-muted);margin-top:4px;}
+.legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}
+.history-item{background:var(--cream);border-radius:var(--radius-sm);padding:14px;margin-bottom:8px;border:1px solid var(--border);}
+.history-item-header{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.history-face{font-size:24px;}
+.history-meta{flex:1;}
+.history-date{font-size:11px;color:var(--text-muted);}
+.history-mood-name{font-size:13px;font-weight:500;color:var(--text);}
+.history-feelings-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+.history-feeling-tag{padding:3px 8px;background:var(--rose-light);border-radius:12px;font-size:11px;color:var(--rose-dark);}
+.history-note{font-size:12px;color:var(--text-muted);line-height:1.5;border-top:1px solid var(--border);padding-top:6px;}
+.history-empty{text-align:center;padding:32px 20px;color:var(--text-muted);font-size:13px;}
+/* QUIZ LINGUAGENS */
+.quiz-progress{padding:20px 20px 0;}
+.progress-bar-wrap{background:var(--border);border-radius:4px;height:4px;overflow:hidden;margin-bottom:6px;}
+.progress-bar-fill{height:100%;background:var(--rose);border-radius:4px;transition:width .3s;}
+.progress-text{font-size:12px;color:var(--text-muted);}
+.quiz-card{margin:16px 20px;background:white;border-radius:var(--radius);border:1px solid var(--border);padding:20px;}
+.quiz-q{font-family:'Playfair Display',serif;font-size:16px;color:var(--navy);margin-bottom:6px;line-height:1.5;}
+.quiz-inst{font-size:12px;color:var(--text-muted);margin-bottom:18px;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-option{padding:14px 16px;border-radius:var(--radius-sm);border:1.5px solid var(--border);cursor:pointer;transition:all .15s;font-size:14px;color:var(--text);background:white;text-align:left;}
+.quiz-option.selected{border-color:var(--rose);background:var(--rose-light);color:var(--rose-dark);font-weight:500;}
+.quiz-nav{display:flex;gap:10px;margin:0 20px 20px;}
+.btn-outline{flex:1;background:transparent;border:1.5px solid var(--border);padding:12px;border-radius:50px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text-muted);}
+/* RESULTADO LINGUAGENS */
+.quiz-result{padding:20px;}
+.result-badge{text-align:center;padding:24px 20px;background:linear-gradient(135deg,var(--rose-light),var(--gold-light));border-radius:var(--radius);margin-bottom:16px;}
+.result-icon{font-size:48px;margin-bottom:8px;}
+.result-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--rose-dark);margin-bottom:4px;}
+.result-sub{font-size:13px;color:var(--text-muted);}
+.lang-ranking{display:flex;flex-direction:column;gap:12px;margin-top:4px;}
+.lang-rank-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--cream);border-radius:var(--radius-sm);border:1px solid var(--border);}
+.lang-rank-item.primary{background:var(--rose-light);border-color:var(--rose);}
+.lang-rank-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;background:var(--rose-light);color:var(--rose-dark);flex-shrink:0;}
+.lang-rank-item.primary .lang-rank-num{background:var(--rose);color:white;}
+.lang-rank-icon{font-size:22px;flex-shrink:0;}
+.lang-rank-info{flex:1;}
+.lang-rank-name{font-size:14px;font-weight:500;color:var(--navy);}
+.lang-rank-score{font-size:11px;color:var(--text-muted);}
+.lang-rank-bar{height:4px;background:var(--border);border-radius:2px;margin-top:4px;overflow:hidden;}
+.lang-rank-fill{height:100%;background:var(--rose);border-radius:2px;}
+.lang-explain{margin-top:8px;padding:10px 12px;background:var(--gold-light);border-radius:var(--radius-sm);font-size:12px;color:var(--gold-dark);line-height:1.6;border-left:3px solid var(--gold);}
+.lang-saved-badge{background:var(--sage-light);border:1px solid var(--sage);border-radius:var(--radius-sm);padding:10px 12px;font-size:12px;color:var(--sage);text-align:center;margin-bottom:12px;}
+.saved-results-card{padding:20px;}
+.saved-result-item{background:white;border-radius:var(--radius-sm);border:1px solid var(--border);padding:14px;margin-bottom:10px;}
+.saved-result-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.saved-result-name{font-size:14px;font-weight:500;color:var(--navy);}
+.saved-result-date{font-size:11px;color:var(--text-muted);}
+/* COMUNICAÇÃO */
+.comm-card{background:white;border-radius:var(--radius);padding:16px 18px;border:1px solid var(--border);cursor:pointer;margin-bottom:10px;}
+.comm-card-header{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.comm-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.comm-name{font-size:15px;font-weight:500;color:var(--navy);}
+.comm-desc{font-size:12px;color:var(--text-muted);line-height:1.5;padding-left:24px;}
+.example-bubble{padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.5;margin-bottom:8px;}
+.example-bubble.bad{background:#FFF0F0;color:#8B2020;border-left:3px solid #E24B4A;}
+.example-bubble.good{background:#F0FFF4;color:#1A5C2E;border-left:3px solid #3B6D11;}
+.example-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;opacity:.7;}
+.tip-item{display:flex;gap:10px;font-size:13px;color:var(--text);line-height:1.5;margin-bottom:8px;}
+.tip-bullet{color:var(--sage);font-size:16px;flex-shrink:0;}
+/* FRASES */
+.frase-item{background:white;border-radius:var(--radius);padding:14px 16px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.frase-text{flex:1;font-size:14px;color:var(--text);line-height:1.5;}
+.frase-time{font-size:11px;color:var(--text-muted);margin-top:4px;}
+.frase-delete{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:18px;padding:0;}
+.frase-add-card{background:white;border-radius:var(--radius);border:1.5px dashed var(--rose);padding:18px;cursor:pointer;text-align:center;margin-bottom:12px;}
+.frase-add-icon{font-size:28px;margin-bottom:6px;}
+.frase-add-text{font-size:13px;color:var(--rose-dark);font-weight:500;}
+.add-frase-form{background:white;border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:12px;}
+.form-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;display:block;}
+.time-inputs{display:flex;gap:10px;align-items:center;margin-bottom:8px;}
+input[type=time]{flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--cream);outline:none;}
+input[type=date]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--cream);outline:none;margin-bottom:8px;}
+input[type=date]:focus,input[type=time]:focus{border-color:var(--rose);}
+.btn-add-time{padding:10px 14px;border:1px solid var(--rose);border-radius:var(--radius-sm);background:var(--rose-light);color:var(--rose-dark);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;}
+.time-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.time-tag{padding:4px 10px;background:var(--rose-light);border-radius:20px;font-size:12px;color:var(--rose-dark);display:flex;align-items:center;gap:4px;}
+.repeat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+.repeat-btn{padding:8px 4px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;cursor:pointer;background:white;font-family:'DM Sans',sans-serif;color:var(--text-muted);text-align:center;transition:all .15s;}
+.repeat-btn.active{border-color:var(--rose);background:var(--rose-light);color:var(--rose-dark);font-weight:500;}
+.personalizado-wrap{background:var(--cream);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px;border:1px solid var(--border);}
+.dias-semana{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.dia-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);font-size:11px;cursor:pointer;background:white;font-family:'DM Sans',sans-serif;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-weight:500;}
+.dia-btn.active{border-color:var(--rose);background:var(--rose);color:white;}
+.frase-item{background:white;border-radius:var(--radius);padding:14px 16px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.frase-meta{flex:1;}
+.frase-text{font-size:14px;color:var(--text);line-height:1.5;margin-bottom:4px;}
+.frase-info{font-size:11px;color:var(--text-muted);}
+.frase-repeat-badge{display:inline-block;padding:2px 8px;background:var(--rose-light);border-radius:10px;font-size:11px;color:var(--rose-dark);margin-left:4px;}
+.frase-delete{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:18px;padding:0;}
+/* DESAFIOS */
+.desafio-active{background:linear-gradient(135deg,var(--rose-light),var(--gold-light));border-radius:var(--radius);padding:18px;margin-bottom:12px;border:1px solid rgba(193,123,138,.2);}
+.desafio-active-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--rose-dark);margin-bottom:6px;font-weight:500;}
+.desafio-active-text{font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);line-height:1.4;margin-bottom:12px;}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--rose);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.check-box.checked{background:var(--rose);border-color:var(--rose);color:white;}
+.desafio-item{background:white;border-radius:var(--radius-sm);padding:14px 16px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;margin-bottom:8px;}
+.desafio-num{width:28px;height:28px;border-radius:50%;background:var(--rose-light);color:var(--rose-dark);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+/* 30 DIAS */
+.trinta-progress-card{background:linear-gradient(135deg,var(--navy),#3D5A73);border-radius:var(--radius);padding:20px;margin-bottom:16px;color:white;}
+.trinta-day-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:400;line-height:1;}
+.trinta-day-label{font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+.trinta-progress-bar{background:rgba(255,255,255,.2);border-radius:4px;height:6px;overflow:hidden;}
+.trinta-progress-fill{height:100%;background:var(--gold);border-radius:4px;transition:width .5s;}
+.semana-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:500;margin-bottom:8px;}
+.trinta-day-card{background:white;border-radius:var(--radius);padding:18px;border:1px solid var(--border);margin-bottom:12px;}
+.trinta-day-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);margin-bottom:8px;}
+.trinta-day-desc{font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:16px;}
+.trinta-calendar{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:0 20px 20px;}
+.cal-day{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);}
+.cal-day.done{background:var(--rose);color:white;border-color:var(--rose);}
+.cal-day.current{background:var(--gold-light);color:var(--gold-dark);border-color:var(--gold);font-weight:700;}
+.cal-day.future{background:white;color:var(--text-muted);}
+.semana-header{padding:0 20px;margin-bottom:8px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);font-weight:500;}
+/* TOAST */
+.success-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#2C3E50;color:white;padding:12px 20px;border-radius:50px;font-size:13px;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;}
+.success-toast.show{opacity:1;}
+/* QUIZ GENDER */
+.quiz-gender-btns{display:flex;gap:10px;margin:16px 20px;}
+.gender-btn{flex:1;padding:14px;border-radius:var(--radius-sm);border:2px solid var(--border);cursor:pointer;text-align:center;font-size:14px;background:white;font-family:'DM Sans',sans-serif;}
+.gender-btn.active{border-color:var(--rose);background:var(--rose-light);color:var(--rose-dark);font-weight:500;}
+.gender-icon{font-size:28px;display:block;margin-bottom:4px;}
+
+/* ONBOARDING / TERMOS */
+#onboarding{display:none;position:fixed;inset:0;background:rgba(28,26,46,0.92);z-index:500;align-items:flex-end;justify-content:center;}
+#onboarding.show{display:flex;}
+.onb-sheet{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:420px;padding:28px 24px 36px;max-height:90vh;overflow-y:auto;}
+.onb-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
+.onb-icon{font-size:36px;text-align:center;margin-bottom:12px;}
+.onb-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);text-align:center;margin-bottom:6px;}
+.onb-subtitle{font-size:13px;color:var(--text-muted);text-align:center;line-height:1.6;margin-bottom:20px;}
+.onb-items{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+.onb-item{display:flex;gap:12px;align-items:flex-start;}
+.onb-item-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:1px;}
+.onb-item-text{font-size:13px;color:var(--text);line-height:1.55;}
+.onb-item-text strong{color:var(--navy);font-weight:500;}
+.onb-divider{height:1px;background:var(--border);margin:4px 0 16px;}
+.onb-terms-text{font-size:12px;color:var(--text-muted);text-align:center;line-height:1.7;margin-bottom:16px;}
+.onb-terms-text a{color:var(--rose);text-decoration:none;}
+.onb-accept-btn{width:100%;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:white;border:none;padding:15px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;margin-bottom:10px;}
+.onb-decline{font-size:12px;color:var(--text-muted);text-align:center;cursor:pointer;padding:6px;}
+/* MODAL TERMOS COMPLETO */
+#termsModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:600;align-items:flex-end;justify-content:center;}
+#termsModal.show{display:flex;}
+.terms-sheet{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:420px;padding:24px 24px 40px;max-height:88vh;overflow-y:auto;}
+.terms-close{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.terms-close-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:white;cursor:pointer;font-size:16px;color:var(--text-muted);display:flex;align-items:center;justify-content:center;}
+.terms-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);}
+.terms-body{font-size:13px;color:var(--text);line-height:1.75;}
+.terms-body h3{font-size:13px;font-weight:500;color:var(--navy);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.04em;}
+.terms-body p{margin-bottom:10px;color:var(--text-muted);}
+.terms-body strong{color:var(--text);font-weight:500;}
+
+/* PWA / iOS safe areas */
+body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+.bottom-nav { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
+@media (display-mode: standalone) {
+  #splash { padding-top: calc(2.5rem + env(safe-area-inset-top)); }
+}
+
+/* TELA DE ACESSO EXPIRADO */
+#accessExpired{display:none;position:fixed;inset:0;background:linear-gradient(175deg,#1C1A2E 0%,#2D1F35 45%,#3A2040 100%);z-index:999;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;}
+#accessExpired.show{display:flex;}
+.exp-rings{position:relative;width:100px;height:100px;margin-bottom:1.5rem;}
+.exp-ring{position:absolute;border-radius:50%;}
+.exp-r1{width:100px;height:100px;border:1px solid rgba(201,169,110,0.2);}
+.exp-r2{width:78px;height:78px;top:11px;left:11px;border:1px solid rgba(201,169,110,0.4);}
+.exp-r3{width:56px;height:56px;top:22px;left:22px;border:1.5px solid rgba(201,169,110,0.6);background:rgba(255,255,255,0.04);}
+.exp-lock{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:22px;}
+.exp-eyebrow{font-size:11px;color:rgba(201,169,110,0.7);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;}
+.exp-title{font-family:'Playfair Display',serif;font-size:26px;color:#FDFAF6;margin-bottom:8px;font-weight:400;}
+.exp-title em{color:#C9A96E;font-style:italic;}
+.exp-divider{width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.7),transparent);margin:14px auto;}
+.exp-desc{font-size:14px;color:rgba(253,250,246,0.55);line-height:1.7;margin-bottom:1.5rem;max-width:280px;}
+.exp-card{background:rgba(255,255,255,0.06);border:1px solid rgba(201,169,110,0.2);border-radius:16px;padding:20px;margin-bottom:1.5rem;width:100%;max-width:300px;}
+.exp-card-label{font-size:11px;color:rgba(201,169,110,0.7);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;}
+.exp-card-name{font-family:'Playfair Display',serif;font-size:18px;color:#FDFAF6;margin-bottom:4px;}
+.exp-card-date{font-size:12px;color:rgba(253,250,246,0.4);}
+.exp-btn{background:linear-gradient(135deg,#C9A96E,#8B7040);color:white;border:none;padding:14px 36px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;letter-spacing:.04em;margin-bottom:12px;width:100%;max-width:300px;}
+.exp-btn-wa{background:transparent;border:1.5px solid rgba(201,169,110,0.4);color:rgba(201,169,110,0.8);padding:12px 36px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;width:100%;max-width:300px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.exp-credit{margin-top:1.5rem;font-size:11px;color:rgba(253,250,246,0.25);letter-spacing:.06em;}
+
+/* BOAS VINDAS / AUTH */
+#boasVindas{display:none;min-height:100vh;background:linear-gradient(175deg,#1C1A2E 0%,#2D1F35 45%,#3A2040 100%);flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;}
+#boasVindas.active-screen{display:flex;}
+.auth-logo-wrap{position:relative;width:90px;height:90px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;}
+.auth-c1{position:absolute;width:90px;height:90px;border-radius:50%;border:1px solid rgba(201,169,110,0.25);}
+.auth-c2{position:absolute;width:70px;height:70px;border-radius:50%;border:1px solid rgba(201,169,110,0.45);}
+.auth-ra{position:absolute;width:36px;height:36px;border-radius:50%;border:2.5px solid #C9A96E;top:27px;left:10px;box-shadow:0 0 10px rgba(201,169,110,0.4);}
+.auth-rb{position:absolute;width:36px;height:36px;border-radius:50%;border:2.5px solid #C17B8A;top:27px;left:44px;box-shadow:0 0 10px rgba(193,123,138,0.4);}
+.auth-gem{position:absolute;width:8px;height:8px;background:#C9A96E;top:21px;left:41px;transform:rotate(45deg);box-shadow:0 0 8px rgba(201,169,110,0.9);}
+.auth-title{font-family:'Playfair Display',serif;font-size:28px;color:#FDFAF6;margin-bottom:4px;font-weight:400;}
+.auth-title em{color:#C9A96E;font-style:italic;}
+.auth-sub{font-size:12px;color:rgba(253,250,246,0.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem;}
+.auth-btns{display:flex;flex-direction:column;gap:10px;width:100%;max-width:300px;}
+.btn-auth-primary{background:linear-gradient(135deg,#C17B8A,#8B4F5E);color:white;border:none;padding:15px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;width:100%;}
+.btn-auth-secondary{background:transparent;border:1.5px solid rgba(201,169,110,0.5);color:rgba(201,169,110,0.9);padding:14px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;width:100%;}
+.auth-credit{margin-top:1.5rem;font-size:11px;color:rgba(253,250,246,0.25);}
+/* LOGIN / CADASTRO */
+#loginScreen,#cadastroScreen,#forgotScreen{display:none;min-height:100vh;background:var(--cream);flex-direction:column;}
+#loginScreen.active-screen,#cadastroScreen.active-screen,#forgotScreen.active-screen{display:flex;}
+.auth-header{padding:16px 20px;display:flex;align-items:center;gap:12px;background:white;border-bottom:1px solid var(--border);}
+.auth-back{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text-muted);}
+.auth-header-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);}
+.auth-form{padding:24px 20px;flex:1;}
+.auth-form-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:6px;}
+.auth-form-sub{font-size:13px;color:var(--text-muted);margin-bottom:24px;line-height:1.6;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+.form-group input{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);background:white;outline:none;transition:border-color .15s;}
+.form-group input:focus{border-color:var(--rose);}
+.form-group input.error{border-color:#E24B4A;}
+.form-error{font-size:12px;color:#E24B4A;margin-top:4px;display:none;}
+.form-error.show{display:block;}
+.forgot-link{font-size:13px;color:var(--rose);text-align:right;cursor:pointer;margin-top:-8px;margin-bottom:16px;display:block;}
+.auth-divider{display:flex;align-items:center;gap:10px;margin:16px 0;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.auth-divider span{font-size:12px;color:var(--text-muted);}
+.auth-switch{font-size:13px;color:var(--text-muted);text-align:center;margin-top:16px;}
+.auth-switch a{color:var(--rose);cursor:pointer;text-decoration:none;}
+.invite-info{background:var(--gold-light);border:1px solid var(--gold);border-radius:var(--radius-sm);padding:12px 14px;font-size:12px;color:var(--gold-dark);margin-bottom:16px;line-height:1.6;}
+/* PERFIL */
+#perfil{display:none;min-height:100vh;padding-bottom:80px;}
+#perfil.active{display:block;}
+.perfil-hero{background:linear-gradient(150deg,#1C1A2E,#3A2040);padding:32px 20px 24px;text-align:center;position:relative;}
+.perfil-photo-wrap{position:relative;width:90px;height:90px;margin:0 auto 12px;}
+.perfil-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #C9A96E;}
+.perfil-photo-placeholder{width:90px;height:90px;border-radius:50%;background:rgba(201,169,110,0.2);border:3px solid #C9A96E;display:flex;align-items:center;justify-content:center;font-size:32px;}
+.perfil-photo-edit{position:absolute;bottom:0;right:0;width:28px;height:28px;border-radius:50%;background:var(--rose);border:2px solid white;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;}
+.perfil-couple-name{font-family:'Playfair Display',serif;font-size:22px;color:#FDFAF6;margin-bottom:4px;}
+.perfil-since{font-size:12px;color:rgba(253,250,246,0.5);letter-spacing:.06em;}
+.perfil-badges{display:flex;justify-content:center;gap:12px;margin-top:16px;}
+.perfil-badge{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:10px 16px;text-align:center;}
+.perfil-badge-num{font-family:'Playfair Display',serif;font-size:20px;color:#C9A96E;font-weight:400;}
+.perfil-badge-label{font-size:10px;color:rgba(253,250,246,0.5);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.perfil-section{padding:20px;}
+.perfil-card{background:white;border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:12px;}
+.perfil-card-title{font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;}
+.perfil-field{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.perfil-field:last-child{border-bottom:none;}
+.perfil-field-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center;}
+.perfil-field-content{flex:1;}
+.perfil-field-label{font-size:11px;color:var(--text-muted);margin-bottom:2px;}
+.perfil-field-value{font-size:14px;color:var(--text);font-weight:500;}
+.perfil-field-edit{color:var(--rose);font-size:13px;cursor:pointer;}
+.aniversario-card{background:linear-gradient(135deg,#1C1A2E,#3A2040);border-radius:var(--radius);padding:18px;margin-bottom:12px;border:1px solid rgba(201,169,110,0.2);}
+.aniv-countdown{font-family:'Playfair Display',serif;font-size:36px;color:#C9A96E;text-align:center;margin-bottom:4px;}
+.aniv-label{font-size:12px;color:rgba(253,250,246,0.5);text-align:center;text-transform:uppercase;letter-spacing:.08em;}
+.aniv-date{font-size:13px;color:rgba(253,250,246,0.7);text-align:center;margin-top:8px;}
+/* CONFIGURAÇÕES */
+#configuracoes{display:none;min-height:100vh;padding-bottom:80px;}
+#configuracoes.active{display:block;}
+.config-section{padding:16px 20px 0;}
+.config-section-title{font-size:11px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;padding:0 4px;}
+.config-card{background:white;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:12px;overflow:hidden;}
+.config-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;}
+.config-item:last-child{border-bottom:none;}
+.config-item:hover{background:var(--cream);}
+.config-item-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
+.config-item-text{flex:1;}
+.config-item-title{font-size:14px;color:var(--text);font-weight:500;}
+.config-item-sub{font-size:12px;color:var(--text-muted);margin-top:1px;}
+.config-item-arrow{font-size:16px;color:var(--text-muted);}
+.config-item.danger .config-item-title{color:#E24B4A;}
+.config-toggle{width:44px;height:24px;border-radius:12px;background:var(--border);border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;}
+.config-toggle.on{background:var(--rose);}
+.config-toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:white;top:3px;left:3px;transition:transform .2s;}
+.config-toggle.on::after{transform:translateX(20px);}
+/* MODAL EDITAR PERFIL */
+#editPerfilModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:700;align-items:flex-end;justify-content:center;}
+#editPerfilModal.show{display:flex;}
+.edit-sheet{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:420px;padding:24px 24px 40px;max-height:90vh;overflow-y:auto;}
+.edit-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
+.edit-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);margin-bottom:20px;}
+/* NOTIFICAÇÃO ANIVERSÁRIO */
+#anivNotif{display:none;position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;z-index:800;padding:12px 16px;}
+#anivNotif.show{display:block;}
+.aniv-banner{border-radius:var(--radius);padding:16px;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
+.aniv-banner.eve{background:linear-gradient(135deg,#F7F0E3,#F5E8EC);border:1px solid rgba(201,169,110,0.4);}
+.aniv-banner.day{background:linear-gradient(135deg,#1C1A2E,#3A2040);border:1px solid rgba(201,169,110,0.3);}
+.aniv-banner-title{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:4px;}
+.aniv-banner.eve .aniv-banner-title{color:var(--navy);}
+.aniv-banner.day .aniv-banner-title{color:#FDFAF6;}
+.aniv-banner-text{font-size:13px;line-height:1.6;}
+.aniv-banner.eve .aniv-banner-text{color:var(--text-muted);}
+.aniv-banner.day .aniv-banner-text{color:rgba(253,250,246,0.7);}
+.aniv-close{float:right;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted);margin-top:-4px;}
+
+#editFraseModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:700;align-items:flex-end;justify-content:center;}
+#editFraseModal.show{display:flex;}
+.frase-actions{display:flex;gap:6px;margin-top:6px;}
+.frase-action-btn{padding:5px 10px;border-radius:20px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--border);background:white;color:var(--text-muted);}
+.frase-action-btn.edit{border-color:var(--rose);color:var(--rose);}
+.frase-action-btn.del{border-color:#E24B4A;color:#E24B4A;}
+</style>
+
+<!-- Firebase SDK -->
+<!-- Firebase SDK Compat (mais estável para PWA) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyADaWVvsl13Oqi0zM-RcUByWB8535WC184",
+    authDomain: "casamento-em-graca.firebaseapp.com",
+    projectId: "casamento-em-graca",
+    storageBucket: "casamento-em-graca.firebasestorage.app",
+    messagingSenderId: "421639161730",
+    appId: "1:421639161730:web:7c01a8365236d5fb5ef19b",
+    measurementId: "G-DGLP4R8V98"
+  };
+
+  const VAPID_KEY = "BBbzSMvl0f94BWZukShdN9M5L7u8xbtbPVKfePPhur42xt084U4_kCalqoBJD_Zs7R8uTYPMwlLQMLKHgKrNEs4";
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const _auth = firebase.auth();
+  const _db = firebase.firestore();
+  const _googleProvider = new firebase.auth.GoogleAuthProvider();
+
+  // Expose to global scope — mesma interface que antes
+  window.FB_AUTH = _auth;
+  window.FB_DB = _db;
+  window.FB_GOOGLE = _googleProvider;
+  window.FB_VAPID = VAPID_KEY;
+
+  // FB_FUNCS — adaptado para API compat
+  window.FB_FUNCS = {
+    // Auth
+    createUserWithEmailAndPassword: (auth, email, senha) => auth.createUserWithEmailAndPassword(email, senha),
+    signInWithEmailAndPassword: (auth, email, senha) => auth.signInWithEmailAndPassword(email, senha),
+    signOut: (auth) => auth.signOut(),
+    sendPasswordResetEmail: (auth, email) => auth.sendPasswordResetEmail(email),
+    signInWithPopup: (auth, provider) => auth.signInWithPopup(provider),
+    onAuthStateChanged: (auth, cb) => auth.onAuthStateChanged(cb),
+    // Firestore
+    doc: (db, ...path) => {
+      let ref = db;
+      for (let i = 0; i < path.length; i++) {
+        if (i % 2 === 0) ref = ref.collection(path[i]);
+        else ref = ref.doc(path[i]);
+      }
+      return ref;
+    },
+    setDoc: (ref, data) => ref.set(data),
+    getDoc: async (ref) => {
+      const snap = await ref.get();
+      return { exists: () => snap.exists, data: () => snap.data(), id: snap.id };
+    },
+    updateDoc: (ref, data) => ref.update(data),
+    deleteDoc: (ref) => ref.delete(),
+    collection: (db, ...path) => {
+      let ref = db;
+      for (let i = 0; i < path.length; i++) {
+        if (i % 2 === 0) ref = ref.collection(path[i]);
+        else ref = ref.doc(path[i]);
+      }
+      return ref;
+    },
+    addDoc: (ref, data) => ref.add(data),
+    getDocs: async (ref) => {
+      const snap = await ref.get();
+      return { docs: snap.docs.map(d => ({ id: d.id, data: () => d.data() })) };
+    },
+    query: (ref) => ref,
+    where: (field, op, val) => ({ field, op, val }),
+    orderBy: (field, dir) => ({ field, dir }),
+    getMessaging: () => null,
+    getToken: () => null,
+    onMessage: () => null,
+  };
+
+  // Auth state observer
+  _auth.onAuthStateChanged((user) => {
+    if (user) {
+      window.FB_USER = user;
+      if (window.onFirebaseUserReady) window.onFirebaseUserReady(user);
+    } else {
+      window.FB_USER = null;
+      if (window.onFirebaseUserSignedOut) window.onFirebaseUserSignedOut();
+    }
+  });
+
+  console.log('Firebase initialized ✅');
+</script>
+</head>
+<body>
+
+<div id="splash">
+  <div class="splash-logo-wrap">
+    <div class="spl-circle spl-c1"></div>
+    <div class="spl-circle spl-c2"></div>
+    <div class="spl-circle spl-c3"></div>
+    <div class="spl-ring-a"></div>
+    <div class="spl-ring-b"></div>
+    <div class="spl-gem"></div>
+  </div>
+  <span class="splash-eyebrow">Psicólogo Gabriel Aguilar</span>
+  <h1 class="splash-title">Casamento<br>em <em>Graça</em></h1>
+  <div class="splash-divider"></div>
+  <p class="splash-sub">Terapia de casal · Saúde emocional</p>
+  <button class="splash-btn" onclick="checkTerms()">Começar ✦</button>
+  <div class="splash-credit">
+    <a href="https://www.psicologogabrielaguilar.com.br" target="_blank">
+      <span class="ic-globe">🌐</span>psicologogabrielaguilar.com.br
+    </a>
+    <a href="https://www.instagram.com/psi.gabrielaguilar/" target="_blank">
+      <span class="ic-insta"></span>@psi.gabrielaguilar
+    </a>
+  </div>
+</div>
+
+
+<!-- ONBOARDING / TERMOS -->
+<div id="onboarding">
+  <div class="onb-sheet">
+    <div class="onb-handle"></div>
+    <div class="onb-icon">💑</div>
+    <div class="onb-title">Bem-vindo ao Casamento em Graça</div>
+    <div class="onb-subtitle">Antes de começar, algumas informações rápidas sobre como cuidamos dos seus dados.</div>
+    <div class="onb-items">
+      <div class="onb-item">
+        <div class="onb-item-icon" style="background:#F5E8EC;">🔒</div>
+        <div class="onb-item-text"><strong>Seus dados são seus.</strong> Tudo que você registrar fica salvo apenas neste dispositivo e nunca é compartilhado com terceiros.</div>
+      </div>
+      <div class="onb-item">
+        <div class="onb-item-icon" style="background:#EAF2EF;">🧠</div>
+        <div class="onb-item-text"><strong>Sigilo clínico.</strong> Seus registros emocionais são confidenciais e seguem as diretrizes do CFP e da Lei 13.709/2018 (LGPD).</div>
+      </div>
+      <div class="onb-item">
+        <div class="onb-item-icon" style="background:#F7F0E3;">✏️</div>
+        <div class="onb-item-text"><strong>Você tem controle.</strong> Pode apagar seus dados a qualquer momento nas configurações do app.</div>
+      </div>
+    </div>
+    <div class="onb-divider"></div>
+    <div class="onb-terms-text">
+      Ao continuar, você concorda com nossa<br>
+      <a href="#" onclick="showTerms();return false;">Política de Privacidade e Termos de Uso</a>
+    </div>
+    <button class="onb-accept-btn" onclick="acceptTerms()">Entendi, vamos começar ✦</button>
+    <div class="onb-decline" onclick="showTerms()">Ler termos completos</div>
+  </div>
+</div>
+
+<!-- MODAL TERMOS COMPLETOS -->
+<div id="termsModal">
+  <div class="terms-sheet">
+    <div class="terms-close">
+      <div class="terms-title">Política de Privacidade</div>
+      <button class="terms-close-btn" onclick="closeTerms()">×</button>
+    </div>
+    <div class="terms-body">
+      <h3>Quem somos</h3>
+      <p>Este aplicativo é desenvolvido e operado pelo <strong>Psicólogo Gabriel Aguilar</strong>, CRP 04/55625, especialista em terapia de casais. Contato: <strong>psicologogabrielaguilar.com.br</strong></p>
+
+      <h3>Quais dados coletamos</h3>
+      <p>Coletamos apenas os dados que você insere voluntariamente: registros de humor e emoções, anotações sobre situações e pensamentos, respostas aos questionários de linguagens do amor, e lembretes pessoais que você cria.</p>
+
+      <h3>Como armazenamos</h3>
+      <p>Atualmente todos os dados são armazenados <strong>localmente neste dispositivo</strong>, usando a memória do seu navegador. Nenhuma informação é enviada para servidores externos ou terceiros.</p>
+
+      <h3>Base legal — LGPD</h3>
+      <p>O tratamento dos seus dados ocorre com base no seu <strong>consentimento explícito</strong> (Art. 7º, I da Lei 13.709/2018) e para a execução de serviço de saúde psicológica (Art. 7º, VII). Seus dados de saúde mental são classificados como dados sensíveis e recebem proteção reforçada conforme o Art. 11 da LGPD.</p>
+
+      <h3>Sigilo profissional</h3>
+      <p>As informações registradas neste app estão protegidas pelo sigilo profissional do psicólogo, conforme o <strong>Código de Ética Profissional do Psicólogo</strong> e a <strong>Resolução CFP 06/2019</strong>.</p>
+
+      <h3>Seus direitos</h3>
+      <p>Você pode a qualquer momento: acessar todos os seus dados, corrigir informações incorretas, solicitar a exclusão completa dos seus dados, e revogar o consentimento. Para exercer esses direitos, entre em contato pelo site ou Instagram do psicólogo.</p>
+
+      <h3>Exclusão de dados</h3>
+      <p>Para apagar todos os seus dados do dispositivo, limpe os dados do navegador ou use a opção de exclusão nas configurações do app. Os dados são removidos permanentemente e não podem ser recuperados.</p>
+
+      <h3>Menores de idade</h3>
+      <p>Este app não é destinado a menores de 18 anos sem supervisão de um responsável legal e acompanhamento do profissional de psicologia responsável.</p>
+
+      <h3>Atualizações</h3>
+      <p>Esta política pode ser atualizada. Em caso de mudanças relevantes, você será notificado ao abrir o app.</p>
+
+      <p style="margin-top:20px;font-size:11px;color:var(--text-muted);">Última atualização: abril de 2026 · Versão 1.0</p>
+    </div>
+    <button class="onb-accept-btn" style="margin-top:20px;" onclick="acceptTerms()">Aceitar e continuar ✦</button>
+  </div>
+</div>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button class="nav-item active" onclick="goTo('home')" id="nav-home"><span class="nav-icon">🏠</span><span class="nav-label">Início</span></button>
+  <button class="nav-item" onclick="goTo('emocional')" id="nav-emocional"><span class="nav-icon">💛</span><span class="nav-label">Emoções</span></button>
+  <button class="nav-item" onclick="goTo('linguagens')" id="nav-linguagens"><span class="nav-icon">💌</span><span class="nav-label">Amor</span></button>
+  <button class="nav-item" onclick="goTo('comunicacao')" id="nav-comunicacao"><span class="nav-icon">💬</span><span class="nav-label">Comunicar</span></button>
+  <button class="nav-item" onclick="goTo('trinta')" id="nav-trinta"><span class="nav-icon">🌱</span><span class="nav-label">30 dias</span></button>
+  <button class="nav-item" onclick="goTo('perfil')" id="nav-perfil"><span class="nav-icon">👫</span><span class="nav-label">Nós</span></button>
+</nav>
+
+<div class="success-toast" id="toast"></div>
+
+<!-- HOME -->
+<div class="screen" id="home">
+  <div class="home-hero">
+    <p class="couple-greeting">Olá, casal</p>
+    <h2 class="couple-name">Como estão hoje? 💑</h2>
+    <div class="today-mood-card">
+      <p class="mood-label">Registre seu humor agora</p>
+      <div class="mood-faces">
+        <button class="mood-face" onclick="quickMood(1)">😢</button>
+        <button class="mood-face" onclick="quickMood(2)">😕</button>
+        <button class="mood-face" onclick="quickMood(3)">😐</button>
+        <button class="mood-face" onclick="quickMood(4)">🙂</button>
+        <button class="mood-face" onclick="quickMood(5)">😄</button>
+      </div>
+    </div>
+  </div>
+  <div class="home-modules">
+    <div class="module-card" onclick="goTo('emocional')"><span class="module-icon">💛</span><div class="module-name">Inteligência emocional</div><div class="module-desc">Registros, gráficos e histórico</div></div>
+    <div class="module-card" onclick="goTo('linguagens')"><span class="module-icon">💌</span><div class="module-name">Linguagens do amor</div><div class="module-desc">Teste e resultado salvo</div></div>
+    <div class="module-card" onclick="goTo('comunicacao')"><span class="module-icon">💬</span><div class="module-name">Comunicação</div><div class="module-desc">5 estilos e assertividade</div></div>
+    <div class="module-card" onclick="goTo('frases')"><span class="module-icon">🔔</span><div class="module-name">Lembretes</div><div class="module-desc">Suas frases no horário certo</div></div>
+    <div class="module-card" onclick="goTo('desafios')"><span class="module-icon">✅</span><div class="module-name">Desafios da terapia</div><div class="module-desc">Tarefas das sessões</div></div>
+    <div class="module-card" onclick="goTo('trinta')"><span class="module-icon">🌱</span><div class="module-name">Desafio 30 dias</div><div class="module-desc">Seu programa completo</div></div>
+  </div>
+</div>
+
+<!-- EMOCIONAL -->
+<div class="screen" id="emocional">
+  <div class="app-header">
+    <button class="back-btn" onclick="goTo('home')">←</button>
+    <span class="header-title">Inteligência emocional</span>
+  </div>
+  <!-- Sub-tabs -->
+  <div style="padding:16px 20px 0;">
+    <div class="hist-tabs">
+      <button class="hist-tab active" onclick="switchEmoTab('registrar',this)" id="tab-registrar">Registrar</button>
+      <button class="hist-tab" onclick="switchEmoTab('grafico',this)" id="tab-grafico">Gráfico</button>
+      <button class="hist-tab" onclick="switchEmoTab('historico',this)" id="tab-historico">Histórico</button>
+    </div>
+  </div>
+
+  <!-- TAB REGISTRAR -->
+  <div id="emo-registrar" style="padding:0 20px 20px;">
+    <div class="card" style="margin-top:12px;">
+      <div class="card-title">Como estou me sentindo</div>
+      <div class="mood-big-face" id="moodEmoji">😐</div>
+      <div class="mood-desc" id="moodText">Neutro</div>
+      <input type="range" class="mood-range" id="moodSlider" min="1" max="5" value="3" step="1" oninput="updateMood(this.value)">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px;"><span>Muito triste</span><span>Muito feliz</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">O que estou sentindo</div>
+      <div class="feelings-grid" id="feelingsGrid">
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Ansioso</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Amado</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Irritado</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Grato</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Triste</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Esperançoso</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Sobrecarregado</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Conectado</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Inseguro</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Tranquilo</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Frustrado</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Feliz</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Solitário</button>
+        <button class="feeling-chip" onclick="toggleFeeling(this)">Realizado</button>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Situação</div><textarea class="note-input" id="situacao" placeholder="O que aconteceu?"></textarea></div>
+    <div class="card"><div class="card-title">Pensamentos</div><textarea class="note-input" id="pensamentos" placeholder="Quais pensamentos você teve?"></textarea></div>
+    <div class="card"><div class="card-title">Como reagiu</div><textarea class="note-input" id="comportamento" placeholder="O que você fez ou disse?"></textarea></div>
+    <button class="btn-primary" onclick="saveRegisto()">💾 Salvar registro</button>
+  </div>
+
+  <!-- TAB GRÁFICO -->
+  <div id="emo-grafico" style="display:none;padding:0 20px 20px;">
+    <div class="card" style="margin-top:12px;">
+      <div class="card-title" style="margin-bottom:8px;">Período</div>
+      <div class="hist-tabs" style="margin-bottom:16px;">
+        <button class="hist-tab active" onclick="switchChartPeriod('7',this)">7 dias</button>
+      <button class="hist-tab" onclick="switchChartPeriod('15',this)">15 dias</button>
+      <button class="hist-tab" onclick="switchChartPeriod('30',this)">30 dias</button>
+      </div>
+      <div class="card-title">Evolução do humor</div>
+      <div class="chart-wrap"><canvas id="moodChart"></canvas></div>
+      <div class="chart-legend">
+        <span><span class="legend-dot" style="background:var(--rose);"></span>Seu humor</span>
+      </div>
+    </div>
+    <div class="card" id="statsCard">
+      <div class="card-title">Resumo do período</div>
+      <div id="statsContent" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Sentimentos mais frequentes</div>
+      <div id="topFeelings" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+    </div>
+  </div>
+
+  <!-- TAB HISTÓRICO -->
+  <div id="emo-historico" style="display:none;padding:0 20px 20px;">
+    <div style="margin-top:12px;" id="historyList"></div>
+  </div>
+</div>
+
+<!-- LINGUAGENS -->
+<div class="screen" id="linguagens">
+  <div class="app-header">
+    <button class="back-btn" onclick="backLing()">←</button>
+    <span class="header-title">Linguagens do amor</span>
+  </div>
+
+  <div id="lingStart">
+    <div style="padding:20px;text-align:center;">
+      <div style="font-size:48px;margin:16px 0;">💌</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px;">Descubra sua linguagem</h2>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:8px;">30 perguntas. Em cada par, escolha a que mais representa você.</p>
+    </div>
+    <div id="savedResultsSection" style="padding:0 20px;display:none;">
+      <div class="lang-saved-badge">✦ Resultados salvos do casal</div>
+      <div id="savedResultsList"></div>
+      <div style="border-top:1px solid var(--border);margin:16px 0;"></div>
+    </div>
+    <div style="padding:0 20px;margin-bottom:8px;font-size:13px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;">Fazer teste para:</div>
+    <div class="quiz-gender-btns">
+      <button class="gender-btn" onclick="startQuiz('marido')"><span class="gender-icon">👨</span>Marido</button>
+      <button class="gender-btn" onclick="startQuiz('esposa')"><span class="gender-icon">👩</span>Esposa</button>
+    </div>
+    <div style="padding:0 20px;">
+      <div class="card" style="background:var(--gold-light);border-color:var(--gold);">
+        <div style="font-size:12px;font-weight:500;color:var(--gold-dark);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">As 5 linguagens</div>
+        <div style="font-size:13px;color:var(--gold-dark);line-height:2;">💬 Palavras de afirmação<br>⏰ Tempo de qualidade<br>🎁 Presentes<br>🤝 Atos de serviço<br>🤗 Toque físico</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="lingQuiz" style="display:none;">
+    <div class="quiz-progress">
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="quizProgress" style="width:0%"></div></div>
+      <div class="progress-text" id="quizProgressText">Pergunta 1 de 30</div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-q" id="quizQ">Carregando...</div>
+      <div class="quiz-inst">Escolha a que melhor representa você:</div>
+      <div class="quiz-options" id="quizOpts"></div>
+    </div>
+    <div class="quiz-nav">
+      <button class="btn-outline" onclick="prevQ()">← Anterior</button>
+      <button class="btn-primary" onclick="nextQ()" style="flex:1;" id="nextBtn">Próxima →</button>
+    </div>
+  </div>
+
+  <div id="lingResult" style="display:none;"></div>
+</div>
+
+<!-- COMUNICAÇÃO -->
+<div class="screen" id="comunicacao">
+  <div class="app-header">
+    <button class="back-btn" onclick="backComm()">←</button>
+    <span class="header-title">Comunicação</span>
+  </div>
+  <div id="commList">
+    <div style="padding:16px 20px 8px;font-size:13px;color:var(--text-muted);line-height:1.5;">Conheça os 5 estilos. Toque para explorar cada um.</div>
+    <div style="padding:0 20px;">
+      <div class="comm-card" onclick="showComm('agressiva')"><div class="comm-card-header"><div class="comm-dot" style="background:#E24B4A;"></div><div class="comm-name">Comunicação agressiva</div></div><div class="comm-desc">Impõe, intimida, fere. Ganha a batalha, perde a conexão.</div></div>
+      <div class="comm-card" onclick="showComm('s-agressiva')"><div class="comm-card-header"><div class="comm-dot" style="background:#EF9F27;"></div><div class="comm-name">Sutilmente agressiva</div></div><div class="comm-desc">Frases com "você" que julgam, acusam e colocam o outro no modo defesa.</div></div>
+      <div class="comm-card" onclick="showComm('passiva')"><div class="comm-card-header"><div class="comm-dot" style="background:#85B7EB;"></div><div class="comm-name">Comunicação passiva</div></div><div class="comm-desc">Cede sempre. Acumula ressentimento em silêncio.</div></div>
+      <div class="comm-card" onclick="showComm('p-agressiva')"><div class="comm-card-header"><div class="comm-dot" style="background:#D4537E;"></div><div class="comm-name">Passivo-agressiva</div></div><div class="comm-desc">Ironia, sarcasmo, silêncio punitivo e comunicação paralinguística.</div></div>
+      <div class="comm-card" onclick="showComm('assertiva')" style="border-color:var(--sage);background:var(--sage-light);"><div class="comm-card-header"><div class="comm-dot" style="background:var(--sage);"></div><div class="comm-name">Comunicação assertiva ✦</div></div><div class="comm-desc">Clara, respeitosa, honesta. O objetivo da terapia.</div></div>
+    </div>
+  </div>
+  <div id="commDetail" style="display:none;"></div>
+</div>
+
+<!-- FRASES -->
+<div class="screen" id="frases">
+  <div class="app-header">
+    <button class="back-btn" onclick="goTo('home')">←</button>
+    <span class="header-title">Lembretes pessoais</span>
+  </div>
+  <div style="padding:16px 20px 8px;font-size:13px;color:var(--text-muted);">Escreva frases que te lembram de quem você quer ser. Programe horários.</div>
+  <div style="padding:0 20px;">
+    <div class="frase-add-card" id="fraseAddCard" onclick="showFraseForm()"><div class="frase-add-icon">✍️</div><div class="frase-add-text">Adicionar nova frase</div></div>
+    <div class="add-frase-form" id="fraseForm" style="display:none;">
+      <label class="form-label">Sua frase ou tarefa</label>
+      <textarea class="note-input" id="fraseInput" placeholder="Ex: Hoje eu escolho reagir com amor..." style="margin-bottom:14px;"></textarea>
+
+      <label class="form-label">Horário</label>
+      <div class="time-inputs">
+        <input type="time" id="timeInput" value="08:00">
+        <button class="btn-add-time" onclick="addTime()">+ Adicionar</button>
+      </div>
+      <div class="time-tags" id="timeTags"></div>
+
+      <label class="form-label">Data de início</label>
+      <input type="date" id="fraseDataInicio">
+
+      <label class="form-label">Data de término (opcional)</label>
+      <input type="date" id="fraseDataFim">
+
+      <label class="form-label">Repetir</label>
+      <div class="repeat-grid">
+        <button class="repeat-btn active" data-rep="nao" onclick="selectRepeat('nao',this)">Não repetir</button>
+        <button class="repeat-btn" data-rep="diario" onclick="selectRepeat('diario',this)">Diariamente</button>
+        <button class="repeat-btn" data-rep="semanal" onclick="selectRepeat('semanal',this)">Semanalmente</button>
+        <button class="repeat-btn" data-rep="mensal" onclick="selectRepeat('mensal',this)">Mensalmente</button>
+        <button class="repeat-btn" data-rep="anual" onclick="selectRepeat('anual',this)">Anualmente</button>
+        <button class="repeat-btn" data-rep="personalizado" onclick="selectRepeat('personalizado',this)">Personalizado</button>
+      </div>
+
+      <div class="personalizado-wrap" id="personalizadoWrap" style="display:none;">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Selecione os dias da semana:</div>
+        <div class="dias-semana">
+          <button class="dia-btn" data-dia="0" onclick="toggleDia(this)">Dom</button>
+          <button class="dia-btn" data-dia="1" onclick="toggleDia(this)">Seg</button>
+          <button class="dia-btn" data-dia="2" onclick="toggleDia(this)">Ter</button>
+          <button class="dia-btn" data-dia="3" onclick="toggleDia(this)">Qua</button>
+          <button class="dia-btn" data-dia="4" onclick="toggleDia(this)">Qui</button>
+          <button class="dia-btn" data-dia="5" onclick="toggleDia(this)">Sex</button>
+          <button class="dia-btn" data-dia="6" onclick="toggleDia(this)">Sáb</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="saveFrase()">Salvar lembrete</button>
+      <button class="btn-secondary" onclick="hideFraseForm()">Cancelar</button>
+    </div>
+    <div id="frasesList"></div>
+  </div>
+</div>
+
+<!-- DESAFIOS -->
+<div class="screen" id="desafios">
+  <div class="app-header">
+    <button class="back-btn" onclick="goTo('home')">←</button>
+    <span class="header-title">Desafios da terapia</span>
+  </div>
+  <div style="padding:20px;">
+    <div class="desafio-active">
+      <div class="desafio-active-label">✦ Desafio desta semana</div>
+      <div class="desafio-active-text" id="desafioAtual">Pratique escuta ativa: ao invés de pensar na resposta enquanto o cônjuge fala, concentre-se em entender completamente o que ele diz.</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:white;border-radius:var(--radius-sm);cursor:pointer;border:1px solid var(--border);" onclick="toggleDesafioCheck()">
+        <div class="check-box" id="desafioCheckBox"></div>
+        <div style="font-size:13px;" id="desafioCheckLabel">Marcar como concluído hoje</div>
+      </div>
+    </div>
+    <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Todos os desafios</div>
+    <div id="desafiosList"></div>
+  </div>
+</div>
+
+<!-- 30 DIAS -->
+<div class="screen" id="trinta">
+  <div class="app-header">
+    <button class="back-btn" onclick="goTo('home')">←</button>
+    <span class="header-title">Desafio 30 dias</span>
+  </div>
+  <div style="padding:20px;">
+    <div class="trinta-progress-card">
+      <div class="trinta-day-num" id="trintaDayNum">1</div>
+      <div class="trinta-day-label">Dia atual</div>
+      <div class="trinta-progress-bar"><div class="trinta-progress-fill" id="trintaProgressFill" style="width:3.3%"></div></div>
+      <div style="font-size:12px;opacity:.6;margin-top:6px;" id="trintaProgressText">1 de 30 dias</div>
+    </div>
+    <div class="trinta-day-card" id="trintaDayCard">
+      <div id="trintaSemana" class="semana-badge"></div>
+      <div id="trintaDayTitle" class="trinta-day-title"></div>
+      <div id="trintaDayDesc" class="trinta-day-desc"></div>
+      <div id="trintaDayObj" style="font-size:12px;color:var(--text-muted);background:var(--gold-light);padding:10px 12px;border-radius:var(--radius-sm);margin-bottom:16px;line-height:1.5;border-left:3px solid var(--gold);"></div>
+      <button class="btn-primary" onclick="completarDia()" id="trintaBtn">✓ Completar este dia</button>
+    </div>
+    <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Progresso</div>
+  </div>
+  <div style="padding:0 20px 4px;font-size:11px;color:var(--text-muted);">Semana 1: Comunicação • Semana 2: Qualidade • Semana 3: Conexão • Semana 4: Confiança</div>
+  <div class="trinta-calendar" id="trintaCalendar" style="margin-top:8px;"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const MOODS=['','😢','😕','😐','🙂','😄'];
+const MOOD_TEXTS=['','Muito triste','Triste','Neutro','Feliz','Muito feliz'];
+let moodVal=3,selectedFeelings=[];
+let moodHistory=JSON.parse(localStorage.getItem('ceg_moods')||'[]');
+let frases=JSON.parse(localStorage.getItem('ceg_frases')||'[]');
+let trintaDone=JSON.parse(localStorage.getItem('ceg_trinta')||'[]');
+let currentDay=parseInt(localStorage.getItem('ceg_day')||'1');
+let savedLangResults=JSON.parse(localStorage.getItem('ceg_lang_results')||'[]');
+let chartInstance=null,currentTimes=[],chartPeriod='7',currentRepeat='nao',currentDias=[];
+const REPEAT_LABELS={'nao':'Não repete','diario':'Todo dia','semanal':'Toda semana','mensal':'Todo mês','anual':'Todo ano','personalizado':'Personalizado'};
+const DIAS_NOMES=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+// ---- QUIZ DATA ----
+const QUIZ_MARIDO=[
+  {q:"Par 1",a:"Gostaria que minha esposa me enviasse mensagens apaixonadas.",la:"A",b:"Gostaria de receber mais abraços de minha esposa.",lb:"E"},
+  {q:"Par 2",a:"Gostaria de passar mais tempo sozinho com minha esposa.",la:"B",b:"Gosto de fazer serviços de casa com minha esposa.",lb:"D"},
+  {q:"Par 3",a:"Receber presentes especiais de minha esposa me deixa feliz.",la:"C",b:"Uma das coisas de que mais gosto é viajar com minha esposa.",lb:"B"},
+  {q:"Par 4",a:"Gostaria que minha esposa fizesse as compras ou abastecesse meu carro.",la:"D",b:"Gostaria que minha esposa me tocasse mais.",lb:"E"},
+  {q:"Par 5",a:"Gostaria que minha esposa me abraçasse em público.",la:"E",b:"De vez em quando gostaria de receber um presente surpresa.",lb:"C"},
+  {q:"Par 6",a:"Gostaria de sair com minha esposa — mesmo que seja apenas ao supermercado!",la:"B",b:"Gosto de andar de mãos dadas com minha esposa.",lb:"E"},
+  {q:"Par 7",a:"Valorizo os presentes da minha esposa.",la:"C",b:"Adoraria ouvir minha esposa dizer 'Amo você' com mais frequência.",lb:"A"},
+  {q:"Par 8",a:"Gostaria que minha esposa se sentasse perto de mim com mais frequência.",la:"E",b:"Sinto-me amado quando minha esposa me diz que estou bonito.",lb:"A"},
+  {q:"Par 9",a:"Gostaria de passar mais tempo junto da minha esposa.",la:"B",b:"Até mesmo o menor presente da minha esposa é importante para mim.",lb:"C"},
+  {q:"Par 10",a:"Adoraria ouvir minha esposa dizer 'Tenho orgulho de você'.",la:"A",b:"Quando minha esposa me prepara uma bela refeição, sinto-me amado.",lb:"D"},
+  {q:"Par 11",a:"Gosto muito de fazer coisas com minha esposa, não importa o que seja.",la:"B",b:"Gostaria que minha esposa me dissesse mais palavras de apoio.",lb:"A"},
+  {q:"Par 12",a:"Coisas pequenas que minha esposa faz significam muito para mim.",la:"D",b:"Minha esposa e eu precisamos nos abraçar mais.",lb:"E"},
+  {q:"Par 13",a:"Gostaria de ouvir mais elogios de minha esposa.",la:"A",b:"É bastante significativo receber presentes que eu gosto.",lb:"C"},
+  {q:"Par 14",a:"Gostaria que minha esposa e eu passássemos mais tempo juntos.",la:"B",b:"Gostaria que minha esposa me fizesse afagos nas costas com mais frequência.",lb:"E"},
+  {q:"Par 15",a:"Gostaria que minha esposa ficasse mais feliz quando eu realizo alguma coisa.",la:"A",b:"Gostaria que minha esposa me ajudasse mais com tarefas de casa.",lb:"D"},
+  {q:"Par 16",a:"Nunca me canso dos beijos de minha esposa.",la:"E",b:"Gostaria que minha esposa mostrasse mais interesse pelas coisas que gosto.",lb:"B"},
+  {q:"Par 17",a:"Gostaria que minha esposa trabalhasse comigo em algum projeto.",la:"D",b:"Gostaria que minha esposa se animasse mais com meus presentes.",lb:"C"},
+  {q:"Par 18",a:"Adoro quando minha esposa elogia minha aparência.",la:"A",b:"Gostaria que minha esposa não criticasse tanto minhas ideias.",lb:"B"},
+  {q:"Par 19",a:"Não consigo deixar de tocar minha esposa quando ela está por perto.",la:"E",b:"Gostaria que minha esposa me ajudasse com algumas tarefas.",lb:"D"},
+  {q:"Par 20",a:"Gostaria que minha esposa percebesse quando eu estivesse sobrecarregado.",la:"D",b:"Gostaria que minha esposa pensasse mais em presentes para me dar.",lb:"C"},
+  {q:"Par 21",a:"Gostaria que minha esposa me desse total atenção enquanto conversamos.",la:"B",b:"Manter a casa limpa é um importante ato de serviço.",lb:"D"},
+  {q:"Par 22",a:"Estou ansioso para saber o que minha esposa vai me dar de aniversário.",la:"C",b:"Sei que minha esposa me ama, mas gostaria que dissesse isso mais.",lb:"A"},
+  {q:"Par 23",a:"Ficaria feliz se minha esposa me trouxesse um presente na volta de uma viagem.",la:"C",b:"Gostaria que minha esposa me ajudasse com alguma tarefa.",lb:"D"},
+  {q:"Par 24",a:"Fico chateado quando minha esposa me interrompe.",la:"B",b:"Nunca me canso de receber presentes de minha esposa.",lb:"C"},
+  {q:"Par 25",a:"Gostaria que minha esposa me ajudasse quando eu estiver cansado.",la:"D",b:"Gostaria que minha esposa fosse tão animada para sair quanto eu.",lb:"B"},
+  {q:"Par 26",a:"Adoro fazer amor com minha esposa.",la:"E",b:"Gosto quando minha esposa traz pequenas coisas de que ela sabe que vou gostar.",lb:"C"},
+  {q:"Par 27",a:"Gostaria que minha esposa fosse mais incentivadora.",la:"A",b:"Gosto de ver filmes com minha esposa.",lb:"B"},
+  {q:"Par 28",a:"Se eu recebesse um presente de minha esposa eu me sentiria querido.",la:"C",b:"Não consigo desgrudar da minha esposa.",lb:"E"},
+  {q:"Par 29",a:"Adoraria que minha esposa me ajudasse com as coisas que tenho para fazer.",la:"D",b:"Ficaria muito feliz se minha esposa dissesse 'Gosto de você'.",lb:"A"},
+  {q:"Par 30",a:"Adoro abraçar minha esposa depois de termos ficado longe por um tempo.",la:"E",b:"Quero ouvir minha esposa dizer que acredita em mim.",lb:"A"},
+];
+const QUIZ_ESPOSA=[
+  {q:"Par 1",a:"Adoraria receber uma mensagem romântica do meu marido.",la:"A",b:"Gostaria que meu marido me abraçasse mais.",lb:"E"},
+  {q:"Par 2",a:"Gosto de ficar mais sozinha com meu marido.",la:"B",b:"Gostaria que meu marido fizesse alguma tarefa doméstica sem eu precisar pedir.",lb:"D"},
+  {q:"Par 3",a:"Adoraria que meu marido me trouxesse um presente do tipo 'comprei porque tive vontade'.",la:"C",b:"Gosto de fazer longas viagens com meu marido.",lb:"B"},
+  {q:"Par 4",a:"Me sentiria muito amada se meu marido lavasse as roupas.",la:"D",b:"Gosto quando meu marido me toca.",lb:"E"},
+  {q:"Par 5",a:"Gostaria que meu marido me abraçasse de vez em quando.",la:"E",b:"Gostaria que meu marido me trouxesse presente quando viajasse.",lb:"C"},
+  {q:"Par 6",a:"Gostaria de compartilhar a paixão de ir a lugares juntos.",la:"B",b:"Gosto de segurar a mão de meu marido.",lb:"E"},
+  {q:"Par 7",a:"Sinto-me amada quando meu marido me dá presentes.",la:"C",b:"Sei que meu marido me ama, mas gosto de ouvir isso.",lb:"A"},
+  {q:"Par 8",a:"Gosto que meu marido se sente perto de mim.",la:"E",b:"Gostaria que meu marido sempre me dissesse que sou bonita.",lb:"A"},
+  {q:"Par 9",a:"Passar tempo com meu marido me deixa feliz.",la:"B",b:"Gostaria que meu marido me desse presentes pequenos mas significativos.",lb:"C"},
+  {q:"Par 10",a:"Gostaria de ouvir meu marido dizer que se orgulha de mim.",la:"A",b:"Gostaria que meu marido me ajudasse na limpeza sem eu precisar pedir.",lb:"D"},
+  {q:"Par 11",a:"Gosto muito de fazer as coisas com meu marido, não importa o que seja.",la:"B",b:"Gostaria de ouvir mais palavras de apoio de meu marido.",lb:"A"},
+  {q:"Par 12",a:"Gostaria que meu marido fizesse coisas gentis para mim.",la:"D",b:"Adoro abraçar meu marido.",lb:"E"},
+  {q:"Par 13",a:"Gostaria que meu marido me fizesse elogios com mais frequência.",la:"A",b:"Gostaria que meu marido me desse presentes mais bem escolhidos.",lb:"C"},
+  {q:"Par 14",a:"O simples fato de estar perto do meu marido me faz sentir bem.",la:"B",b:"Gostaria que meu marido me fizesse uma massagem.",lb:"E"},
+  {q:"Par 15",a:"Gostaria que meu marido elogiasse mais minhas realizações.",la:"A",b:"Gostaria que meu marido me ajudasse mais com as tarefas que não aprecio.",lb:"D"},
+  {q:"Par 16",a:"Nunca me canso dos beijos do meu marido.",la:"E",b:"Gostaria que meu marido demonstrasse mais interesse por coisas importantes para mim.",lb:"B"},
+  {q:"Par 17",a:"Sinto-me amada quando meu marido me ajuda com meus projetos.",la:"D",b:"Ainda fico entusiasmada quando abro um presente do meu marido.",lb:"C"},
+  {q:"Par 18",a:"Gostaria que meu marido me elogiasse quando eu realizo meus objetivos.",la:"A",b:"Gostaria que meu marido me escutasse mais e respeitasse minhas ideias.",lb:"B"},
+  {q:"Par 19",a:"Não consigo deixar de tocar meu marido quando ele está perto de mim.",la:"E",b:"Gostaria que meu marido se oferecesse para ajudar nas tarefas.",lb:"D"},
+  {q:"Par 20",a:"Ficaria muito feliz se meu marido me ajudasse com as coisas da casa.",la:"D",b:"Me sentirei amada se os presentes demonstrarem atenção.",lb:"C"},
+  {q:"Par 21",a:"Gostaria que meu marido me desse atenção total quando conversamos.",la:"B",b:"Gostaria muito que meu marido me ajudasse a limpar a casa.",lb:"D"},
+  {q:"Par 22",a:"Estou ansiosa para saber o que meu marido me dará de presente no aniversário.",la:"C",b:"Quero ouvir meu marido dizer o quanto sou importante para ele.",lb:"A"},
+  {q:"Par 23",a:"Gostaria que meu marido me desse presentes com mais frequência.",la:"C",b:"Gostaria que meu marido me ajudasse sem eu precisar pedir.",lb:"D"},
+  {q:"Par 24",a:"Fico chateada quando meu marido me interrompe.",la:"B",b:"Nunca me canso de receber presentes de meu marido.",lb:"C"},
+  {q:"Par 25",a:"Gostaria que meu marido se oferecesse para me ajudar quando eu estiver cansada.",la:"D",b:"Gosto de ir a qualquer lugar com meu marido.",lb:"B"},
+  {q:"Par 26",a:"Gostaria que meu marido e eu nos afagássemos com mais frequência.",la:"E",b:"Gostaria que meu marido me surpreendesse mais com presentes.",lb:"C"},
+  {q:"Par 27",a:"Os incentivos de meu marido me dão confiança.",la:"A",b:"Adoro assistir a filmes com meu marido.",lb:"B"},
+  {q:"Par 28",a:"Gostaria que meu marido me desse um presente fora de ocasião especial.",la:"C",b:"Gostaria muito que meu marido me tocasse mais.",lb:"E"},
+  {q:"Par 29",a:"O fato de meu marido me ajudar é muito significativo.",la:"D",b:"Gostaria que meu marido dissesse 'gosto de você'.",lb:"A"},
+  {q:"Par 30",a:"Adoro abraçar meu marido quando ele chega em casa.",la:"E",b:"Quero ouvir meu marido dizer que sente minha falta quando saio.",lb:"A"},
+];
+const LANG_NAMES={A:"Palavras de afirmação",B:"Tempo de qualidade",C:"Presentes",D:"Atos de serviço",E:"Toque físico"};
+const LANG_ICONS={A:"💬",B:"⏰",C:"🎁",D:"🤝",E:"🤗"};
+const LANG_EXPLAIN={
+  A:"<b>Palavras de afirmação</b> — Você se sente amado(a) através de elogios, palavras de encorajamento e expressões verbais de carinho. Ouvir 'te amo', 'tenho orgulho de você' ou receber mensagens afetuosas enche seu tanque emocional. Críticas ou falta de reconhecimento verbal podem ferir profundamente.",
+  B:"<b>Tempo de qualidade</b> — Você se sente amado(a) quando seu parceiro(a) dedica atenção plena e exclusiva a você. Não é a quantidade de tempo, mas a qualidade — estar presente de verdade, olho no olho, sem celular ou distrações. Cancelamentos ou distrações constantes fazem você se sentir preterido(a).",
+  C:"<b>Presentes</b> — Você se sente amado(a) ao receber presentes — não pelo valor, mas pelo símbolo de que a pessoa pensou em você. Um presente inesperado, por menor que seja, comunica 'você está na minha mente'. A ausência de presentes em datas especiais pode parecer descaso.",
+  D:"<b>Atos de serviço</b> — Você se sente amado(a) quando seu parceiro(a) alivia sua carga com ações práticas: fazer uma tarefa sem ser pedido, ajudar com algo que você não gosta. Para você, ações falam mais alto do que palavras. Preguiça ou descuido nas tarefas pode parecer falta de amor.",
+  E:"<b>Toque físico</b> — Você se sente amado(a) através do contato físico: abraços, beijos, mãos dadas, proximidade corporal. O toque é sua principal forma de sentir segurança e conexão. A falta de toque ou frieza física pode gerar sensação de rejeição e distanciamento emocional."
+};
+const LANG_TIPS={
+  A:["Faça um elogio diferente e específico ao seu cônjuge a cada dia por um mês.","Escreva uma carta ou mensagem de amor e entregue com carinho.","Elogie seu cônjuge na presença de amigos e familiares — vale dobrado!"],
+  B:["Reserve um momento diário só para conversar, sem celular.","Planejem juntos um fim de semana especial só para o casal.","Faça uma atividade que seu cônjuge ama, mesmo que não seja sua favorita."],
+  C:["Crie um caderno de 'ideias para presentes' — anote quando ele mencionar algo que gosta.","Surpresas pequenas no dia a dia valem mais do que presentes caros em datas especiais.","Um bilhete, uma flor, um doce favorito — pequenos gestos enchem o tanque."],
+  D:["Faça uma lista dos pedidos que seu cônjuge fez nas últimas semanas e escolha um por semana.","Realize uma tarefa adiada sem ser solicitado(a) — os pontos extras valem muito!","Antecipe as necessidades: ajude antes que precisem pedir."],
+  E:["Segure a mão do seu cônjuge ao caminhar juntos.","Dê início ao dia com um abraço longo — pelo menos 20 segundos.","Quando estiverem sentados juntos, mantenha algum contato físico."]
+};
+
+// ---- 30 DIAS DO GABRIEL ----
+const TRINTA_DIAS=[
+  {t:"Escrevam uma Mensagem de Gratidão",s:1,semana:"Semana 1 — Comunicação e Reconexão",cor:"#C17B8A",obj:"Estimular o diálogo aberto e a compreensão, resgatando a conexão emocional do casal.",d:"A gratidão é poderosa para fortalecer vínculos. Cada um deve enviar uma mensagem simples destacando algo que valoriza no outro. Seja específico: não apenas 'obrigado por tudo', mas 'sou grato por você ter me escutado ontem'."},
+  {t:"15 Minutos de Conversa sem Distrações",s:1,semana:"Semana 1 — Comunicação e Reconexão",cor:"#C17B8A",obj:"Estimular o diálogo aberto e a compreensão.",d:"Reservem um tempo só para conversar, sem celular ou TV. Isso ajuda o casal a se ouvir de verdade e reforçar a intimidade. Escolham um assunto que não seja sobre tarefas ou problemas práticos."},
+  {t:"Compartilhem um Sonho ou Desejo",s:1,semana:"Semana 1 — Comunicação e Reconexão",cor:"#C17B8A",obj:"Estimular o diálogo aberto e a compreensão.",d:"Revelar sonhos e desejos estimula a confiança e permite que o casal se conecte em um nível mais profundo. Compartilhem algo que ainda não disseram um ao outro — pode ser um sonho pessoal, uma vontade, um medo."},
+  {t:"Elogiem um ao Outro",s:1,semana:"Semana 1 — Comunicação e Reconexão",cor:"#C17B8A",obj:"Estimular o diálogo aberto e a compreensão.",d:"Pequenos elogios são essenciais para manter o apreço. Cada um deve destacar algo positivo do parceiro(a) — algo específico e genuíno. Elogios vagos não enchem o tanque; seja concreto."},
+  {t:"Façam Perguntas Curiosas",s:1,semana:"Semana 1 — Comunicação e Reconexão",cor:"#C17B8A",obj:"Estimular o diálogo aberto e a compreensão.",d:"Reviver a curiosidade dos primeiros encontros, fazendo perguntas inesperadas, renova o interesse e a diversão na relação. Tente: 'Qual foi o dia mais feliz da sua vida?' ou 'O que você faria se não tivesse medo?'"},
+  {t:"Pratiquem Escuta Ativa",s:1,semana:"Semana 1 — Comunicação e Reconexão",cor:"#C17B8A",obj:"Estimular o diálogo aberto e a compreensão.",d:"Ouvir sem interromper e confirmar o que o outro disse é essencial para evitar mal-entendidos e fortalecer a empatia. Prática: depois que o parceiro falar, repita com suas palavras o que entendeu antes de responder."},
+  {t:"Revivam uma Memória Especial",s:1,semana:"Semana 1 — Comunicação e Reconexão",cor:"#C17B8A",obj:"Estimular o diálogo aberto e a compreensão.",d:"Relembrar juntos momentos felizes do passado desperta sentimentos positivos e reforça o vínculo emocional. Escolham uma foto, um lugar ou uma história que os dois amam. Contem os detalhes, riam juntos."},
+  {t:"Jantar à Luz de Velas em Casa",s:2,semana:"Semana 2 — Tempo de Qualidade",cor:"#C9A96E",obj:"Aprofundar a intimidade através de momentos compartilhados e criar memórias significativas.",d:"Preparar uma refeição especial, mesmo simples, e desfrutar juntos cria um clima romântico e promove conversas genuínas. Não precisa ser elaborado — o que importa é a intenção de criar um momento especial."},
+  {t:"Assistam a um Filme Escolhido por um dos Dois",s:2,semana:"Semana 2 — Tempo de Qualidade",cor:"#C9A96E",obj:"Aprofundar a intimidade através de momentos compartilhados.",d:"Alternar as escolhas do filme demonstra respeito e permite que ambos compartilhem seus gostos e interesses. Depois do filme, conversem sobre o que sentiram e por que aquele filme é especial para quem escolheu."},
+  {t:"Caminhem Juntos e Conversem Sobre o Dia",s:2,semana:"Semana 2 — Tempo de Qualidade",cor:"#C9A96E",obj:"Aprofundar a intimidade através de momentos compartilhados.",d:"Passear sem pressa e conversar relaxadamente ajuda a aliviar o estresse e a fortalecer a conexão cotidiana. Uma caminhada de 20 minutos sem destino específico pode revelar conversas profundas."},
+  {t:"Criem uma Playlist com Músicas que Marcam o Relacionamento",s:2,semana:"Semana 2 — Tempo de Qualidade",cor:"#C9A96E",obj:"Aprofundar a intimidade através de momentos compartilhados.",d:"Músicas têm o poder de resgatar memórias e emoções positivas, unindo o casal em momentos especiais. Cada um escolhe 5 músicas que representam algo importante da relação de vocês."},
+  {t:"Façam Algo Novo Juntos",s:2,semana:"Semana 2 — Tempo de Qualidade",cor:"#C9A96E",obj:"Aprofundar a intimidade através de momentos compartilhados.",d:"Experimentar uma atividade inédita, como cozinhar uma receita nova ou praticar um hobby, fortalece o vínculo e traz diversão. Novidades ativam o cérebro de forma parecida com o início do namoro."},
+  {t:"Joguem um Jogo Divertido",s:2,semana:"Semana 2 — Tempo de Qualidade",cor:"#C9A96E",obj:"Aprofundar a intimidade através de momentos compartilhados.",d:"Jogos leves e descontraídos estimulam a cooperação e ajudam o casal a relaxar e se divertir. Vale jogo de cartas, tabuleiro, videogame — o que importa é a leveza e o riso compartilhado."},
+  {t:"Planejem uma Surpresa Simples um para o Outro",s:2,semana:"Semana 2 — Tempo de Qualidade",cor:"#C9A96E",obj:"Aprofundar a intimidade através de momentos compartilhados.",d:"Surpresas mostram que ambos estão atentos aos desejos do parceiro(a), reforçando o carinho e a consideração. Não precisa ser caro — um bilhete escondido, o lanche favorito, um gesto inesperado já cumpre o papel."},
+  {t:"Abracem-se por 20 Segundos Antes de Dormir",s:3,semana:"Semana 3 — Conexão Física e Afetiva",cor:"#7A9E8E",obj:"Reforçar a intimidade por meio de toques, gestos carinhosos e momentos de proximidade.",d:"Estudos mostram que abraços longos liberam ocitocina, o hormônio do amor, criando uma sensação de conforto e segurança. Vinte segundos é o tempo mínimo para que o corpo libere ocitocina de forma significativa."},
+  {t:"Façam uma Massagem Rápida um no Outro",s:3,semana:"Semana 3 — Conexão Física e Afetiva",cor:"#7A9E8E",obj:"Reforçar a intimidade por meio de toques e gestos carinhosos.",d:"Uma massagem simples, mesmo por alguns minutos, alivia o estresse e fortalece a conexão por meio do toque. Cada um dá 5 minutos de massagem ao outro — ombros, pescoço ou pés."},
+  {t:"Dediquem um Momento para Dar as Mãos em Silêncio",s:3,semana:"Semana 3 — Conexão Física e Afetiva",cor:"#7A9E8E",obj:"Reforçar a intimidade por meio de gestos carinhosos.",d:"Segurar as mãos em silêncio é um gesto simples, mas poderoso, que comunica apoio e proximidade sem palavras. Sentem-se juntos, segurem as mãos e fiquem em silêncio por 3 minutos. Observem o que sentem."},
+  {t:"Planejem um Momento de Carinho sem Distrações",s:3,semana:"Semana 3 — Conexão Física e Afetiva",cor:"#7A9E8E",obj:"Reforçar a intimidade por meio de presença plena.",d:"Estar presente de corpo e alma durante um momento íntimo, sem distrações como celular ou TV, reforça a sintonia. Combinem um horário, coloquem os celulares em modo silencioso e estejam completamente presentes um para o outro."},
+  {t:"Recriem o Primeiro Encontro",s:3,semana:"Semana 3 — Conexão Física e Afetiva",cor:"#7A9E8E",obj:"Reforçar a intimidade resgatando memórias afetivas.",d:"Reviver a experiência do primeiro encontro traz à tona memórias e sentimentos que reacendem a chama do relacionamento. Vão ao mesmo lugar, façam as mesmas coisas, relembrem como se sentiram naquele dia."},
+  {t:"Façam um Piquenique ou Lanche Juntos",s:3,semana:"Semana 3 — Conexão Física e Afetiva",cor:"#7A9E8E",obj:"Reforçar a intimidade através de momentos de leveza.",d:"Compartilhar uma refeição leve ao ar livre promove relaxamento e cria um ambiente descontraído para a conversa. Pode ser no parque, na varanda, na sala mesmo — o que importa é o clima de descontração."},
+  {t:"Escrevam uma Carta de Amor um para o Outro",s:3,semana:"Semana 3 — Conexão Física e Afetiva",cor:"#7A9E8E",obj:"Reforçar a intimidade através da expressão dos sentimentos.",d:"Expressar sentimentos em palavras fortalece o vínculo emocional e permite que cada um relembre o que sente pelo parceiro(a). Escrevam à mão, se possível — e leiam para o outro em voz alta."},
+  {t:"Revisitem Planos Futuros Juntos",s:4,semana:"Semana 4 — Fortalecendo Confiança e Compromisso",cor:"#534AB7",obj:"Consolidar a confiança e reforçar o compromisso com a relação.",d:"Planejar algo para o futuro, como uma viagem ou projeto em comum, alinha expectativas e reforça o compromisso com a relação. Onde vocês querem estar daqui a 5 anos? O que querem construir juntos?"},
+  {t:"Estabeleçam um Objetivo como Casal",s:4,semana:"Semana 4 — Fortalecendo Confiança e Compromisso",cor:"#534AB7",obj:"Consolidar a confiança e reforçar o compromisso.",d:"Escolher um objetivo compartilhado (como economizar para algo especial ou aprender algo novo juntos) cria um senso de parceria e união. Escrevam o objetivo e coloquem em algum lugar visível."},
+  {t:"Pratiquem a Honestidade Total por um Dia",s:4,semana:"Semana 4 — Fortalecendo Confiança e Compromisso",cor:"#534AB7",obj:"Consolidar a confiança através da transparência.",d:"Criar um momento para serem completamente honestos fortalece a confiança e abre espaço para conversas genuínas. A regra do dia: sem meias verdades, sem 'tá bom' quando não está."},
+  {t:"Façam uma Lista de Coisas que Apreciam um no Outro",s:4,semana:"Semana 4 — Fortalecendo Confiança e Compromisso",cor:"#534AB7",obj:"Consolidar a confiança e reforçar o apreço mútuo.",d:"Lembrar e verbalizar as qualidades que admiram no parceiro(a) ajuda a reverter padrões de crítica e distanciamento emocional. Cada um faz uma lista de 10 qualidades — e lê para o outro."},
+  {t:"Falem Sobre o Que Precisa Ser Melhorado na Relação",s:4,semana:"Semana 4 — Fortalecendo Confiança e Compromisso",cor:"#534AB7",obj:"Consolidar a confiança através da transparência e da escuta.",d:"Uma conversa franca e sem julgamentos sobre pontos de melhoria promove ajustes saudáveis e reforça a transparência. Use a comunicação assertiva: 'Eu sinto que... e preciso que...'"},
+  {t:"Combinem um Novo Ritual Semanal para Fortalecer a Conexão",s:4,semana:"Semana 4 — Fortalecendo Confiança e Compromisso",cor:"#534AB7",obj:"Consolidar a confiança criando consistência na rotina.",d:"Pode ser um café da manhã semanal ou uma caminhada aos sábados. Rituais reforçam a intimidade e criam consistência na rotina do casal. Escolham algo simples e viável — e comprometam-se com ele."},
+  {t:"Celebrem Juntos as Pequenas Conquistas da Relação",s:4,semana:"Semana 4 — Fortalecendo Confiança e Compromisso",cor:"#534AB7",obj:"Consolidar a confiança e reforçar o compromisso com o futuro.",d:"Reconhecer o progresso, por menor que seja, fortalece o sentimento de gratidão e cria motivação para seguir investindo na parceria. Releiam os desafios que fizeram. O que mudou? O que cresceu entre vocês?"},
+  {t:"Dia 29 — Escolha livre",s:4,semana:"Semana 4 — Dias livres do casal",cor:"#534AB7",obj:"Vocês escolhem! Repitam a atividade favorita de um dos dois.",d:"Cada um escolhe a atividade que mais gostou de todo o desafio. O dia 29 pertence a um de vocês — escolha e compartilhe com seu parceiro(a) o que quer repetir e por quê foi tão especial."},
+  {t:"Dia 30 — Escolha livre",s:4,semana:"Semana 4 — Dias livres do casal",cor:"#534AB7",obj:"Vocês escolhem! Repitam a atividade favorita do outro.",d:"O dia 30 pertence ao outro parceiro(a) — ele(a) escolhe a atividade favorita para fechar o desafio. Celebrem os 30 dias! Pequenas atitudes, feitas todos os dias, quebraram padrões e criaram novos caminhos juntos."},
+];
+
+const COMM_DATA={
+  'agressiva':{cor:'#E24B4A',nome:'Comunicação agressiva',desc:'A comunicação agressiva busca vencer a qualquer custo. Fere, intimida e humilha — mesmo que às vezes sem perceber.',sinais:['Gritos e elevação de voz','Xingamentos ou palavras duras','Interromper constantemente','Culpar e atacar o outro'],exemploBad:'Você NUNCA faz nada certo! Eu preciso fazer tudo sozinho nessa casa!',exemploGood:'Estou me sentindo sobrecarregado. Você pode me ajudar com isso hoje?',dicas:['Faça uma pausa antes de responder quando sentir raiva','Respire fundo: inspire 4s, segure 4s, expire 4s','Pergunte-se: "Quero ter razão ou quero conexão?"']},
+  's-agressiva':{cor:'#EF9F27',nome:'Sutilmente agressiva',desc:'É a comunicação que fala DO outro — frases que começam com "você" e colocam o outro em posição de acusado, julgado ou apontado. O efeito imediato é defensividade: quem recebe entra em modo de revide ou justificativa, e a conversa vira um cabo de guerra em vez de um diálogo. A pessoa que usou pode nem perceber que provocou isso.',sinais:['"Você nunca faz isso direito"','Frases iniciadas com "você" acusatório','Tom que implica julgamento mesmo sem gritar','Coloca o outro na posição de réu','Provoca revide ou justificativas automáticas','Elogios seguidos de "mas você..."'],exemploBad:'"Você sempre chega tarde e não se importa com nada que eu planejo."',exemploGood:'"Quando espero além do combinado, eu me sinto desvalorizado(a). Podemos combinar horários que funcionem para os dois?"',dicas:['Troque frases com "você" por frases com "eu sinto" ou "eu percebo"','Antes de falar, pergunte: "Isso que vou dizer vai acusar ou vai abrir diálogo?"','O objetivo não é ganhar — é ser compreendido(a) e compreender']},
+  'passiva':{cor:'#85B7EB',nome:'Comunicação passiva',desc:'Cede sempre. Não expressa opiniões, não defende necessidades. O silêncio acumula ressentimento.',sinais:['Dificuldade de dizer não','Concordar com tudo para evitar conflito','Guardar tudo para si','Ressentimento acumulado silencioso'],exemploBad:'Não, tudo bem. Pode fazer como você quer... (mas fica com raiva por dentro)',exemploGood:'Hoje eu precisava de algo diferente. Posso te contar o que eu gostaria?',dicas:['Pratique dizer "eu prefiro" ou "para mim funciona melhor assim"','Lembre: suas necessidades têm o mesmo valor que as do seu cônjuge','Comece pequeno: expresse uma preferência por dia']},
+  'p-agressiva':{cor:'#D4537E',nome:'Passivo-agressiva',desc:'É a comunicação que expressa raiva ou insatisfação de forma indireta — sem assumir o que está sentindo. A hostilidade não é falada, é demonstrada através do comportamento, do tom, do silêncio ou de gestos. Quem recebe sente claramente que algo está errado, mas não consegue nomear o problema porque "nada foi dito".',sinais:['Ironia e sarcasmo como forma de punir','Silêncio como castigo — tratamento de silêncio','Comunicação paralinguística: suspiros, expressões, trejeitos que comunicam raiva sem palavras','Dizer "tá bom" quando claramente não está','Fazer de propósito errado aquilo que não quer fazer','Esquecer seletivamente coisas importantes'],exemploBad:'(Silêncio total por horas, suspiros pesados, porta fechando com força — sem explicar o porquê)',exemploGood:'"Estou me sentindo magoado(a) com o que aconteceu e preciso de um tempo para processar. Posso te contar quando estiver pronto(a) para conversar?"',dicas:['Nomeie o que está sentindo em voz alta — não demonstre com atitudes','O tratamento de silêncio comunica punição, não resolve o problema','Quando perceber ironia ou sarcasmo saindo, pare e diga o que realmente quer dizer']},
+  'assertiva':{cor:'#7A9E8E',nome:'Comunicação assertiva',desc:'Clara, honesta e respeitosa ao mesmo tempo. Expressa necessidades sem atacar nem se submeter. É uma habilidade — e pode ser aprendida.',sinais:['Fala em primeira pessoa ("eu sinto", "eu preciso")','Ouve com atenção genuína','Pede sem exigir','Diz não com respeito'],exemploBad:'"Você nunca me ouve quando eu falo!"',exemploGood:'"Quando você olha o celular enquanto eu falo, eu me sinto invisível. Posso ter sua atenção por 5 minutos?"',dicas:['Use sempre: "Quando... eu sinto... porque... e preciso..."','Pratique ouvir para entender, não para responder','A assertividade une clareza + respeito + cuidado']}
+};
+
+const DESAFIOS_LIST=["Pratique escuta ativa: concentre-se em entender completamente antes de responder.","Diga ao seu cônjuge uma coisa específica que você admira nele hoje.","Realizem uma atividade que só seu cônjuge gosta, sem reclamar.","Expressem gratidão por 3 coisas que o outro fez esta semana.","Pratiquem 10 minutos de conversa sem celular e sem TV.","Façam algo juntos que não fazem há muito tempo.","Escrevam uma nota de amor e deixem em algum lugar surpresa.","Conversem sobre um sonho que têm juntos para o futuro."];
+
+let quizData=[],quizAnswers=[],quizIdx=0,quizGender='';
+
+function checkTerms(){
+  const accepted = localStorage.getItem('ceg_terms_accepted');
+  if (!accepted) {
+    document.getElementById('onboarding').classList.add('show');
+    return;
+  }
+  document.getElementById('splash').style.display = 'none';
+  // Check if Firebase already has an authenticated user
+  const fbUser = window.FB_AUTH?.currentUser;
+  if (fbUser) {
+    currentUser = { email: fbUser.email, uid: fbUser.uid };
+    localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+    loadUserDataFromFirebase(fbUser.uid).then(() => enterAppLoggedIn());
+    return;
+  }
+  // Check localStorage for saved session
+  const saved = JSON.parse(localStorage.getItem('ceg_user') || 'null');
+  if (saved && saved.uid) {
+    currentUser = saved;
+    // Wait briefly for Firebase to restore auth state
+    document.getElementById('splash').innerHTML += '<p style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:16px;">Verificando sessão...</p>';
+    setTimeout(() => {
+      const fbU = window.FB_AUTH?.currentUser;
+      if (fbU) {
+        loadUserDataFromFirebase(fbU.uid).then(() => enterAppLoggedIn());
+      } else {
+        showScreen('boasVindas');
+      }
+    }, 2000);
+  } else {
+    showScreen('boasVindas');
+  }
+}
+function acceptTerms(){
+  localStorage.setItem('ceg_terms_accepted','1');
+  document.getElementById('onboarding').classList.remove('show');
+  document.getElementById('termsModal').classList.remove('show');
+  const user=JSON.parse(localStorage.getItem('ceg_user')||'null');
+  if(!user){
+    document.getElementById('splash').style.display='none';
+    showScreen('boasVindas');
+  } else {
+    currentUser=user;
+    enterAppLoggedIn();
+  }
+  setTimeout(requestAndScheduleNotifications, 2000);
+}
+function showTerms(){
+  document.getElementById('termsModal').classList.add('show');
+}
+function closeTerms(){
+  document.getElementById('termsModal').classList.remove('show');
+}
+function enterApp(){
+  document.getElementById('splash').style.display='none';
+  if (runAccessCheck()) return;
+  document.getElementById('bottomNav').classList.add('visible');
+  goTo('home');
+  renderFrases();renderDesafios();renderTrinta();loadSavedResults();
+}
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el)el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const nav=document.getElementById('nav-'+id);
+  if(nav)nav.classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='trinta')renderTrinta();
+  if(id==='perfil')renderPerfil();
+}
+function quickMood(v){
+  document.querySelectorAll('.mood-face').forEach((f,i)=>f.classList.toggle('selected',i+1===v));
+  const rec={mood:v,feelings:[],sit:'',pens:'',comp:'',date:new Date().toLocaleDateString('pt-BR'),time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),ts:Date.now()};
+  moodHistory.push(rec);localStorage.setItem('ceg_moods',JSON.stringify(moodHistory));
+  showToast(MOODS[v]+' Humor registrado!');
+}
+function updateMood(v){
+  moodVal=parseInt(v);
+  document.getElementById('moodEmoji').textContent=MOODS[moodVal];
+  document.getElementById('moodText').textContent=MOOD_TEXTS[moodVal];
+}
+function toggleFeeling(btn){
+  btn.classList.toggle('selected');
+  const f=btn.textContent;
+  if(btn.classList.contains('selected')){if(!selectedFeelings.includes(f))selectedFeelings.push(f);}
+  else{selectedFeelings=selectedFeelings.filter(x=>x!==f);}
+}
+function saveRegisto(){
+  const rec={mood:moodVal,feelings:[...selectedFeelings],sit:document.getElementById('situacao').value,pens:document.getElementById('pensamentos').value,comp:document.getElementById('comportamento').value,date:new Date().toLocaleDateString('pt-BR'),time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),ts:Date.now()};
+  moodHistory.push(rec);localStorage.setItem('ceg_moods',JSON.stringify(moodHistory));
+  saveRegistroToFirebase(rec);
+  selectedFeelings=[];
+  document.querySelectorAll('.feeling-chip').forEach(c=>c.classList.remove('selected'));
+  ['situacao','pensamentos','comportamento'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('moodSlider').value=3;updateMood(3);
+  showToast('✓ Registro salvo!');
+}
+// EMO TABS
+function switchEmoTab(tab,btn){
+  ['registrar','grafico','historico'].forEach(t=>{
+    document.getElementById('emo-'+t).style.display=t===tab?'block':'none';
+  });
+  document.querySelectorAll('.hist-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(tab==='grafico'){renderChart();renderStats();}
+  if(tab==='historico'){renderHistoryList();}
+}
+function switchChartPeriod(p,btn){
+  chartPeriod=p;
+  document.querySelectorAll('#emo-grafico .hist-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChart();renderStats();
+}
+function renderChart(){
+  const ctx=document.getElementById('moodChart').getContext('2d');
+  if(chartInstance)chartInstance.destroy();
+  const n=parseInt(chartPeriod);
+  const slice=moodHistory.slice(-n);
+  const labels=slice.map(r=>(r.date||'')+(r.time?' '+r.time:''));
+  const data=slice.map(r=>r.mood);
+  chartInstance=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data,borderColor:'#C17B8A',backgroundColor:'rgba(193,123,138,0.1)',borderWidth:2,pointBackgroundColor:'#C17B8A',pointRadius:4,tension:.4,fill:true}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:1,max:5,ticks:{stepSize:1,callback:v=>MOODS[v]||v},grid:{color:'rgba(0,0,0,0.05)'}},x:{grid:{display:false},ticks:{font:{size:10},maxRotation:0}}}}
+  });
+}
+function renderStats(){
+  const n=parseInt(chartPeriod);
+  const slice=moodHistory.slice(-n);
+  if(!slice.length){document.getElementById('statsContent').innerHTML='<div style="grid-column:1/-1;text-align:center;font-size:13px;color:var(--text-muted);">Nenhum registro ainda.</div>';return;}
+  const avg=(slice.reduce((a,r)=>a+r.mood,0)/slice.length).toFixed(1);
+  const best=Math.max(...slice.map(r=>r.mood));
+  const worst=Math.min(...slice.map(r=>r.mood));
+  document.getElementById('statsContent').innerHTML=`
+    <div style="text-align:center;padding:10px;background:var(--rose-light);border-radius:var(--radius-sm);"><div style="font-size:20px;font-weight:500;color:var(--rose-dark);">${avg}</div><div style="font-size:11px;color:var(--text-muted);">Média</div></div>
+    <div style="text-align:center;padding:10px;background:#F0FFF4;border-radius:var(--radius-sm);"><div style="font-size:20px;">${MOODS[best]}</div><div style="font-size:11px;color:var(--text-muted);">Melhor</div></div>
+    <div style="text-align:center;padding:10px;background:var(--cream);border-radius:var(--radius-sm);"><div style="font-size:20px;">${MOODS[worst]}</div><div style="font-size:11px;color:var(--text-muted);">Menor</div></div>
+  `;
+  // Top feelings
+  const freq={};
+  slice.forEach(r=>(r.feelings||[]).forEach(f=>{freq[f]=(freq[f]||0)+1;}));
+  const top=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  document.getElementById('topFeelings').innerHTML=top.length?top.map(([f,c])=>`<div style="padding:4px 10px;background:var(--rose-light);border-radius:12px;font-size:12px;color:var(--rose-dark);">${f} <span style="opacity:.6;">${c}x</span></div>`).join(''):'<div style="font-size:13px;color:var(--text-muted);">Nenhum sentimento registrado ainda.</div>';
+}
+function renderHistoryList(){
+  const el=document.getElementById('historyList');
+  if(!moodHistory.length){el.innerHTML='<div class="history-empty">Nenhum registro ainda.<br>Comece registrando seu humor!</div>';return;}
+  el.innerHTML=[...moodHistory].reverse().map(r=>`
+    <div class="history-item">
+      <div class="history-item-header">
+        <div class="history-face">${MOODS[r.mood]||'😐'}</div>
+        <div class="history-meta">
+          <div class="history-date">${r.date||''}${r.time?' às '+r.time:''}</div>
+          <div class="history-mood-name">${MOOD_TEXTS[r.mood]||'Neutro'}</div>
+        </div>
+      </div>
+      ${r.feelings&&r.feelings.length?`<div class="history-feelings-row">${r.feelings.map(f=>`<div class="history-feeling-tag">${f}</div>`).join('')}</div>`:''}
+      ${r.sit||r.pens||r.comp?`<div class="history-note">${[r.sit&&'<b>Situação:</b> '+r.sit,r.pens&&'<b>Pensamentos:</b> '+r.pens,r.comp&&'<b>Reação:</b> '+r.comp].filter(Boolean).join('<br>')}</div>`:''}
+    </div>
+  `).join('');
+}
+
+// QUIZ
+function startQuiz(gender){
+  quizGender=gender;
+  quizData=gender==='marido'?QUIZ_MARIDO:QUIZ_ESPOSA;
+  quizAnswers=new Array(30).fill(null);quizIdx=0;
+  document.getElementById('lingStart').style.display='none';
+  document.getElementById('lingQuiz').style.display='block';
+  document.getElementById('lingResult').style.display='none';
+  renderQuizQ();
+}
+function renderQuizQ(){
+  const q=quizData[quizIdx];const total=quizData.length;
+  document.getElementById('quizProgress').style.width=Math.round((quizIdx/total)*100)+'%';
+  document.getElementById('quizProgressText').textContent=`Pergunta ${quizIdx+1} de ${total}`;
+  document.getElementById('quizQ').textContent=q.q;
+  const opts=document.getElementById('quizOpts');
+  opts.innerHTML=`
+    <button class="quiz-option ${quizAnswers[quizIdx]===q.la?'selected':''}" onclick="selectOpt('${q.la}',this)">${q.a}</button>
+    <button class="quiz-option ${quizAnswers[quizIdx]===q.lb?'selected':''}" onclick="selectOpt('${q.lb}',this)">${q.b}</button>
+  `;
+  document.getElementById('nextBtn').textContent=quizIdx===total-1?'Ver resultado ✦':'Próxima →';
+}
+function selectOpt(lang,btn){
+  quizAnswers[quizIdx]=lang;
+  document.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function nextQ(){
+  if(!quizAnswers[quizIdx]){showToast('Escolha uma opção!');return;}
+  if(quizIdx<quizData.length-1){quizIdx++;renderQuizQ();}
+  else showResult();
+}
+function prevQ(){if(quizIdx>0){quizIdx--;renderQuizQ();}}
+function showResult(){
+  const scores={A:0,B:0,C:0,D:0,E:0};
+  quizAnswers.forEach(a=>{if(a)scores[a]++;});
+  const ranked=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const primary=ranked[0][0];
+  const maxScore=ranked[0][1];
+  // Save result
+  const result={gender:quizGender,scores,ranked,date:new Date().toLocaleDateString('pt-BR'),primary};
+  // Remove previous result for same gender
+  savedLangResults=savedLangResults.filter(r=>r.gender!==quizGender);
+  savedLangResults.push(result);
+  localStorage.setItem('ceg_lang_results',JSON.stringify(savedLangResults));
+  saveModuloToFirebase('linguagens', savedLangResults);
+  document.getElementById('lingStart').style.display='none';
+  document.getElementById('lingQuiz').style.display='none';
+  const res=document.getElementById('lingResult');
+  res.style.display='block';
+  res.innerHTML=`
+    <div class="quiz-result">
+      <div class="result-badge">
+        <div class="result-icon">${LANG_ICONS[primary]}</div>
+        <div class="result-title">${LANG_NAMES[primary]}</div>
+        <div class="result-sub">Linguagem primária de ${quizGender==='marido'?'marido':'esposa'} • ${new Date().toLocaleDateString('pt-BR')}</div>
+      </div>
+      <div class="lang-saved-badge">✦ Resultado salvo automaticamente</div>
+      <div class="card">
+        <div class="card-title">Hierarquia das suas linguagens</div>
+        <div class="lang-ranking">
+          ${ranked.map(([k,v],i)=>`
+            <div class="lang-rank-item ${i===0?'primary':''}">
+              <div class="lang-rank-num">${i+1}º</div>
+              <div class="lang-rank-icon">${LANG_ICONS[k]}</div>
+              <div class="lang-rank-info">
+                <div class="lang-rank-name">${LANG_NAMES[k]}</div>
+                <div class="lang-rank-score">${v} ponto${v!==1?'s':''}</div>
+                <div class="lang-rank-bar"><div class="lang-rank-fill" style="width:${maxScore>0?Math.round((v/maxScore)*100):0}%"></div></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">O que isso significa</div>
+        ${ranked.map(([k,v],i)=>`
+          <div style="margin-bottom:10px;">
+            <div style="font-size:11px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">${i+1}º lugar — ${v} ponto${v!==1?'s':''}</div>
+            <div style="font-size:13px;color:var(--text);line-height:1.6;padding:12px;background:var(--cream);border-radius:var(--radius-sm);">${LANG_EXPLAIN[k]}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="card" style="background:var(--gold-light);border-color:var(--gold);">
+        <div class="card-title" style="color:var(--gold-dark);">Como amar melhor</div>
+        ${LANG_TIPS[primary].map(t=>`<div style="font-size:13px;color:var(--gold-dark);padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);line-height:1.5;">✦ ${t}</div>`).join('')}
+      </div>
+      <button class="btn-primary" onclick="resetQuiz()" style="margin-top:8px;">Refazer questionário</button>
+      <button class="btn-secondary" onclick="resetQuiz()">Ver resultados salvos</button>
+    </div>
+  `;
+}
+function resetQuiz(){
+  document.getElementById('lingStart').style.display='block';
+  document.getElementById('lingQuiz').style.display='none';
+  document.getElementById('lingResult').style.display='none';
+  loadSavedResults();
+}
+function backLing(){
+  if(document.getElementById('lingQuiz').style.display!=='none'){
+    document.getElementById('lingStart').style.display='block';
+    document.getElementById('lingQuiz').style.display='none';
+  }else{goTo('home');}
+}
+function loadSavedResults(){
+  const sec=document.getElementById('savedResultsSection');
+  const list=document.getElementById('savedResultsList');
+  if(!savedLangResults.length){sec.style.display='none';return;}
+  sec.style.display='block';
+  list.innerHTML=savedLangResults.map(r=>`
+    <div class="saved-result-item">
+      <div class="saved-result-header">
+        <div style="font-size:24px;">${r.gender==='marido'?'👨':'👩'}</div>
+        <div>
+          <div class="saved-result-name">${r.gender==='marido'?'Marido':'Esposa'}</div>
+          <div class="saved-result-date">${r.date}</div>
+        </div>
+      </div>
+      ${r.ranked.map(([k,v],i)=>`
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <div style="width:18px;font-size:11px;color:var(--text-muted);font-weight:500;">${i+1}º</div>
+          <div style="font-size:14px;">${LANG_ICONS[k]}</div>
+          <div style="flex:1;font-size:12px;color:${i===0?'var(--rose-dark)':'var(--text)'};">${LANG_NAMES[k]}</div>
+          <div style="font-size:12px;color:var(--text-muted);">${v}pts</div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+// COMUNICAÇÃO
+function showComm(id){
+  const d=COMM_DATA[id];
+  document.getElementById('commList').style.display='none';
+  const detail=document.getElementById('commDetail');
+  detail.style.display='block';
+  detail.innerHTML=`
+    <div class="app-header" style="position:sticky;top:0;z-index:100;">
+      <button class="back-btn" onclick="backComm()">←</button>
+      <span class="header-title">${d.nome}</span>
+    </div>
+    <div style="padding:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:16px;height:16px;border-radius:50%;background:${d.cor};flex-shrink:0;"></div>
+        <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);">${d.nome}</div>
+      </div>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">${d.desc}</p>
+      <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Sinais</div>
+      ${d.sinais.map(s=>`<div class="tip-item"><span class="tip-bullet">•</span>${s}</div>`).join('')}
+      <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 8px;">Na prática</div>
+      <div class="example-bubble bad"><div class="example-label">Evitar</div>"${d.exemploBad}"</div>
+      <div class="example-bubble good"><div class="example-label">Assertivo</div>"${d.exemploGood}"</div>
+      <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 8px;">Como mudar</div>
+      ${d.dicas.map(t=>`<div class="tip-item"><span class="tip-bullet" style="color:var(--sage);">✦</span>${t}</div>`).join('')}
+    </div>
+  `;
+}
+function backComm(){
+  document.getElementById('commList').style.display='block';
+  document.getElementById('commDetail').style.display='none';
+}
+
+// FRASES
+function showFraseForm(){document.getElementById('fraseForm').style.display='block';document.getElementById('fraseAddCard').style.display='none';currentTimes=[];renderTimeTags();}
+function hideFraseForm(){document.getElementById('fraseForm').style.display='none';document.getElementById('fraseAddCard').style.display='block';currentTimes=[];document.getElementById('fraseInput').value='';}
+function addTime(){const t=document.getElementById('timeInput').value;if(t&&!currentTimes.includes(t)){currentTimes.push(t);renderTimeTags();}}
+function renderTimeTags(){document.getElementById('timeTags').innerHTML=currentTimes.map((t,i)=>`<div class="time-tag">🔔 ${t} <span style="cursor:pointer;font-weight:500;" onclick="removeTime(${i})">×</span></div>`).join('');}
+function removeTime(i){currentTimes.splice(i,1);renderTimeTags();}
+function saveFrase(){
+  const text=document.getElementById('fraseInput').value.trim();
+  if(!text){showToast('Escreva uma frase antes de salvar');return;}
+  const dataInicio=document.getElementById('fraseDataInicio')?document.getElementById('fraseDataInicio').value:'';
+  const dataFim=document.getElementById('fraseDataFim')?document.getElementById('fraseDataFim').value:'';
+  const frase={
+    text,
+    times:[...currentTimes],
+    repeat:currentRepeat||'nao',
+    dias:currentRepeat==='personalizado'?[...currentDias]:[],
+    dataInicio,
+    dataFim,
+    id:Date.now()
+  };
+  frases.push(frase);
+  localStorage.setItem('ceg_frases',JSON.stringify(frases));
+  saveFraseToFirebase(frase);
+  if(currentTimes.length>0 && Notification && Notification.permission==='granted'){
+    scheduleFraseNotifications(frase);
+  }
+  hideFraseForm();
+  renderFrases();
+  showToast('✓ Lembrete salvo!');
+}
+function renderFrases(){
+  const el=document.getElementById('frasesList');
+  if(!el)return;
+  if(!frases.length){el.innerHTML='<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">Nenhum lembrete ainda.<br>Adicione sua primeira frase!</div>';return;}
+  el.innerHTML=frases.map((f,i)=>{
+    const timesStr=f.times&&f.times.length?'🔔 '+f.times.join(' • '):'';
+    const repeatDesc=getRepeatDesc(f);
+    const dataStr=f.dataInicio?'📅 '+new Date(f.dataInicio+'T12:00:00').toLocaleDateString('pt-BR'):'';
+    const dataFimStr=f.dataFim?' → '+new Date(f.dataFim+'T12:00:00').toLocaleDateString('pt-BR'):'';
+    return `<div class="frase-item">
+      <div style="font-size:22px;flex-shrink:0;">💭</div>
+      <div class="frase-meta">
+        <div class="frase-text">"${f.text}"</div>
+        <div class="frase-info">
+          ${timesStr}
+          ${repeatDesc?`<span class="frase-repeat-badge">↻ ${repeatDesc}</span>`:''}
+          ${dataStr?`<br>${dataStr}${dataFimStr}`:''}
+        </div>
+        <div class="frase-actions">
+          <button class="frase-action-btn edit" onclick="openEditFrase(${i})">✏️ Editar</button>
+          <button class="frase-action-btn del" onclick="deleteFrase(${i})">🗑️ Excluir</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function deleteFrase(i) {
+  const frase = frases[i];
+  frases.splice(i, 1);
+  localStorage.setItem('ceg_frases', JSON.stringify(frases));
+  renderFrases();
+  // Remove from Firebase
+  const user = window.FB_USER || window.FB_AUTH?.currentUser;
+  if (window.FB_DB && window.FB_FUNCS && user && frase.id) {
+    try {
+      await window.FB_DB.collection('usuarios').doc(user.uid).collection('frases').doc(String(frase.id)).delete();
+    } catch(e) { console.log('Delete frase Firebase error:', e); }
+  }
+}
+
+// DESAFIOS
+function renderDesafios(){
+  if(!document.getElementById('desafiosList'))return;
+  document.getElementById('desafiosList').innerHTML=DESAFIOS_LIST.map((d,i)=>`
+    <div class="desafio-item">
+      <div class="desafio-num">${i+1}</div>
+      <div style="font-size:13px;color:var(--text);line-height:1.5;">${d}</div>
+    </div>
+  `).join('');
+}
+function toggleDesafioCheck(){
+  const box=document.getElementById('desafioCheckBox');
+  const lbl=document.getElementById('desafioCheckLabel');
+  box.classList.toggle('checked');
+  if(box.classList.contains('checked')){box.textContent='✓';lbl.textContent='Concluído hoje!';showToast('✦ Desafio concluído!');}
+  else{box.textContent='';lbl.textContent='Marcar como concluído hoje';}
+}
+
+// 30 DIAS
+function renderTrinta(){
+  const d=currentDay;
+  const dayData=TRINTA_DIAS[d-1]||TRINTA_DIAS[0];
+  document.getElementById('trintaDayNum').textContent=d;
+  document.getElementById('trintaDayTitle').textContent=`Dia ${d}: ${dayData.t}`;
+  document.getElementById('trintaDayDesc').textContent=dayData.d;
+  const objEl=document.getElementById('trintaDayObj');
+  if(dayData.obj){objEl.innerHTML='<b>Objetivo:</b> '+dayData.obj;objEl.style.display='block';}
+  else{objEl.style.display='none';}
+  const semBadge=document.getElementById('trintaSemana');
+  semBadge.textContent=dayData.semana||'';
+  semBadge.style.background=(dayData.cor||'#C17B8A')+'22';
+  semBadge.style.color=dayData.cor||'#C17B8A';
+  document.getElementById('trintaProgressFill').style.width=Math.round((d/30)*100)+'%';
+  document.getElementById('trintaProgressText').textContent=`${d} de 30 dias`;
+  const isDone=trintaDone.includes(d);
+  const btn=document.getElementById('trintaBtn');
+  btn.textContent=isDone?'✓ Dia concluído!':'✓ Completar este dia';
+  btn.style.background=isDone?'#3B6D11':'';
+  // Calendar
+  const cal=document.getElementById('trintaCalendar');
+  cal.innerHTML=Array.from({length:30},(_,i)=>{
+    const n=i+1;
+    const cls=trintaDone.includes(n)?'done':n===d?'current':'future';
+    const c=TRINTA_DIAS[i]?TRINTA_DIAS[i].cor:'#C17B8A';
+    const style=trintaDone.includes(n)?`background:${c};border-color:${c};`:'';
+    return `<div class="cal-day ${cls}" style="${style}" onclick="goToDay(${n})" title="Dia ${n}">${n}</div>`;
+  }).join('');
+}
+function completarDia(){
+  if(!trintaDone.includes(currentDay)){
+    trintaDone.push(currentDay);localStorage.setItem('ceg_trinta',JSON.stringify(trintaDone));
+  saveModuloToFirebase('trinta', trintaDone);
+    const prev=currentDay;
+    if(currentDay<30){currentDay++;localStorage.setItem('ceg_day',currentDay);
+  saveModuloToFirebase('progresso30dias', {day: currentDay});}
+    renderTrinta();showToast('✦ Dia '+prev+' concluído!');
+  }
+}
+function goToDay(d){currentDay=d;localStorage.setItem('ceg_day',currentDay);saveModuloToFirebase('progresso30dias',{day:currentDay});renderTrinta();}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+updateMood(3);
+</script>
+
+
+<!-- BOAS VINDAS -->
+<div id="boasVindas" class="active-screen">
+  <div class="auth-logo-wrap">
+    <div class="auth-c1"></div><div class="auth-c2"></div>
+    <div class="auth-ra"></div><div class="auth-rb"></div><div class="auth-gem"></div>
+  </div>
+  <span style="font-size:11px;color:rgba(201,169,110,0.7);letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px;">Psicólogo Gabriel Aguilar</span>
+  <h1 class="auth-title">Casamento<br>em <em>Graça</em></h1>
+  <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.7),transparent);margin:16px auto 20px;"></div>
+  <p style="font-size:13px;color:rgba(253,250,246,0.45);margin-bottom:2rem;line-height:1.6;max-width:260px;">Sua jornada de casal começa aqui</p>
+  <div class="auth-btns">
+    <button class="btn-auth-primary" onclick="showScreen('loginScreen')">Entrar na minha conta</button>
+    <button class="btn-auth-secondary" onclick="showScreen('cadastroScreen')">Criar conta</button>
+    <button style="width:100%;background:white;border:1.5px solid rgba(255,255,255,0.3);color:#2C3E50;padding:14px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;" onclick="loginComGoogle()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Entrar com Google
+    </button>
+  </div>
+  <div class="auth-credit">psicologogabrielaguilar.com.br</div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="auth-header">
+    <button class="auth-back" onclick="showScreen('boasVindas')">←</button>
+    <span class="auth-header-title">Entrar</span>
+  </div>
+  <div class="auth-form">
+    <h2 class="auth-form-title">Bem-vindo de volta 💑</h2>
+    <p class="auth-form-sub">Entre com seu e-mail e senha para continuar sua jornada.</p>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" id="loginEmail" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')doLogin()">
+      <div class="form-error" id="loginEmailErr">E-mail inválido</div>
+    </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" id="loginSenha" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+      <div class="form-error" id="loginSenhaErr">Senha incorreta</div>
+    </div>
+    <span class="forgot-link" onclick="showScreen('forgotScreen')">Esqueci minha senha</span>
+    <button class="btn-primary" onclick="doLogin()" aria-label="Entrar na conta">Entrar</button>
+    <div class="auth-switch">Não tem conta? <a onclick="showScreen('cadastroScreen')">Criar conta</a></div>
+  </div>
+</div>
+
+<!-- CADASTRO -->
+<div id="cadastroScreen">
+  <div class="auth-header">
+    <button class="auth-back" onclick="showScreen('boasVindas')">←</button>
+    <span class="auth-header-title">Criar conta</span>
+  </div>
+  <div class="auth-form">
+    <h2 class="auth-form-title">Começar a jornada 🌱</h2>
+    <p class="auth-form-sub">Crie sua conta com o código de acesso enviado pelo seu psicólogo.</p>
+    <div class="invite-info">
+      🎟️ <strong>Código de acesso obrigatório.</strong> Você receberá seu código personalizado diretamente do Psicólogo Gabriel Aguilar pelo WhatsApp.
+    </div>
+    <div class="form-group">
+      <label>Código de acesso</label>
+      <input type="text" id="cadCodigo" placeholder="Ex: gabrieleraquel2026" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <div class="form-error" id="cadCodigoErr">Código inválido ou já utilizado</div>
+    </div>
+    <div class="form-group">
+      <label>Nome do casal</label>
+      <input type="text" id="cadNome" placeholder="Ex: João & Maria">
+      <div class="form-error" id="cadNomeErr">Preencha o nome do casal</div>
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" id="cadEmail" placeholder="seu@email.com">
+      <div class="form-error" id="cadEmailErr">E-mail inválido</div>
+    </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres">
+      <div class="form-error" id="cadSenhaErr">Mínimo 6 caracteres</div>
+    </div>
+    <div class="form-group">
+      <label>Confirmar senha</label>
+      <input type="password" id="cadSenha2" placeholder="Repita a senha">
+      <div class="form-error" id="cadSenha2Err">As senhas não coincidem</div>
+    </div>
+    <button class="btn-primary" onclick="doCadastro()" aria-label="Criar minha conta">Criar minha conta</button>
+    <div class="auth-switch">Já tem conta? <a onclick="showScreen('loginScreen')">Entrar</a></div>
+  </div>
+</div>
+
+<!-- ESQUECI SENHA -->
+<div id="forgotScreen">
+  <div class="auth-header">
+    <button class="auth-back" onclick="showScreen('loginScreen')">←</button>
+    <span class="auth-header-title">Recuperar senha</span>
+  </div>
+  <div class="auth-form">
+    <h2 class="auth-form-title">Redefinir senha 🔑</h2>
+    <p class="auth-form-sub">Digite seu e-mail e enviaremos um link para redefinir sua senha.</p>
+    <div class="form-group">
+      <label>E-mail cadastrado</label>
+      <input type="email" id="forgotEmail" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')doForgot()">
+    </div>
+    <button class="btn-primary" onclick="doForgot()">Enviar link de recuperação</button>
+    <button class="btn-secondary" onclick="showScreen('loginScreen')">Voltar ao login</button>
+  </div>
+</div>
+
+<!-- PERFIL DO CASAL -->
+<div class="screen" id="perfil">
+  <div class="perfil-hero">
+    <div class="perfil-photo-wrap">
+      <div class="perfil-photo-placeholder" id="perfilPhotoEl">💑</div>
+      <div class="perfil-photo-edit" onclick="editarFoto()">✏️</div>
+    </div>
+    <div class="perfil-couple-name" id="perfilNomeEl">Casal</div>
+    <div class="perfil-since" id="perfilSinceEl">Juntos desde —</div>
+    <div class="perfil-badges">
+      <div class="perfil-badge">
+        <div class="perfil-badge-num" id="perfilDiasJuntos">—</div>
+        <div class="perfil-badge-label">Dias juntos</div>
+      </div>
+      <div class="perfil-badge">
+        <div class="perfil-badge-num" id="perfilAnosJuntos">—</div>
+        <div class="perfil-badge-label">Anos</div>
+      </div>
+      <div class="perfil-badge">
+        <div class="perfil-badge-num" id="perfilDiasAniv">—</div>
+        <div class="perfil-badge-label">Dias p/ aniversário</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="perfil-section">
+    <!-- Countdown aniversário -->
+    <div class="aniversario-card" id="anivCard" style="display:none;">
+      <div class="aniv-countdown" id="anivCountdown">0</div>
+      <div class="aniv-label" id="anivCardLabel">dias para o aniversário</div>
+      <div class="aniv-date" id="anivCardDate"></div>
+    </div>
+
+    <!-- Dados do casal -->
+    <div class="perfil-card">
+      <div class="perfil-card-title">Nosso perfil</div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">💑</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">Nome do casal</div>
+          <div class="perfil-field-value" id="pfNome">—</div>
+        </div>
+        <span class="perfil-field-edit" onclick="openEditPerfil()">Editar</span>
+      </div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">💍</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">Data de casamento / relacionamento</div>
+          <div class="perfil-field-value" id="pfDataRel">—</div>
+        </div>
+        <span class="perfil-field-edit" onclick="openEditPerfil()">Editar</span>
+      </div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">🧠</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">Início da terapia</div>
+          <div class="perfil-field-value" id="pfDataTerapia">—</div>
+        </div>
+        <span class="perfil-field-edit" onclick="openEditPerfil()">Editar</span>
+      </div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">📧</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">E-mail</div>
+          <div class="perfil-field-value" id="pfEmail">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Configurações rápidas -->
+    <div class="perfil-card">
+      <div class="perfil-card-title">Conta e configurações</div>
+      <div class="perfil-field" style="cursor:pointer;" onclick="goTo('configuracoes')">
+        <div class="perfil-field-icon">⚙️</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-value">Configurações</div>
+        </div>
+        <span style="color:var(--text-muted);">›</span>
+      </div>
+      <div class="perfil-field" style="cursor:pointer;" onclick="doLogout()">
+        <div class="perfil-field-icon">🚪</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-value" style="color:#E24B4A;">Sair da conta</div>
+        </div>
+        <span style="color:var(--text-muted);">›</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIGURAÇÕES -->
+<div class="screen" id="configuracoes">
+  <div class="app-header">
+    <button class="back-btn" onclick="goTo('perfil')">←</button>
+    <span class="header-title">Configurações</span>
+  </div>
+  <div class="config-section">
+    <div class="config-section-title">Notificações</div>
+    <div class="config-card">
+      <div class="config-item">
+        <div class="config-item-icon">🔔</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Lembretes diários</div>
+          <div class="config-item-sub">Receber notificações de tarefas</div>
+        </div>
+        <button class="config-toggle on" id="toggleLembretes" onclick="toggleConfig('lembretes',this)"></button>
+      </div>
+      <div class="config-item">
+        <div class="config-item-icon">💍</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Aniversário do casal</div>
+          <div class="config-item-sub">Aviso 1 dia antes e no dia</div>
+        </div>
+        <button class="config-toggle on" id="toggleAniv" onclick="toggleConfig('aniv',this)"></button>
+      </div>
+      <div class="config-item">
+        <div class="config-item-icon">🌱</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Desafio 30 dias</div>
+          <div class="config-item-sub">Lembrete diário do desafio</div>
+        </div>
+        <button class="config-toggle on" id="toggleDesafio30" onclick="toggleConfig('desafio30',this)"></button>
+      </div>
+    </div>
+  </div>
+  <div class="config-section">
+    <div class="config-section-title">Privacidade</div>
+    <div class="config-card">
+      <div class="config-item" onclick="showTermsFromConfig()">
+        <div class="config-item-icon">📄</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Política de privacidade</div>
+          <div class="config-item-sub">Termos e condições de uso</div>
+        </div>
+        <div class="config-item-arrow">›</div>
+      </div>
+      <div class="config-item" onclick="confirmarApagarDados()">
+        <div class="config-item-icon">🗑️</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Apagar meus dados</div>
+          <div class="config-item-sub">Remove todos os registros locais</div>
+        </div>
+        <div class="config-item-arrow">›</div>
+      </div>
+    </div>
+  </div>
+  <div class="config-section">
+    <div class="config-section-title">Conta</div>
+    <div class="config-card">
+      <div class="config-item danger" onclick="doLogout()">
+        <div class="config-item-icon">🚪</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Sair da conta</div>
+        </div>
+        <div class="config-item-arrow">›</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:20px;text-align:center;font-size:11px;color:var(--text-muted);">
+    Casamento em Graça · Versão 1.0<br>Psicólogo Gabriel Aguilar · CRP 04/55625
+  </div>
+</div>
+
+<!-- MODAL EDITAR PERFIL -->
+<div id="editPerfilModal">
+  <div class="edit-sheet">
+    <div class="edit-handle"></div>
+    <div class="edit-title">Editar perfil do casal</div>
+    <div class="form-group">
+      <label>Nome do casal</label>
+      <input type="text" id="editNome" placeholder="Ex: João & Maria">
+    </div>
+    <div class="form-group">
+      <label>Data de casamento / relacionamento</label>
+      <input type="date" id="editDataRel">
+    </div>
+    <div class="form-group">
+      <label>Início da terapia</label>
+      <input type="date" id="editDataTerapia">
+    </div>
+    <button class="btn-primary" onclick="salvarPerfil()">Salvar perfil</button>
+    <button class="btn-secondary" onclick="closeEditPerfil()">Cancelar</button>
+  </div>
+</div>
+
+<!-- NOTIFICAÇÃO ANIVERSÁRIO -->
+<div id="anivNotif">
+  <div class="aniv-banner" id="anivBanner">
+    <button class="aniv-close" onclick="document.getElementById('anivNotif').classList.remove('show')">×</button>
+    <div class="aniv-banner-title" id="anivBannerTitle"></div>
+    <div class="aniv-banner-text" id="anivBannerText"></div>
+  </div>
+</div>
+<!-- PWA Install Banner -->
+<div id="installBanner" style="display:none;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:380px;background:white;border-radius:16px;padding:14px 16px;box-shadow:0 4px 24px rgba(0,0,0,0.15);z-index:300;border:1px solid rgba(193,123,138,0.2);">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <img src="/AppTerapiadecasal/icons/icon-96.png" style="width:40px;height:40px;border-radius:10px;" alt="icon">
+    <div style="flex:1;">
+      <div style="font-size:13px;font-weight:500;color:#2C3E50;">Instalar no celular</div>
+      <div style="font-size:11px;color:#7A7A7A;margin-top:2px;">Acesse sem precisar do navegador</div>
+    </div>
+    <button onclick="installPWA()" style="background:#C17B8A;color:white;border:none;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;">Instalar</button>
+    <button onclick="dismissInstall()" style="background:none;border:none;color:#7A7A7A;cursor:pointer;font-size:18px;padding:0 0 0 4px;">×</button>
+  </div>
+</div>
+
+<script>
+
+/* ============================================
+   AUTH + PERFIL + CONFIGURAÇÕES + ANIVERSÁRIO
+   ============================================ */
+
+// Códigos de convite válidos (quando Firebase ativo, virá do banco)
+// Por enquanto validação local para demonstração
+const INVITE_CODES = []; // Códigos agora validados pelo Firestore
+
+let currentUser = JSON.parse(localStorage.getItem('ceg_user') || 'null');
+let perfilData = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+let configData = JSON.parse(localStorage.getItem('ceg_config') || '{"lembretes":true,"aniv":true,"desafio30":true}');
+
+function showScreen(id) {
+  // Hide all auth screens
+  ['boasVindas','loginScreen','cadastroScreen','forgotScreen'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) { el.classList.remove('active-screen'); el.style.display = 'none'; }
+  });
+  const target = document.getElementById(id);
+  if (target) { target.style.display = id === 'boasVindas' ? 'flex' : 'flex'; target.classList.add('active-screen'); }
+}
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const senha = document.getElementById('loginSenha').value;
+  document.getElementById('loginEmailErr').classList.remove('show');
+  document.getElementById('loginSenhaErr').classList.remove('show');
+  if (!email || !email.includes('@')) {
+    document.getElementById('loginEmailErr').classList.add('show'); return;
+  }
+  if (!senha || senha.length < 6) {
+    document.getElementById('loginSenhaErr').classList.add('show'); return;
+  }
+  // Show loading
+  const btn = document.querySelector('#loginScreen .btn-primary');
+  const origText = btn.textContent;
+  btn.textContent = 'Entrando...'; btn.disabled = true;
+  try {
+    if (window.FB_AUTH && window.FB_FUNCS) {
+      const cred = await window.FB_AUTH.signInWithEmailAndPassword(email, senha);
+      currentUser = { email: cred.user.email, uid: cred.user.uid };
+      localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+      await loadUserDataFromFirebase(cred.user.uid);
+      enterAppLoggedIn();
+    } else {
+      // Fallback local
+      const saved = JSON.parse(localStorage.getItem('ceg_user') || 'null');
+      if (saved && saved.email === email && saved.senha === senha) {
+        currentUser = saved; enterAppLoggedIn();
+      } else { throw new Error('Credenciais inválidas'); }
+    }
+  } catch(e) {
+    const msg = e.code === 'auth/invalid-credential' ? 'E-mail ou senha incorretos' :
+                e.code === 'auth/too-many-requests' ? 'Muitas tentativas. Tente novamente mais tarde.' :
+                'Erro ao entrar. Tente novamente.';
+    document.getElementById('loginSenhaErr').textContent = msg;
+    document.getElementById('loginSenhaErr').classList.add('show');
+  } finally { btn.textContent = origText; btn.disabled = false; }
+}
+
+async function doCadastro() {
+  const codigo = document.getElementById('cadCodigo').value.trim().toLowerCase();
+  const nome = document.getElementById('cadNome').value.trim();
+  const email = document.getElementById('cadEmail').value.trim();
+  const senha = document.getElementById('cadSenha').value;
+  const senha2 = document.getElementById('cadSenha2').value;
+  ['cadCodigoErr','cadNomeErr','cadEmailErr','cadSenhaErr','cadSenha2Err'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+  let valid = true;
+  if (!codigo) { document.getElementById('cadCodigoErr').textContent='Digite o código de acesso'; document.getElementById('cadCodigoErr').classList.add('show'); valid=false; }
+  if (!nome) { document.getElementById('cadNomeErr').classList.add('show'); valid=false; }
+  if (!email||!email.includes('@')) { document.getElementById('cadEmailErr').classList.add('show'); valid=false; }
+  if (!senha||senha.length<6) { document.getElementById('cadSenhaErr').classList.add('show'); valid=false; }
+  if (senha!==senha2) { document.getElementById('cadSenha2Err').classList.add('show'); valid=false; }
+  if (!valid) return;
+
+  const btn = document.querySelector('#cadastroScreen .btn-primary');
+  const origText = btn.textContent;
+  btn.textContent = 'Verificando código...'; btn.disabled = true;
+
+  try {
+    if (window.FB_AUTH && window.FB_FUNCS && window.FB_DB) {
+      // Busca código na coleção Convites — tenta lowercase, uppercase e exato
+      const codigoLower = codigo.toLowerCase();
+      const codigoUpper = codigo.toUpperCase();
+      let conviteRef = window.FB_DB.collection('Convites').doc(codigoLower);
+      let conviteSnap = await conviteRef.get();
+      if (!conviteSnap.exists) {
+        conviteRef = window.FB_DB.collection('Convites').doc(codigoUpper);
+        conviteSnap = await conviteRef.get();
+      }
+      if (!conviteSnap.exists) {
+        conviteRef = window.FB_DB.collection('Convites').doc(codigo);
+        conviteSnap = await conviteRef.get();
+      }
+      if (!conviteSnap.exists) {
+        document.getElementById('cadCodigoErr').textContent = 'Código inválido. Solicite ao Psicólogo Gabriel.';
+        document.getElementById('cadCodigoErr').classList.add('show');
+        return;
+      }
+
+      const cd = conviteSnap.data();
+
+      if (cd.usado === true) {
+        document.getElementById('cadCodigoErr').textContent = 'Este código já foi utilizado.';
+        document.getElementById('cadCodigoErr').classList.add('show');
+        return;
+      }
+
+      if (cd.validade) {
+        const p = cd.validade.split('/');
+        if (p.length === 3 && new Date() > new Date(p[2], p[1]-1, p[0])) {
+          document.getElementById('cadCodigoErr').textContent = 'Código expirado. Entre em contato com o psicólogo.';
+          document.getElementById('cadCodigoErr').classList.add('show');
+          return;
+        }
+      }
+
+      btn.textContent = 'Criando conta...';
+      const cred = await window.FB_AUTH.createUserWithEmailAndPassword(email, senha);
+      const uid = cred.user.uid;
+
+      await window.FB_DB.collection('usuarios').doc(uid).set({
+        nome, email,
+        codigoUsado: codigo,
+        casal: cd.casal || nome,
+        createdAt: new Date().toISOString(),
+        accessExpiry: cd.validade || null
+      });
+
+      await conviteRef.update({
+        usado: true,
+        usadoPor: email,
+        usadoEm: new Date().toISOString()
+      });
+
+      currentUser = { email, uid, nome };
+      localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+      localStorage.setItem('ceg_perfil', JSON.stringify({ nome, email }));
+      enterAppLoggedIn();
+
+    } else {
+      // Fallback local sem Firebase
+      currentUser = { email, nome, createdAt: new Date().toISOString() };
+      localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+      localStorage.setItem('ceg_perfil', JSON.stringify({ nome, email }));
+      enterAppLoggedIn();
+    }
+  } catch(e) {
+    console.error('Cadastro error:', e.code, e.message);
+    const msg = e.code==='auth/email-already-in-use' ? 'Este e-mail já está cadastrado.' :
+                e.code==='auth/weak-password' ? 'Senha fraca. Use mínimo 6 caracteres.' :
+                e.code==='auth/network-request-failed' ? 'Sem conexão. Verifique sua internet.' :
+                e.code==='auth/too-many-requests' ? 'Muitas tentativas. Aguarde alguns minutos.' :
+                e.code==='permission-denied' ? 'Erro de permissão. Verifique as regras do Firestore.' :
+                e.message ? e.message : 'Erro ao criar conta. Tente novamente.';
+    document.getElementById('cadEmailErr').textContent = msg;
+    document.getElementById('cadEmailErr').classList.add('show');
+  } finally {
+    btn.textContent = origText;
+    btn.disabled = false;
+  }
+}
+
+async function doForgot() {
+  const email = document.getElementById('forgotEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast('Digite um e-mail válido'); return; }
+  try {
+    if (window.FB_AUTH && window.FB_FUNCS) {
+      await window.FB_AUTH.sendPasswordResetEmail(email);
+      showToast('✓ Link enviado para ' + email);
+    } else {
+      showToast('✓ Link enviado para ' + email);
+    }
+    setTimeout(() => showScreen('loginScreen'), 2000);
+  } catch(e) {
+    showToast('E-mail não encontrado. Verifique e tente novamente.');
+  }
+}
+
+function enterAppLoggedIn() {
+  // Hide all auth screens
+  ['boasVindas','loginScreen','cadastroScreen','forgotScreen'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) { el.style.display = 'none'; el.classList.remove('active-screen'); }
+  });
+  document.getElementById('splash').style.display = 'none';
+  if (runAccessCheck()) return;
+  document.getElementById('bottomNav').classList.add('visible');
+  goTo('home');
+  renderFrases(); renderDesafios(); renderTrinta(); loadSavedResults();
+  setTimeout(scheduleAllNotifications, 1000);
+  if (window.FB_USER) {
+    loadUserDataFromFirebase(window.FB_USER.uid).then(() => {
+      renderFrases(); renderPerfil();
+    });
+    if (Notification.permission === 'granted') setTimeout(setupFirebasePush, 2000);
+  }
+  renderPerfil();
+  checkAniversario();
+}
+
+async function doLogout() {
+  if (!confirm('Deseja sair da sua conta?')) return;
+  try {
+    if (window.FB_AUTH && window.FB_FUNCS) {
+      await window.FB_AUTH.signOut();
+    }
+  } catch(e) {}
+  currentUser = null;
+  localStorage.removeItem('ceg_user');
+  localStorage.removeItem('ceg_perfil');
+  localStorage.removeItem('ceg_moods');
+  localStorage.removeItem('ceg_frases');
+  localStorage.removeItem('ceg_access_expiry');
+  localStorage.removeItem('ceg_patient_name');
+  // Reset in-memory data
+  frases = [];
+  moodHistory = [];
+  trintaDone = [];
+  document.getElementById('bottomNav').classList.remove('visible');
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  showScreen('boasVindas');
+  showToast('Até logo! 💑');
+}
+
+// PERFIL
+function renderPerfil() {
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  const nome = p.nome || 'Casal';
+  const email = p.email || currentUser?.email || '—';
+  document.getElementById('perfilNomeEl').textContent = nome;
+  document.getElementById('pfNome').textContent = nome;
+  document.getElementById('pfEmail').textContent = email;
+
+  if (p.dataRel) {
+    const d = new Date(p.dataRel + 'T12:00:00');
+    document.getElementById('pfDataRel').textContent = d.toLocaleDateString('pt-BR');
+    document.getElementById('perfilSinceEl').textContent = 'Juntos desde ' + d.toLocaleDateString('pt-BR', {month:'long',year:'numeric'});
+
+    // Cálculos
+    const hoje = new Date(); hoje.setHours(0,0,0,0);
+    const inicio = new Date(p.dataRel + 'T00:00:00');
+    const diasJuntos = Math.floor((hoje - inicio) / 86400000);
+    const anos = Math.floor(diasJuntos / 365);
+    document.getElementById('perfilDiasJuntos').textContent = diasJuntos.toLocaleString('pt-BR');
+    document.getElementById('perfilAnosJuntos').textContent = anos;
+
+    // Próximo aniversário
+    const proxAniv = proximoAniversario(p.dataRel);
+    const diasAniv = Math.round((proxAniv - hoje) / 86400000);
+    document.getElementById('perfilDiasAniv').textContent = diasAniv === 0 ? '🎉' : diasAniv;
+
+    // Card countdown
+    const anivCard = document.getElementById('anivCard');
+    anivCard.style.display = 'block';
+    document.getElementById('anivCountdown').textContent = diasAniv === 0 ? '🎉' : diasAniv;
+    document.getElementById('anivCardLabel').textContent = diasAniv === 0 ? 'Feliz aniversário!' : 'dias para o aniversário';
+    document.getElementById('anivCardDate').textContent = proxAniv.toLocaleDateString('pt-BR', {day:'2-digit',month:'long'});
+  } else {
+    document.getElementById('pfDataRel').textContent = 'Não informado';
+    document.getElementById('perfilSinceEl').textContent = 'Adicione sua data especial';
+  }
+
+  if (p.dataTerapia) {
+    const d = new Date(p.dataTerapia + 'T12:00:00');
+    document.getElementById('pfDataTerapia').textContent = d.toLocaleDateString('pt-BR');
+  } else {
+    document.getElementById('pfDataTerapia').textContent = 'Não informado';
+  }
+}
+
+function proximoAniversario(dataStr) {
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const orig = new Date(dataStr + 'T00:00:00');
+  const proxAniv = new Date(hoje.getFullYear(), orig.getMonth(), orig.getDate());
+  if (proxAniv < hoje) proxAniv.setFullYear(hoje.getFullYear() + 1);
+  return proxAniv;
+}
+
+function checkAniversario() {
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  const cfg = JSON.parse(localStorage.getItem('ceg_config') || '{"aniv":true}');
+  if (!p.dataRel || !cfg.aniv) return;
+
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const proxAniv = proximoAniversario(p.dataRel);
+  const diasFaltam = Math.round((proxAniv - hoje) / 86400000);
+  const orig = new Date(p.dataRel + 'T00:00:00');
+  const anos = hoje.getFullYear() - orig.getFullYear() + (diasFaltam === 0 ? 0 : 1);
+
+  const notif = document.getElementById('anivNotif');
+  const banner = document.getElementById('anivBanner');
+  const title = document.getElementById('anivBannerTitle');
+  const text = document.getElementById('anivBannerText');
+
+  const DICAS_VESPERA = [
+    'Que tal reservar um restaurante especial? Ligue agora antes que lote!',
+    'Prepare uma mensagem de amor para entregar amanhã de manhã. Palavras escritas ficam para sempre.',
+    'Combine um programa surpresa — um passeio, um filme, um jantar em casa com velas.',
+    'Compre ou faça um pequeno presente com significado. Não precisa ser caro, precisa ser pensado.',
+    'Relembre juntos a história de vocês: primeiro encontro, primeiro beijo, momentos marcantes.'
+  ];
+
+  const FRASES_ANIVERSARIO = [
+    'Que cada ano juntos seja mais bonito que o anterior. Vocês são a prova de que o amor verdadeiro existe.',
+    'Amor não é encontrar alguém perfeito. É aprender a enxergar a perfeição numa pessoa imperfeita.',
+    'Dois são melhores do que um — porque têm uma boa recompensa pelo seu trabalho.',
+    'O amor não consiste em olhar um para o outro, mas em olhar juntos na mesma direção.',
+    'Cada dia ao seu lado é um presente que escolho receber com gratidão.'
+  ];
+
+  if (diasFaltam === 0) {
+    banner.className = 'aniv-banner day';
+    title.textContent = `🎉 Feliz ${anos}º aniversário, ${p.nome || 'casal'}!`;
+    text.textContent = FRASES_ANIVERSARIO[Math.floor(Math.random() * FRASES_ANIVERSARIO.length)];
+    notif.classList.add('show');
+  } else if (diasFaltam === 1) {
+    banner.className = 'aniv-banner eve';
+    title.textContent = `💍 Amanhã é o aniversário de vocês!`;
+    text.textContent = DICAS_VESPERA[Math.floor(Math.random() * DICAS_VESPERA.length)];
+    notif.classList.add('show');
+  }
+}
+
+function openEditPerfil() {
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  document.getElementById('editNome').value = p.nome || '';
+  document.getElementById('editDataRel').value = p.dataRel || '';
+  document.getElementById('editDataTerapia').value = p.dataTerapia || '';
+  document.getElementById('editPerfilModal').classList.add('show');
+}
+
+function closeEditPerfil() {
+  document.getElementById('editPerfilModal').classList.remove('show');
+}
+
+function salvarPerfil() {
+  const nome = document.getElementById('editNome').value.trim();
+  const dataRel = document.getElementById('editDataRel').value;
+  const dataTerapia = document.getElementById('editDataTerapia').value;
+  if (!nome) { showToast('Preencha o nome do casal'); return; }
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  p.nome = nome;
+  p.dataRel = dataRel;
+  p.dataTerapia = dataTerapia;
+  localStorage.setItem('ceg_perfil', JSON.stringify(p));
+  savePerfilToFirebase(p);
+  closeEditPerfil();
+  renderPerfil();
+  checkAniversario();
+  showToast('✓ Perfil salvo!');
+}
+
+function editarFoto() {
+  showToast('Upload de foto disponível com Firebase');
+}
+
+// CONFIGURAÇÕES
+function toggleConfig(key, btn) {
+  const cfg = JSON.parse(localStorage.getItem('ceg_config') || '{}');
+  cfg[key] = !cfg[key];
+  localStorage.setItem('ceg_config', JSON.stringify(cfg));
+  btn.classList.toggle('on', cfg[key]);
+}
+
+function showTermsFromConfig() {
+  document.getElementById('termsModal').classList.add('show');
+}
+
+function confirmarApagarDados() {
+  if (confirm('Tem certeza? Todos os seus registros serão apagados permanentemente.')) {
+    const email = currentUser?.email;
+    const senha = currentUser?.senha;
+    localStorage.clear();
+    if (email) localStorage.setItem('ceg_user', JSON.stringify({email, senha}));
+    showToast('✓ Dados apagados');
+    goTo('home');
+  }
+}
+
+
+/* ============ EDITAR LEMBRETE ============ */
+let editFraseIdx = -1;
+let editCurrentTimes = [];
+let editCurrentRepeat = 'nao';
+let editCurrentDias = [];
+
+function openEditFrase(i) {
+  editFraseIdx = i;
+  const f = frases[i];
+  editCurrentTimes = [...(f.times||[])];
+  editCurrentRepeat = f.repeat || 'nao';
+  editCurrentDias = [...(f.dias||[])];
+
+  document.getElementById('editFraseText').value = f.text || '';
+  document.getElementById('editFraseDataInicio').value = f.dataInicio || '';
+  document.getElementById('editFraseDataFim').value = f.dataFim || '';
+
+  // Render times
+  renderEditTimeTags();
+
+  // Set repeat buttons
+  document.querySelectorAll('#editFraseModal .repeat-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.rep === editCurrentRepeat);
+  });
+  document.getElementById('editPersonalizadoWrap').style.display =
+    editCurrentRepeat === 'personalizado' ? 'block' : 'none';
+
+  // Set dias buttons
+  document.querySelectorAll('#editDiasSemana .dia-btn').forEach(b => {
+    b.classList.toggle('active', editCurrentDias.includes(parseInt(b.dataset.dia)));
+  });
+
+  document.getElementById('editFraseModal').classList.add('show');
+}
+
+function closeEditFrase() {
+  document.getElementById('editFraseModal').classList.remove('show');
+  editFraseIdx = -1;
+}
+
+function editAddTime() {
+  const t = document.getElementById('editTimeInput').value;
+  if (t && !editCurrentTimes.includes(t)) {
+    editCurrentTimes.push(t);
+    renderEditTimeTags();
+  }
+}
+
+function renderEditTimeTags() {
+  document.getElementById('editTimeTags').innerHTML = editCurrentTimes.map((t,i) =>
+    `<div class="time-tag">🔔 ${t} <span style="cursor:pointer;font-weight:500;" onclick="editRemoveTime(${i})">×</span></div>`
+  ).join('');
+}
+
+function editRemoveTime(i) {
+  editCurrentTimes.splice(i, 1);
+  renderEditTimeTags();
+}
+
+function editSelectRepeat(rep, btn) {
+  editCurrentRepeat = rep;
+  document.querySelectorAll('#editFraseModal .repeat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('editPersonalizadoWrap').style.display =
+    rep === 'personalizado' ? 'block' : 'none';
+}
+
+function editToggleDia(btn) {
+  const dia = parseInt(btn.dataset.dia);
+  btn.classList.toggle('active');
+  if (btn.classList.contains('active')) {
+    if (!editCurrentDias.includes(dia)) editCurrentDias.push(dia);
+  } else {
+    editCurrentDias = editCurrentDias.filter(d => d !== dia);
+  }
+}
+
+function saveEditFrase() {
+  if (editFraseIdx < 0) return;
+  const text = document.getElementById('editFraseText').value.trim();
+  if (!text) { showToast('Escreva a frase'); return; }
+  if (editCurrentTimes.length === 0) { showToast('Adicione pelo menos um horário'); return; }
+
+  const updatedFrase = {
+    ...frases[editFraseIdx],
+    text,
+    times: [...editCurrentTimes],
+    repeat: editCurrentRepeat,
+    dias: editCurrentRepeat === 'personalizado' ? [...editCurrentDias] : [],
+    dataInicio: document.getElementById('editFraseDataInicio').value,
+    dataFim: document.getElementById('editFraseDataFim').value,
+  };
+  frases[editFraseIdx] = updatedFrase;
+
+  localStorage.setItem('ceg_frases', JSON.stringify(frases));
+  saveFraseToFirebase(updatedFrase);
+  closeEditFrase();
+  renderFrases();
+  showToast('✓ Lembrete atualizado!');
+}
+
+
+/* ============================================
+   SISTEMA DE NOTIFICAÇÕES LOCAIS
+   Agenda notificações usando setTimeout para
+   hoje. Com Firebase, usaria Cloud Messaging.
+   ============================================ */
+
+const notifTimers = [];
+
+function scheduleFraseNotifications(frase) {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  if (!frase.times || frase.times.length === 0) return;
+
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+
+  // Verifica se deve disparar hoje com base na repetição
+  const shouldFireToday = () => {
+    const rep = frase.repeat || 'nao';
+    if (rep === 'nao') {
+      return !frase.dataInicio || frase.dataInicio === today;
+    }
+    if (rep === 'diario') return true;
+    if (rep === 'semanal') {
+      const startDay = frase.dataInicio ? new Date(frase.dataInicio+'T12:00:00').getDay() : now.getDay();
+      return now.getDay() === startDay;
+    }
+    if (rep === 'mensal') {
+      const startDate = frase.dataInicio ? new Date(frase.dataInicio+'T12:00:00').getDate() : now.getDate();
+      return now.getDate() === startDate;
+    }
+    if (rep === 'anual') {
+      if (!frase.dataInicio) return false;
+      const d = new Date(frase.dataInicio+'T12:00:00');
+      return now.getMonth() === d.getMonth() && now.getDate() === d.getDate();
+    }
+    if (rep === 'personalizado') {
+      return frase.dias && frase.dias.includes(now.getDay());
+    }
+    return false;
+  };
+
+  if (!shouldFireToday()) return;
+  if (frase.dataFim && today > frase.dataFim) return;
+
+  frase.times.forEach(t => {
+    const [h, m] = t.split(':').map(Number);
+    const target = new Date();
+    target.setHours(h, m, 0, 0);
+    const delay = target - now;
+    if (delay > 0) {
+      const timer = setTimeout(() => {
+        
+// Login com Google
+
+
+/* ============================================
+   OFFLINE DETECTION
+   ============================================ */
+function updateOnlineStatus() {
+  const isOnline = navigator.onLine;
+  const existing = document.getElementById('offlineBanner');
+  if (!isOnline) {
+    if (!existing) {
+      const banner = document.createElement('div');
+      banner.id = 'offlineBanner';
+      banner.style.cssText = 'position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:#E24B4A;color:white;text-align:center;padding:8px;font-size:13px;z-index:9999;font-family:DM Sans,sans-serif;';
+      banner.textContent = '📡 Sem conexão — dados salvos localmente';
+      document.body.appendChild(banner);
+    }
+  } else {
+    if (existing) existing.remove();
+  }
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+
+if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.ready.then(reg => {
+            reg.showNotification('Casamento em Graça 💑', {
+              body: frase.text,
+              icon: '/AppTerapiadecasal/icons/icon-192.png',
+              badge: '/AppTerapiadecasal/icons/icon-72.png',
+              vibrate: [200, 100, 200],
+              tag: 'lembrete-' + frase.id + '-' + t
+            });
+          });
+        }
+      }, delay);
+      notifTimers.push(timer);
+    }
+  });
+}
+
+function scheduleAllNotifications() {
+  // Limpa timers anteriores
+  notifTimers.forEach(t => clearTimeout(t));
+  notifTimers.length = 0;
+  if (!frases || !frases.length) return;
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  frases.forEach(f => scheduleFraseNotifications(f));
+}
+
+function requestAndScheduleNotifications() {
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'granted') {
+    scheduleAllNotifications();
+    if (window.FB_USER) setTimeout(setupFirebasePush, 1000);
+  } else if (Notification.permission === 'default') {
+    Notification.requestPermission().then(p => {
+      if (p === 'granted') {
+        showToast('🔔 Notificações ativadas!');
+        scheduleAllNotifications();
+        if (window.FB_USER) setTimeout(setupFirebasePush, 1000);
+      }
+    });
+  }
+}
+
+
+
+async function saveModuloToFirebase(modulo, data) {
+  const user = window.FB_USER || window.FB_AUTH?.currentUser;
+  if (!window.FB_DB || !user) return;
+  try {
+    await window.FB_DB.collection('usuarios').doc(user.uid).collection('modulos').doc(modulo).set({
+      data, updatedAt: new Date().toISOString()
+    });
+  } catch(e) { console.log('Save modulo error:', e); }
+}
+
+// Login com Google
+async function loginComGoogle() {
+  if (!window.FB_AUTH || !window.FB_FUNCS) {
+    showToast('Aguarde... carregando Firebase');
+    setTimeout(() => loginComGoogle(), 2000);
+    return;
+  }
+  try {
+    const result = await window.FB_AUTH.signInWithPopup(window.FB_GOOGLE);
+    const user = result.user;
+    currentUser = { email: user.email, uid: user.uid, nome: user.displayName };
+    localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+    const userSnap = await window.FB_DB.collection('usuarios').doc(user.uid).get();
+    if (!userSnap.exists) {
+      await window.FB_DB.collection('usuarios').doc(user.uid).set({
+        nome: user.displayName || 'Casal',
+        email: user.email,
+        createdAt: new Date().toISOString(),
+        accessExpiry: null
+      });
+    } else {
+      await loadUserDataFromFirebase(user.uid);
+    }
+    enterAppLoggedIn();
+  } catch(e) {
+    if (e.code !== 'auth/popup-closed-by-user') {
+      showToast('Erro ao entrar com Google. Tente novamente.');
+      console.error('Google login error:', e.code, e.message);
+    }
+  }
+}
+
+
+/* ============================================
+   OFFLINE DETECTION
+   ============================================ */
+
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    // Register main service worker
+    navigator.serviceWorker.register('/AppTerapiadecasal/sw.js')
+      .then(reg => { console.log('SW registered:', reg.scope); })
+      .catch(err => { console.log('SW error:', err); });
+    // Register Firebase messaging service worker
+    navigator.serviceWorker.register('/AppTerapiadecasal/firebase-messaging-sw.js')
+      .then(reg => { console.log('Firebase SW registered:', reg.scope); })
+      .catch(err => { console.log('Firebase SW error:', err); });
+  });
+}
+
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const accepted = localStorage.getItem('ceg_install_dismissed');
+  if (!accepted) {
+    setTimeout(() => {
+      document.getElementById('installBanner').style.display = 'block';
+    }, 3000);
+  }
+});
+
+function installPWA() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(result => {
+    if (result.outcome === 'accepted') {
+      document.getElementById('installBanner').style.display = 'none';
+      showToast('✦ App instalado com sucesso!');
+    }
+    deferredPrompt = null;
+  });
+}
+
+function dismissInstall() {
+  document.getElementById('installBanner').style.display = 'none';
+  localStorage.setItem('ceg_install_dismissed', '1');
+}
+
+
+/* ============================================
+   CONTROLE DE ACESSO — ATIVO SOMENTE COM FIREBASE
+   Enquanto o Firebase não estiver integrado,
+   checkAccessExpiry() sempre retorna false
+   e nenhum paciente é bloqueado.
+   ============================================ */
+/* ============================================
+   CONFIGURAÇÕES DO PSICÓLOGO — EDITE AQUI
+   ============================================ */
+const PSICOLOGO_WHATSAPP = '5531XXXXXXXX'; // Coloque seu número com DDD ex: 5531999999999
+const ACCESS_CONTROL_ENABLED = true; // Ativo — verifica data de expiração do Firestore // muda para true quando Firebase for integrado
+
+function checkAccessExpiry() {
+  if (!ACCESS_CONTROL_ENABLED) return false;
+  const expiry = localStorage.getItem('ceg_access_expiry');
+  if (!expiry || expiry === 'null') return false;
+  // Parse dd/mm/yyyy format
+  const parts = expiry.split('/');
+  if (parts.length === 3) {
+    const expiryDate = new Date(parts[2], parts[1]-1, parts[0]);
+    return new Date() > expiryDate;
+  }
+  // ISO format fallback
+  const expiryDate = new Date(expiry);
+  return isNaN(expiryDate) ? false : new Date() > expiryDate;
+}
+
+function showAccessExpired(patientName, expiryDate) {
+  const nameEl = document.getElementById('expiredPatientName');
+  const dateEl = document.getElementById('expiredDate');
+  if (nameEl) nameEl.textContent = patientName || 'Paciente';
+  if (dateEl) dateEl.textContent = expiryDate 
+    ? 'Venceu em ' + new Date(expiryDate).toLocaleDateString('pt-BR') 
+    : 'Acesso encerrado';
+  document.getElementById('accessExpired').classList.add('show');
+  document.getElementById('bottomNav').classList.remove('visible');
+}
+
+function openWhatsAppRenovar() {
+  const msg = encodeURIComponent('Olá, Dr. Gabriel! Meu acesso ao app Casamento em Graça foi encerrado. Gostaria de informações para renovar.');
+  window.open('https://wa.me/55?text=' + msg, '_blank');
+}
+
+// Verificação chamada no enterApp — inativa até Firebase ser integrado
+function runAccessCheck() {
+  if (checkAccessExpiry()) {
+    const name = localStorage.getItem('ceg_patient_name') || '';
+    const expiry = localStorage.getItem('ceg_access_expiry') || '';
+    showAccessExpired(name, expiry);
+    return true; // bloqueado
+  }
+  return false; // liberado
+}
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').style.display = 'none';
+  showToast('✦ Casamento em Graça instalado!');
+});
+
+// Push notification permission request
+function requestNotificationPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        showToast('🔔 Notificações ativadas!');
+        subscribeUserToPush();
+      }
+    });
+  }
+}
+
+function subscribeUserToPush() {
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
+  navigator.serviceWorker.ready.then(reg => {
+    reg.pushManager.getSubscription().then(sub => {
+      if (!sub) {
+        // Will be configured with Firebase VAPID key later
+        console.log('Push: ready for subscription');
+      }
+    });
+  });
+}
+
+// Local scheduled notifications (without Firebase)
+function scheduleLocalNotification(title, body, scheduledTime) {
+  if (Notification.permission !== 'granted') return;
+  const now = new Date();
+  const target = new Date(scheduledTime);
+  const delay = target - now;
+  if (delay > 0) {
+    setTimeout(() => {
+      navigator.serviceWorker.ready.then(reg => {
+        reg.showNotification(title, {
+          body,
+          icon: '/AppTerapiadecasal/icons/icon-192.png',
+          badge: '/icons/icon-72.png',
+          vibrate: [200, 100, 200]
+        });
+      });
+    }, delay);
+  }
+}
+
+// Request notification permission after terms accepted
+const _origAccept = window.acceptTerms;
+window.acceptTermsOrig = window.acceptTerms;
+</script>
+
+<!-- TELA DE ACESSO EXPIRADO (ativa somente com Firebase) -->
+<div id="accessExpired">
+  <div class="exp-rings">
+    <div class="exp-ring exp-r1"></div>
+    <div class="exp-ring exp-r2"></div>
+    <div class="exp-ring exp-r3"></div>
+    <div class="exp-lock">🔒</div>
+  </div>
+  <span class="exp-eyebrow">Casamento em Graça</span>
+  <h2 class="exp-title">Seu acesso<br>foi <em>encerrado</em></h2>
+  <div class="exp-divider"></div>
+  <p class="exp-desc">O período de acesso ao app vinculado à sua terapia chegou ao fim. Para continuar utilizando, entre em contato com o Psicólogo Gabriel Aguilar.</p>
+  <div class="exp-card">
+    <div class="exp-card-label">Acesso encerrado em</div>
+    <div class="exp-card-name" id="expiredPatientName">—</div>
+    <div class="exp-card-date" id="expiredDate">—</div>
+  </div>
+  <button class="exp-btn" onclick="openWhatsAppRenovar()">Renovar acesso</button>
+  <button class="exp-btn-wa" onclick="openWhatsAppRenovar()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    Falar com o psicólogo
+  </button>
+  <div class="exp-credit">psicologogabrielaguilar.com.br · @psi.gabrielaguilar</div>
+</div>
+
+<!-- MODAL EDITAR LEMBRETE -->
+<div id="editFraseModal">
+  <div class="edit-sheet">
+    <div class="edit-handle"></div>
+    <div class="edit-title">Editar lembrete</div>
+    <div class="form-group">
+      <label class="form-label">Frase ou tarefa</label>
+      <textarea class="note-input" id="editFraseText" placeholder="Ex: Hoje eu escolho reagir com amor..." style="margin-bottom:4px;"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Horários</label>
+      <div class="time-inputs">
+        <input type="time" id="editTimeInput" value="08:00">
+        <button class="btn-add-time" onclick="editAddTime()">+ Adicionar</button>
+      </div>
+      <div class="time-tags" id="editTimeTags"></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Data de início</label>
+      <input type="date" id="editFraseDataInicio">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Data de término (opcional)</label>
+      <input type="date" id="editFraseDataFim">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Repetir</label>
+      <div class="repeat-grid">
+        <button class="repeat-btn" data-rep="nao" onclick="editSelectRepeat('nao',this)">Não repetir</button>
+        <button class="repeat-btn" data-rep="diario" onclick="editSelectRepeat('diario',this)">Diariamente</button>
+        <button class="repeat-btn" data-rep="semanal" onclick="editSelectRepeat('semanal',this)">Semanalmente</button>
+        <button class="repeat-btn" data-rep="mensal" onclick="editSelectRepeat('mensal',this)">Mensalmente</button>
+        <button class="repeat-btn" data-rep="anual" onclick="editSelectRepeat('anual',this)">Anualmente</button>
+        <button class="repeat-btn" data-rep="personalizado" onclick="editSelectRepeat('personalizado',this)">Personalizado</button>
+      </div>
+      <div class="personalizado-wrap" id="editPersonalizadoWrap" style="display:none;">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Selecione os dias da semana:</div>
+        <div class="dias-semana" id="editDiasSemana">
+          <button class="dia-btn" data-dia="0" onclick="editToggleDia(this)">Dom</button>
+          <button class="dia-btn" data-dia="1" onclick="editToggleDia(this)">Seg</button>
+          <button class="dia-btn" data-dia="2" onclick="editToggleDia(this)">Ter</button>
+          <button class="dia-btn" data-dia="3" onclick="editToggleDia(this)">Qua</button>
+          <button class="dia-btn" data-dia="4" onclick="editToggleDia(this)">Qui</button>
+          <button class="dia-btn" data-dia="5" onclick="editToggleDia(this)">Sex</button>
+          <button class="dia-btn" data-dia="6" onclick="editToggleDia(this)">Sáb</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="saveEditFrase()">Salvar alterações</button>
+    <button class="btn-secondary" onclick="closeEditFrase()">Cancelar</button>
+  </div>
+</div>
+</body>
+</html>
