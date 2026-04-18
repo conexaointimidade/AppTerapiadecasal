@@ -1465,7 +1465,7 @@ updateMood(3);
     <h2 class="auth-form-title">Começar a jornada 🌱</h2>
     <p class="auth-form-sub">Crie sua conta com o código de acesso enviado pelo seu psicólogo.</p>
     <div class="invite-info">
-      🎟️ <strong>Código de acesso obrigatório.</strong> Solicite ao Psicólogo Gabriel Aguilar o seu código antes de se cadastrar.
+      🎟️ <strong>Código de acesso obrigatório.</strong> Você receberá seu código personalizado diretamente do Psicólogo Gabriel Aguilar pelo WhatsApp.
     </div>
     <div class="form-group">
       <label>Código de acesso</label>
@@ -1729,7 +1729,7 @@ updateMood(3);
 
 // Códigos de convite válidos (quando Firebase ativo, virá do banco)
 // Por enquanto validação local para demonstração
-const INVITE_CODES = ['CASAL2024','CASAMENTO2024','GABRIEL2024','GRACA2024','TERAPIA2024'];
+const INVITE_CODES = []; // Códigos agora validados pelo Firestore
 
 let currentUser = JSON.parse(localStorage.getItem('ceg_user') || 'null');
 let perfilData = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
@@ -1783,27 +1783,96 @@ async function doLogin() {
   } finally { btn.textContent = origText; btn.disabled = false; }
 }
 
-function doCadastro() {
-  const codigo = document.getElementById('cadCodigo').value.trim().toUpperCase();
+async function doCadastro() {
+  const codigo = document.getElementById('cadCodigo').value.trim().toLowerCase();
   const nome = document.getElementById('cadNome').value.trim();
   const email = document.getElementById('cadEmail').value.trim();
   const senha = document.getElementById('cadSenha').value;
   const senha2 = document.getElementById('cadSenha2').value;
-  // Limpa erros
-  ['cadCodigoErr','cadNomeErr','cadEmailErr','cadSenhaErr','cadSenha2Err'].forEach(id => document.getElementById(id).classList.remove('show'));
+  ['cadCodigoErr','cadNomeErr','cadEmailErr','cadSenhaErr','cadSenha2Err'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
   let valid = true;
-  if (!INVITE_CODES.includes(codigo)) { document.getElementById('cadCodigoErr').classList.add('show'); valid = false; }
-  if (!nome) { document.getElementById('cadNomeErr').classList.add('show'); valid = false; }
-  if (!email || !email.includes('@')) { document.getElementById('cadEmailErr').classList.add('show'); valid = false; }
-  if (!senha || senha.length < 6) { document.getElementById('cadSenhaErr').classList.add('show'); valid = false; }
-  if (senha !== senha2) { document.getElementById('cadSenha2Err').classList.add('show'); valid = false; }
+  if (!codigo) { document.getElementById('cadCodigoErr').textContent='Digite o código de acesso'; document.getElementById('cadCodigoErr').classList.add('show'); valid=false; }
+  if (!nome) { document.getElementById('cadNomeErr').classList.add('show'); valid=false; }
+  if (!email||!email.includes('@')) { document.getElementById('cadEmailErr').classList.add('show'); valid=false; }
+  if (!senha||senha.length<6) { document.getElementById('cadSenhaErr').classList.add('show'); valid=false; }
+  if (senha!==senha2) { document.getElementById('cadSenha2Err').classList.add('show'); valid=false; }
   if (!valid) return;
-  // Salva usuário
-  currentUser = { email, senha, nome, createdAt: new Date().toISOString() };
-  localStorage.setItem('ceg_user', JSON.stringify(currentUser));
-  perfilData = { nome, email };
-  localStorage.setItem('ceg_perfil', JSON.stringify(perfilData));
-  enterAppLoggedIn();
+
+  const btn = document.querySelector('#cadastroScreen .btn-primary');
+  const origText = btn.textContent;
+  btn.textContent = 'Verificando código...'; btn.disabled = true;
+
+  try {
+    if (window.FB_AUTH && window.FB_FUNCS && window.FB_DB) {
+      // Busca código na coleção Convites do Firestore
+      const conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigo);
+      const conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
+
+      if (!conviteSnap.exists()) {
+        document.getElementById('cadCodigoErr').textContent = 'Código inválido. Solicite ao Psicólogo Gabriel.';
+        document.getElementById('cadCodigoErr').classList.add('show');
+        return;
+      }
+
+      const cd = conviteSnap.data();
+
+      if (cd.usado === true) {
+        document.getElementById('cadCodigoErr').textContent = 'Este código já foi utilizado.';
+        document.getElementById('cadCodigoErr').classList.add('show');
+        return;
+      }
+
+      if (cd.validade) {
+        const p = cd.validade.split('/');
+        if (p.length === 3 && new Date() > new Date(p[2], p[1]-1, p[0])) {
+          document.getElementById('cadCodigoErr').textContent = 'Código expirado. Entre em contato com o psicólogo.';
+          document.getElementById('cadCodigoErr').classList.add('show');
+          return;
+        }
+      }
+
+      btn.textContent = 'Criando conta...';
+      const cred = await window.FB_FUNCS.createUserWithEmailAndPassword(window.FB_AUTH, email, senha);
+      const uid = cred.user.uid;
+
+      await window.FB_FUNCS.setDoc(window.FB_FUNCS.doc(window.FB_DB, 'usuarios', uid), {
+        nome, email,
+        codigoUsado: codigo,
+        casal: cd.casal || nome,
+        createdAt: new Date().toISOString(),
+        accessExpiry: cd.validade || null
+      });
+
+      await window.FB_FUNCS.updateDoc(conviteRef, {
+        usado: true,
+        usadoPor: email,
+        usadoEm: new Date().toISOString()
+      });
+
+      currentUser = { email, uid, nome };
+      localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+      localStorage.setItem('ceg_perfil', JSON.stringify({ nome, email }));
+      enterAppLoggedIn();
+
+    } else {
+      // Fallback local sem Firebase
+      currentUser = { email, nome, createdAt: new Date().toISOString() };
+      localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+      localStorage.setItem('ceg_perfil', JSON.stringify({ nome, email }));
+      enterAppLoggedIn();
+    }
+  } catch(e) {
+    const msg = e.code==='auth/email-already-in-use' ? 'Este e-mail já está cadastrado.' :
+                e.code==='auth/weak-password' ? 'Senha fraca. Use mínimo 6 caracteres.' :
+                'Erro ao criar conta. Tente novamente.';
+    document.getElementById('cadEmailErr').textContent = msg;
+    document.getElementById('cadEmailErr').classList.add('show');
+  } finally {
+    btn.textContent = origText;
+    btn.disabled = false;
+  }
 }
 
 async function doForgot() {
