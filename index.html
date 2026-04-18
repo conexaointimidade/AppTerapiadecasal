@@ -1469,7 +1469,7 @@ updateMood(3);
     </div>
     <div class="form-group">
       <label>Código de acesso</label>
-      <input type="text" id="cadCodigo" placeholder="Ex: CASAL2024" style="text-transform:uppercase;letter-spacing:.1em;">
+      <input type="text" id="cadCodigo" placeholder="Ex: gabrieleraquel2026" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <div class="form-error" id="cadCodigoErr">Código inválido ou já utilizado</div>
     </div>
     <div class="form-group">
@@ -1806,10 +1806,21 @@ async function doCadastro() {
 
   try {
     if (window.FB_AUTH && window.FB_FUNCS && window.FB_DB) {
-      // Busca código na coleção Convites do Firestore
-      const conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigo);
-      const conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
-
+      // Busca código na coleção Convites — tenta lowercase, uppercase e exato
+      const codigoLower = codigo.toLowerCase();
+      const codigoUpper = codigo.toUpperCase();
+      let conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigoLower);
+      let conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
+      // Se não achou em minúsculo, tenta maiúsculo
+      if (!conviteSnap.exists()) {
+        conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigoUpper);
+        conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
+      }
+      // Se não achou em maiúsculo, tenta exato como digitado
+      if (!conviteSnap.exists()) {
+        conviteRef = window.FB_FUNCS.doc(window.FB_DB, 'Convites', codigo);
+        conviteSnap = await window.FB_FUNCS.getDoc(conviteRef);
+      }
       if (!conviteSnap.exists()) {
         document.getElementById('cadCodigoErr').textContent = 'Código inválido. Solicite ao Psicólogo Gabriel.';
         document.getElementById('cadCodigoErr').classList.add('show');
@@ -1864,9 +1875,13 @@ async function doCadastro() {
       enterAppLoggedIn();
     }
   } catch(e) {
+    console.error('Cadastro error:', e.code, e.message);
     const msg = e.code==='auth/email-already-in-use' ? 'Este e-mail já está cadastrado.' :
                 e.code==='auth/weak-password' ? 'Senha fraca. Use mínimo 6 caracteres.' :
-                'Erro ao criar conta. Tente novamente.';
+                e.code==='auth/network-request-failed' ? 'Sem conexão. Verifique sua internet.' :
+                e.code==='auth/too-many-requests' ? 'Muitas tentativas. Aguarde alguns minutos.' :
+                e.code==='permission-denied' ? 'Erro de permissão. Verifique as regras do Firestore.' :
+                e.message ? e.message : 'Erro ao criar conta. Tente novamente.';
     document.getElementById('cadEmailErr').textContent = msg;
     document.getElementById('cadEmailErr').classList.add('show');
   } finally {
