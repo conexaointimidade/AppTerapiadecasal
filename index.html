@@ -956,7 +956,7 @@ function acceptTerms(){
     currentUser=user;
     enterAppLoggedIn();
   }
-  setTimeout(requestNotificationPermission, 2000);
+  setTimeout(requestAndScheduleNotifications, 2000);
 }
 function showTerms(){
   document.getElementById('termsModal').classList.add('show');
@@ -1243,9 +1243,26 @@ function removeTime(i){currentTimes.splice(i,1);renderTimeTags();}
 function saveFrase(){
   const text=document.getElementById('fraseInput').value.trim();
   if(!text){showToast('Escreva uma frase antes de salvar');return;}
-  frases.push({text,times:[...currentTimes],id:Date.now()});
+  const dataInicio=document.getElementById('fraseDataInicio')?document.getElementById('fraseDataInicio').value:'';
+  const dataFim=document.getElementById('fraseDataFim')?document.getElementById('fraseDataFim').value:'';
+  const frase={
+    text,
+    times:[...currentTimes],
+    repeat:currentRepeat||'nao',
+    dias:currentRepeat==='personalizado'?[...currentDias]:[],
+    dataInicio,
+    dataFim,
+    id:Date.now()
+  };
+  frases.push(frase);
   localStorage.setItem('ceg_frases',JSON.stringify(frases));
-  hideFraseForm();renderFrases();showToast('✓ Lembrete salvo!');
+  // Schedule local notifications for each time
+  if(currentTimes.length>0 && Notification && Notification.permission==='granted'){
+    scheduleFraseNotifications(frase);
+  }
+  hideFraseForm();
+  renderFrases();
+  showToast('✓ Lembrete salvo!');
 }
 function renderFrases(){
   const el=document.getElementById('frasesList');
@@ -1734,6 +1751,7 @@ function enterAppLoggedIn() {
   document.getElementById('bottomNav').classList.add('visible');
   goTo('home');
   renderFrases(); renderDesafios(); renderTrinta(); loadSavedResults();
+  setTimeout(scheduleAllNotifications, 1000);
   renderPerfil();
   checkAniversario();
 }
@@ -1998,6 +2016,98 @@ function saveEditFrase() {
   closeEditFrase();
   renderFrases();
   showToast('✓ Lembrete atualizado!');
+}
+
+
+/* ============================================
+   SISTEMA DE NOTIFICAÇÕES LOCAIS
+   Agenda notificações usando setTimeout para
+   hoje. Com Firebase, usaria Cloud Messaging.
+   ============================================ */
+
+const notifTimers = [];
+
+function scheduleFraseNotifications(frase) {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  if (!frase.times || frase.times.length === 0) return;
+
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+
+  // Verifica se deve disparar hoje com base na repetição
+  const shouldFireToday = () => {
+    const rep = frase.repeat || 'nao';
+    if (rep === 'nao') {
+      return !frase.dataInicio || frase.dataInicio === today;
+    }
+    if (rep === 'diario') return true;
+    if (rep === 'semanal') {
+      const startDay = frase.dataInicio ? new Date(frase.dataInicio+'T12:00:00').getDay() : now.getDay();
+      return now.getDay() === startDay;
+    }
+    if (rep === 'mensal') {
+      const startDate = frase.dataInicio ? new Date(frase.dataInicio+'T12:00:00').getDate() : now.getDate();
+      return now.getDate() === startDate;
+    }
+    if (rep === 'anual') {
+      if (!frase.dataInicio) return false;
+      const d = new Date(frase.dataInicio+'T12:00:00');
+      return now.getMonth() === d.getMonth() && now.getDate() === d.getDate();
+    }
+    if (rep === 'personalizado') {
+      return frase.dias && frase.dias.includes(now.getDay());
+    }
+    return false;
+  };
+
+  if (!shouldFireToday()) return;
+  if (frase.dataFim && today > frase.dataFim) return;
+
+  frase.times.forEach(t => {
+    const [h, m] = t.split(':').map(Number);
+    const target = new Date();
+    target.setHours(h, m, 0, 0);
+    const delay = target - now;
+    if (delay > 0) {
+      const timer = setTimeout(() => {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.ready.then(reg => {
+            reg.showNotification('Casamento em Graça 💑', {
+              body: frase.text,
+              icon: '/AppTerapiadecasal/icone-192.png',
+              badge: '/AppTerapiadecasal/icone-72.png',
+              vibrate: [200, 100, 200],
+              tag: 'lembrete-' + frase.id + '-' + t
+            });
+          });
+        }
+      }, delay);
+      notifTimers.push(timer);
+    }
+  });
+}
+
+function scheduleAllNotifications() {
+  // Limpa timers anteriores
+  notifTimers.forEach(t => clearTimeout(t));
+  notifTimers.length = 0;
+  if (!frases || !frases.length) return;
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  frases.forEach(f => scheduleFraseNotifications(f));
+}
+
+function requestAndScheduleNotifications() {
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'granted') {
+    scheduleAllNotifications();
+  } else if (Notification.permission === 'default') {
+    Notification.requestPermission().then(p => {
+      if (p === 'granted') {
+        showToast('🔔 Notificações ativadas!');
+        scheduleAllNotifications();
+      }
+    });
+  }
 }
 
 if ('serviceWorker' in navigator) {
