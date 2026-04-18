@@ -273,6 +273,112 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
 .exp-btn{background:linear-gradient(135deg,#C9A96E,#8B7040);color:white;border:none;padding:14px 36px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;letter-spacing:.04em;margin-bottom:12px;width:100%;max-width:300px;}
 .exp-btn-wa{background:transparent;border:1.5px solid rgba(201,169,110,0.4);color:rgba(201,169,110,0.8);padding:12px 36px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;width:100%;max-width:300px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .exp-credit{margin-top:1.5rem;font-size:11px;color:rgba(253,250,246,0.25);letter-spacing:.06em;}
+
+/* BOAS VINDAS / AUTH */
+#boasVindas{display:none;min-height:100vh;background:linear-gradient(175deg,#1C1A2E 0%,#2D1F35 45%,#3A2040 100%);flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;}
+#boasVindas.active-screen{display:flex;}
+.auth-logo-wrap{position:relative;width:90px;height:90px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;}
+.auth-c1{position:absolute;width:90px;height:90px;border-radius:50%;border:1px solid rgba(201,169,110,0.25);}
+.auth-c2{position:absolute;width:70px;height:70px;border-radius:50%;border:1px solid rgba(201,169,110,0.45);}
+.auth-ra{position:absolute;width:36px;height:36px;border-radius:50%;border:2.5px solid #C9A96E;top:27px;left:10px;box-shadow:0 0 10px rgba(201,169,110,0.4);}
+.auth-rb{position:absolute;width:36px;height:36px;border-radius:50%;border:2.5px solid #C17B8A;top:27px;left:44px;box-shadow:0 0 10px rgba(193,123,138,0.4);}
+.auth-gem{position:absolute;width:8px;height:8px;background:#C9A96E;top:21px;left:41px;transform:rotate(45deg);box-shadow:0 0 8px rgba(201,169,110,0.9);}
+.auth-title{font-family:'Playfair Display',serif;font-size:28px;color:#FDFAF6;margin-bottom:4px;font-weight:400;}
+.auth-title em{color:#C9A96E;font-style:italic;}
+.auth-sub{font-size:12px;color:rgba(253,250,246,0.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem;}
+.auth-btns{display:flex;flex-direction:column;gap:10px;width:100%;max-width:300px;}
+.btn-auth-primary{background:linear-gradient(135deg,#C17B8A,#8B4F5E);color:white;border:none;padding:15px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;width:100%;}
+.btn-auth-secondary{background:transparent;border:1.5px solid rgba(201,169,110,0.5);color:rgba(201,169,110,0.9);padding:14px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;width:100%;}
+.auth-credit{margin-top:1.5rem;font-size:11px;color:rgba(253,250,246,0.25);}
+/* LOGIN / CADASTRO */
+#loginScreen,#cadastroScreen,#forgotScreen{display:none;min-height:100vh;background:var(--cream);flex-direction:column;}
+#loginScreen.active-screen,#cadastroScreen.active-screen,#forgotScreen.active-screen{display:flex;}
+.auth-header{padding:16px 20px;display:flex;align-items:center;gap:12px;background:white;border-bottom:1px solid var(--border);}
+.auth-back{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text-muted);}
+.auth-header-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);}
+.auth-form{padding:24px 20px;flex:1;}
+.auth-form-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:6px;}
+.auth-form-sub{font-size:13px;color:var(--text-muted);margin-bottom:24px;line-height:1.6;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+.form-group input{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);background:white;outline:none;transition:border-color .15s;}
+.form-group input:focus{border-color:var(--rose);}
+.form-group input.error{border-color:#E24B4A;}
+.form-error{font-size:12px;color:#E24B4A;margin-top:4px;display:none;}
+.form-error.show{display:block;}
+.forgot-link{font-size:13px;color:var(--rose);text-align:right;cursor:pointer;margin-top:-8px;margin-bottom:16px;display:block;}
+.auth-divider{display:flex;align-items:center;gap:10px;margin:16px 0;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.auth-divider span{font-size:12px;color:var(--text-muted);}
+.auth-switch{font-size:13px;color:var(--text-muted);text-align:center;margin-top:16px;}
+.auth-switch a{color:var(--rose);cursor:pointer;text-decoration:none;}
+.invite-info{background:var(--gold-light);border:1px solid var(--gold);border-radius:var(--radius-sm);padding:12px 14px;font-size:12px;color:var(--gold-dark);margin-bottom:16px;line-height:1.6;}
+/* PERFIL */
+#perfil{display:none;min-height:100vh;padding-bottom:80px;}
+#perfil.active{display:block;}
+.perfil-hero{background:linear-gradient(150deg,#1C1A2E,#3A2040);padding:32px 20px 24px;text-align:center;position:relative;}
+.perfil-photo-wrap{position:relative;width:90px;height:90px;margin:0 auto 12px;}
+.perfil-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #C9A96E;}
+.perfil-photo-placeholder{width:90px;height:90px;border-radius:50%;background:rgba(201,169,110,0.2);border:3px solid #C9A96E;display:flex;align-items:center;justify-content:center;font-size:32px;}
+.perfil-photo-edit{position:absolute;bottom:0;right:0;width:28px;height:28px;border-radius:50%;background:var(--rose);border:2px solid white;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;}
+.perfil-couple-name{font-family:'Playfair Display',serif;font-size:22px;color:#FDFAF6;margin-bottom:4px;}
+.perfil-since{font-size:12px;color:rgba(253,250,246,0.5);letter-spacing:.06em;}
+.perfil-badges{display:flex;justify-content:center;gap:12px;margin-top:16px;}
+.perfil-badge{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:10px 16px;text-align:center;}
+.perfil-badge-num{font-family:'Playfair Display',serif;font-size:20px;color:#C9A96E;font-weight:400;}
+.perfil-badge-label{font-size:10px;color:rgba(253,250,246,0.5);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.perfil-section{padding:20px;}
+.perfil-card{background:white;border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:12px;}
+.perfil-card-title{font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;}
+.perfil-field{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.perfil-field:last-child{border-bottom:none;}
+.perfil-field-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center;}
+.perfil-field-content{flex:1;}
+.perfil-field-label{font-size:11px;color:var(--text-muted);margin-bottom:2px;}
+.perfil-field-value{font-size:14px;color:var(--text);font-weight:500;}
+.perfil-field-edit{color:var(--rose);font-size:13px;cursor:pointer;}
+.aniversario-card{background:linear-gradient(135deg,#1C1A2E,#3A2040);border-radius:var(--radius);padding:18px;margin-bottom:12px;border:1px solid rgba(201,169,110,0.2);}
+.aniv-countdown{font-family:'Playfair Display',serif;font-size:36px;color:#C9A96E;text-align:center;margin-bottom:4px;}
+.aniv-label{font-size:12px;color:rgba(253,250,246,0.5);text-align:center;text-transform:uppercase;letter-spacing:.08em;}
+.aniv-date{font-size:13px;color:rgba(253,250,246,0.7);text-align:center;margin-top:8px;}
+/* CONFIGURAÇÕES */
+#configuracoes{display:none;min-height:100vh;padding-bottom:80px;}
+#configuracoes.active{display:block;}
+.config-section{padding:16px 20px 0;}
+.config-section-title{font-size:11px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;padding:0 4px;}
+.config-card{background:white;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:12px;overflow:hidden;}
+.config-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;}
+.config-item:last-child{border-bottom:none;}
+.config-item:hover{background:var(--cream);}
+.config-item-icon{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
+.config-item-text{flex:1;}
+.config-item-title{font-size:14px;color:var(--text);font-weight:500;}
+.config-item-sub{font-size:12px;color:var(--text-muted);margin-top:1px;}
+.config-item-arrow{font-size:16px;color:var(--text-muted);}
+.config-item.danger .config-item-title{color:#E24B4A;}
+.config-toggle{width:44px;height:24px;border-radius:12px;background:var(--border);border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;}
+.config-toggle.on{background:var(--rose);}
+.config-toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:white;top:3px;left:3px;transition:transform .2s;}
+.config-toggle.on::after{transform:translateX(20px);}
+/* MODAL EDITAR PERFIL */
+#editPerfilModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:600;align-items:flex-end;justify-content:center;}
+#editPerfilModal.show{display:flex;}
+.edit-sheet{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:420px;padding:24px 24px 40px;max-height:90vh;overflow-y:auto;}
+.edit-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
+.edit-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);margin-bottom:20px;}
+/* NOTIFICAÇÃO ANIVERSÁRIO */
+#anivNotif{display:none;position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;z-index:800;padding:12px 16px;}
+#anivNotif.show{display:block;}
+.aniv-banner{border-radius:var(--radius);padding:16px;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
+.aniv-banner.eve{background:linear-gradient(135deg,#F7F0E3,#F5E8EC);border:1px solid rgba(201,169,110,0.4);}
+.aniv-banner.day{background:linear-gradient(135deg,#1C1A2E,#3A2040);border:1px solid rgba(201,169,110,0.3);}
+.aniv-banner-title{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:4px;}
+.aniv-banner.eve .aniv-banner-title{color:var(--navy);}
+.aniv-banner.day .aniv-banner-title{color:#FDFAF6;}
+.aniv-banner-text{font-size:13px;line-height:1.6;}
+.aniv-banner.eve .aniv-banner-text{color:var(--text-muted);}
+.aniv-banner.day .aniv-banner-text{color:rgba(253,250,246,0.7);}
+.aniv-close{float:right;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted);margin-top:-4px;}
 </style>
 </head>
 <body>
@@ -379,8 +485,8 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
   <button class="nav-item" onclick="goTo('emocional')" id="nav-emocional"><span class="nav-icon">💛</span><span class="nav-label">Emoções</span></button>
   <button class="nav-item" onclick="goTo('linguagens')" id="nav-linguagens"><span class="nav-icon">💌</span><span class="nav-label">Amor</span></button>
   <button class="nav-item" onclick="goTo('comunicacao')" id="nav-comunicacao"><span class="nav-icon">💬</span><span class="nav-label">Comunicar</span></button>
-  <button class="nav-item" onclick="goTo('frases')" id="nav-frases"><span class="nav-icon">🔔</span><span class="nav-label">Lembretes</span></button>
   <button class="nav-item" onclick="goTo('trinta')" id="nav-trinta"><span class="nav-icon">🌱</span><span class="nav-label">30 dias</span></button>
+  <button class="nav-item" onclick="goTo('perfil')" id="nav-perfil"><span class="nav-icon">👫</span><span class="nav-label">Nós</span></button>
 </nav>
 
 <div class="success-toast" id="toast"></div>
@@ -770,14 +876,28 @@ let quizData=[],quizAnswers=[],quizIdx=0,quizGender='';
 
 function checkTerms(){
   const accepted=localStorage.getItem('ceg_terms_accepted');
-  if(accepted){enterApp();}
-  else{document.getElementById('onboarding').classList.add('show');}
+  if(!accepted){document.getElementById('onboarding').classList.add('show');return;}
+  const user=JSON.parse(localStorage.getItem('ceg_user')||'null');
+  if(!user){
+    document.getElementById('splash').style.display='none';
+    showScreen('boasVindas');
+  } else {
+    currentUser=user;
+    enterAppLoggedIn();
+  }
 }
 function acceptTerms(){
   localStorage.setItem('ceg_terms_accepted','1');
   document.getElementById('onboarding').classList.remove('show');
   document.getElementById('termsModal').classList.remove('show');
-  enterApp();
+  const user=JSON.parse(localStorage.getItem('ceg_user')||'null');
+  if(!user){
+    document.getElementById('splash').style.display='none';
+    showScreen('boasVindas');
+  } else {
+    currentUser=user;
+    enterAppLoggedIn();
+  }
   setTimeout(requestNotificationPermission, 2000);
 }
 function showTerms(){
@@ -802,6 +922,7 @@ function goTo(id){
   if(nav)nav.classList.add('active');
   window.scrollTo(0,0);
   if(id==='trinta')renderTrinta();
+  if(id==='perfil')renderPerfil();
 }
 function quickMood(v){
   document.querySelectorAll('.mood-face').forEach((f,i)=>f.classList.toggle('selected',i+1===v));
@@ -1147,6 +1268,302 @@ function showToast(msg){
 updateMood(3);
 </script>
 
+
+<!-- BOAS VINDAS -->
+<div id="boasVindas" class="active-screen">
+  <div class="auth-logo-wrap">
+    <div class="auth-c1"></div><div class="auth-c2"></div>
+    <div class="auth-ra"></div><div class="auth-rb"></div><div class="auth-gem"></div>
+  </div>
+  <span style="font-size:11px;color:rgba(201,169,110,0.7);letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px;">Psicólogo Gabriel Aguilar</span>
+  <h1 class="auth-title">Casamento<br>em <em>Graça</em></h1>
+  <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.7),transparent);margin:16px auto 20px;"></div>
+  <p style="font-size:13px;color:rgba(253,250,246,0.45);margin-bottom:2rem;line-height:1.6;max-width:260px;">Sua jornada de casal começa aqui</p>
+  <div class="auth-btns">
+    <button class="btn-auth-primary" onclick="showScreen('loginScreen')">Entrar na minha conta</button>
+    <button class="btn-auth-secondary" onclick="showScreen('cadastroScreen')">Criar conta</button>
+  </div>
+  <div class="auth-credit">psicologogabrielaguilar.com.br</div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="auth-header">
+    <button class="auth-back" onclick="showScreen('boasVindas')">←</button>
+    <span class="auth-header-title">Entrar</span>
+  </div>
+  <div class="auth-form">
+    <h2 class="auth-form-title">Bem-vindo de volta 💑</h2>
+    <p class="auth-form-sub">Entre com seu e-mail e senha para continuar sua jornada.</p>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" id="loginEmail" placeholder="seu@email.com">
+      <div class="form-error" id="loginEmailErr">E-mail inválido</div>
+    </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" id="loginSenha" placeholder="••••••••">
+      <div class="form-error" id="loginSenhaErr">Senha incorreta</div>
+    </div>
+    <span class="forgot-link" onclick="showScreen('forgotScreen')">Esqueci minha senha</span>
+    <button class="btn-primary" onclick="doLogin()">Entrar</button>
+    <div class="auth-switch">Não tem conta? <a onclick="showScreen('cadastroScreen')">Criar conta</a></div>
+  </div>
+</div>
+
+<!-- CADASTRO -->
+<div id="cadastroScreen">
+  <div class="auth-header">
+    <button class="auth-back" onclick="showScreen('boasVindas')">←</button>
+    <span class="auth-header-title">Criar conta</span>
+  </div>
+  <div class="auth-form">
+    <h2 class="auth-form-title">Começar a jornada 🌱</h2>
+    <p class="auth-form-sub">Crie sua conta com o código de acesso enviado pelo seu psicólogo.</p>
+    <div class="invite-info">
+      🎟️ <strong>Código de acesso obrigatório.</strong> Solicite ao Psicólogo Gabriel Aguilar o seu código antes de se cadastrar.
+    </div>
+    <div class="form-group">
+      <label>Código de acesso</label>
+      <input type="text" id="cadCodigo" placeholder="Ex: CASAL2024" style="text-transform:uppercase;letter-spacing:.1em;">
+      <div class="form-error" id="cadCodigoErr">Código inválido ou já utilizado</div>
+    </div>
+    <div class="form-group">
+      <label>Nome do casal</label>
+      <input type="text" id="cadNome" placeholder="Ex: João & Maria">
+      <div class="form-error" id="cadNomeErr">Preencha o nome do casal</div>
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" id="cadEmail" placeholder="seu@email.com">
+      <div class="form-error" id="cadEmailErr">E-mail inválido</div>
+    </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres">
+      <div class="form-error" id="cadSenhaErr">Mínimo 6 caracteres</div>
+    </div>
+    <div class="form-group">
+      <label>Confirmar senha</label>
+      <input type="password" id="cadSenha2" placeholder="Repita a senha">
+      <div class="form-error" id="cadSenha2Err">As senhas não coincidem</div>
+    </div>
+    <button class="btn-primary" onclick="doCadastro()">Criar minha conta</button>
+    <div class="auth-switch">Já tem conta? <a onclick="showScreen('loginScreen')">Entrar</a></div>
+  </div>
+</div>
+
+<!-- ESQUECI SENHA -->
+<div id="forgotScreen">
+  <div class="auth-header">
+    <button class="auth-back" onclick="showScreen('loginScreen')">←</button>
+    <span class="auth-header-title">Recuperar senha</span>
+  </div>
+  <div class="auth-form">
+    <h2 class="auth-form-title">Redefinir senha 🔑</h2>
+    <p class="auth-form-sub">Digite seu e-mail e enviaremos um link para redefinir sua senha.</p>
+    <div class="form-group">
+      <label>E-mail cadastrado</label>
+      <input type="email" id="forgotEmail" placeholder="seu@email.com">
+    </div>
+    <button class="btn-primary" onclick="doForgot()">Enviar link de recuperação</button>
+    <button class="btn-secondary" onclick="showScreen('loginScreen')">Voltar ao login</button>
+  </div>
+</div>
+
+<!-- PERFIL DO CASAL -->
+<div class="screen" id="perfil">
+  <div class="perfil-hero">
+    <div class="perfil-photo-wrap">
+      <div class="perfil-photo-placeholder" id="perfilPhotoEl">💑</div>
+      <div class="perfil-photo-edit" onclick="editarFoto()">✏️</div>
+    </div>
+    <div class="perfil-couple-name" id="perfilNomeEl">Casal</div>
+    <div class="perfil-since" id="perfilSinceEl">Juntos desde —</div>
+    <div class="perfil-badges">
+      <div class="perfil-badge">
+        <div class="perfil-badge-num" id="perfilDiasJuntos">—</div>
+        <div class="perfil-badge-label">Dias juntos</div>
+      </div>
+      <div class="perfil-badge">
+        <div class="perfil-badge-num" id="perfilAnosJuntos">—</div>
+        <div class="perfil-badge-label">Anos</div>
+      </div>
+      <div class="perfil-badge">
+        <div class="perfil-badge-num" id="perfilDiasAniv">—</div>
+        <div class="perfil-badge-label">Dias p/ aniversário</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="perfil-section">
+    <!-- Countdown aniversário -->
+    <div class="aniversario-card" id="anivCard" style="display:none;">
+      <div class="aniv-countdown" id="anivCountdown">0</div>
+      <div class="aniv-label" id="anivCardLabel">dias para o aniversário</div>
+      <div class="aniv-date" id="anivCardDate"></div>
+    </div>
+
+    <!-- Dados do casal -->
+    <div class="perfil-card">
+      <div class="perfil-card-title">Nosso perfil</div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">💑</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">Nome do casal</div>
+          <div class="perfil-field-value" id="pfNome">—</div>
+        </div>
+        <span class="perfil-field-edit" onclick="openEditPerfil()">Editar</span>
+      </div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">💍</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">Data de casamento / relacionamento</div>
+          <div class="perfil-field-value" id="pfDataRel">—</div>
+        </div>
+        <span class="perfil-field-edit" onclick="openEditPerfil()">Editar</span>
+      </div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">🧠</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">Início da terapia</div>
+          <div class="perfil-field-value" id="pfDataTerapia">—</div>
+        </div>
+        <span class="perfil-field-edit" onclick="openEditPerfil()">Editar</span>
+      </div>
+      <div class="perfil-field">
+        <div class="perfil-field-icon">📧</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-label">E-mail</div>
+          <div class="perfil-field-value" id="pfEmail">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Configurações rápidas -->
+    <div class="perfil-card">
+      <div class="perfil-card-title">Conta e configurações</div>
+      <div class="perfil-field" style="cursor:pointer;" onclick="goTo('configuracoes')">
+        <div class="perfil-field-icon">⚙️</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-value">Configurações</div>
+        </div>
+        <span style="color:var(--text-muted);">›</span>
+      </div>
+      <div class="perfil-field" style="cursor:pointer;" onclick="doLogout()">
+        <div class="perfil-field-icon">🚪</div>
+        <div class="perfil-field-content">
+          <div class="perfil-field-value" style="color:#E24B4A;">Sair da conta</div>
+        </div>
+        <span style="color:var(--text-muted);">›</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIGURAÇÕES -->
+<div class="screen" id="configuracoes">
+  <div class="app-header">
+    <button class="back-btn" onclick="goTo('perfil')">←</button>
+    <span class="header-title">Configurações</span>
+  </div>
+  <div class="config-section">
+    <div class="config-section-title">Notificações</div>
+    <div class="config-card">
+      <div class="config-item">
+        <div class="config-item-icon">🔔</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Lembretes diários</div>
+          <div class="config-item-sub">Receber notificações de tarefas</div>
+        </div>
+        <button class="config-toggle on" id="toggleLembretes" onclick="toggleConfig('lembretes',this)"></button>
+      </div>
+      <div class="config-item">
+        <div class="config-item-icon">💍</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Aniversário do casal</div>
+          <div class="config-item-sub">Aviso 1 dia antes e no dia</div>
+        </div>
+        <button class="config-toggle on" id="toggleAniv" onclick="toggleConfig('aniv',this)"></button>
+      </div>
+      <div class="config-item">
+        <div class="config-item-icon">🌱</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Desafio 30 dias</div>
+          <div class="config-item-sub">Lembrete diário do desafio</div>
+        </div>
+        <button class="config-toggle on" id="toggleDesafio30" onclick="toggleConfig('desafio30',this)"></button>
+      </div>
+    </div>
+  </div>
+  <div class="config-section">
+    <div class="config-section-title">Privacidade</div>
+    <div class="config-card">
+      <div class="config-item" onclick="showTermsFromConfig()">
+        <div class="config-item-icon">📄</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Política de privacidade</div>
+          <div class="config-item-sub">Termos e condições de uso</div>
+        </div>
+        <div class="config-item-arrow">›</div>
+      </div>
+      <div class="config-item" onclick="confirmarApagarDados()">
+        <div class="config-item-icon">🗑️</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Apagar meus dados</div>
+          <div class="config-item-sub">Remove todos os registros locais</div>
+        </div>
+        <div class="config-item-arrow">›</div>
+      </div>
+    </div>
+  </div>
+  <div class="config-section">
+    <div class="config-section-title">Conta</div>
+    <div class="config-card">
+      <div class="config-item danger" onclick="doLogout()">
+        <div class="config-item-icon">🚪</div>
+        <div class="config-item-text">
+          <div class="config-item-title">Sair da conta</div>
+        </div>
+        <div class="config-item-arrow">›</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:20px;text-align:center;font-size:11px;color:var(--text-muted);">
+    Casamento em Graça · Versão 1.0<br>Psicólogo Gabriel Aguilar · CRP 04/55625
+  </div>
+</div>
+
+<!-- MODAL EDITAR PERFIL -->
+<div id="editPerfilModal">
+  <div class="edit-sheet">
+    <div class="edit-handle"></div>
+    <div class="edit-title">Editar perfil do casal</div>
+    <div class="form-group">
+      <label>Nome do casal</label>
+      <input type="text" id="editNome" placeholder="Ex: João & Maria">
+    </div>
+    <div class="form-group">
+      <label>Data de casamento / relacionamento</label>
+      <input type="date" id="editDataRel">
+    </div>
+    <div class="form-group">
+      <label>Início da terapia</label>
+      <input type="date" id="editDataTerapia">
+    </div>
+    <button class="btn-primary" onclick="salvarPerfil()">Salvar perfil</button>
+    <button class="btn-secondary" onclick="closeEditPerfil()">Cancelar</button>
+  </div>
+</div>
+
+<!-- NOTIFICAÇÃO ANIVERSÁRIO -->
+<div id="anivNotif">
+  <div class="aniv-banner" id="anivBanner">
+    <button class="aniv-close" onclick="document.getElementById('anivNotif').classList.remove('show')">×</button>
+    <div class="aniv-banner-title" id="anivBannerTitle"></div>
+    <div class="aniv-banner-text" id="anivBannerText"></div>
+  </div>
+</div>
 <!-- PWA Install Banner -->
 <div id="installBanner" style="display:none;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:380px;background:white;border-radius:16px;padding:14px 16px;box-shadow:0 4px 24px rgba(0,0,0,0.15);z-index:300;border:1px solid rgba(193,123,138,0.2);">
   <div style="display:flex;align-items:center;gap:12px;">
@@ -1161,6 +1578,259 @@ updateMood(3);
 </div>
 
 <script>
+
+/* ============================================
+   AUTH + PERFIL + CONFIGURAÇÕES + ANIVERSÁRIO
+   ============================================ */
+
+// Códigos de convite válidos (quando Firebase ativo, virá do banco)
+// Por enquanto validação local para demonstração
+const INVITE_CODES = ['CASAL2024','CASAMENTO2024','GABRIEL2024','GRACA2024','TERAPIA2024'];
+
+let currentUser = JSON.parse(localStorage.getItem('ceg_user') || 'null');
+let perfilData = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+let configData = JSON.parse(localStorage.getItem('ceg_config') || '{"lembretes":true,"aniv":true,"desafio30":true}');
+
+function showScreen(id) {
+  // Hide all auth screens
+  ['boasVindas','loginScreen','cadastroScreen','forgotScreen'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) { el.classList.remove('active-screen'); el.style.display = 'none'; }
+  });
+  const target = document.getElementById(id);
+  if (target) { target.style.display = id === 'boasVindas' ? 'flex' : 'flex'; target.classList.add('active-screen'); }
+}
+
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const senha = document.getElementById('loginSenha').value;
+  // Limpa erros
+  document.getElementById('loginEmailErr').classList.remove('show');
+  document.getElementById('loginSenhaErr').classList.remove('show');
+  if (!email || !email.includes('@')) {
+    document.getElementById('loginEmailErr').classList.add('show'); return;
+  }
+  if (!senha || senha.length < 6) {
+    document.getElementById('loginSenhaErr').classList.add('show'); return;
+  }
+  // Verifica usuário salvo localmente
+  const saved = JSON.parse(localStorage.getItem('ceg_user') || 'null');
+  if (saved && saved.email === email && saved.senha === senha) {
+    currentUser = saved;
+    enterAppLoggedIn();
+  } else {
+    document.getElementById('loginSenhaErr').textContent = 'E-mail ou senha incorretos';
+    document.getElementById('loginSenhaErr').classList.add('show');
+  }
+}
+
+function doCadastro() {
+  const codigo = document.getElementById('cadCodigo').value.trim().toUpperCase();
+  const nome = document.getElementById('cadNome').value.trim();
+  const email = document.getElementById('cadEmail').value.trim();
+  const senha = document.getElementById('cadSenha').value;
+  const senha2 = document.getElementById('cadSenha2').value;
+  // Limpa erros
+  ['cadCodigoErr','cadNomeErr','cadEmailErr','cadSenhaErr','cadSenha2Err'].forEach(id => document.getElementById(id).classList.remove('show'));
+  let valid = true;
+  if (!INVITE_CODES.includes(codigo)) { document.getElementById('cadCodigoErr').classList.add('show'); valid = false; }
+  if (!nome) { document.getElementById('cadNomeErr').classList.add('show'); valid = false; }
+  if (!email || !email.includes('@')) { document.getElementById('cadEmailErr').classList.add('show'); valid = false; }
+  if (!senha || senha.length < 6) { document.getElementById('cadSenhaErr').classList.add('show'); valid = false; }
+  if (senha !== senha2) { document.getElementById('cadSenha2Err').classList.add('show'); valid = false; }
+  if (!valid) return;
+  // Salva usuário
+  currentUser = { email, senha, nome, createdAt: new Date().toISOString() };
+  localStorage.setItem('ceg_user', JSON.stringify(currentUser));
+  perfilData = { nome, email };
+  localStorage.setItem('ceg_perfil', JSON.stringify(perfilData));
+  enterAppLoggedIn();
+}
+
+function doForgot() {
+  const email = document.getElementById('forgotEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast('Digite um e-mail válido'); return; }
+  showToast('✓ Quando Firebase ativo, link enviado para ' + email);
+  setTimeout(() => showScreen('loginScreen'), 1500);
+}
+
+function enterAppLoggedIn() {
+  // Hide all auth screens
+  ['boasVindas','loginScreen','cadastroScreen','forgotScreen'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) { el.style.display = 'none'; el.classList.remove('active-screen'); }
+  });
+  document.getElementById('splash').style.display = 'none';
+  if (runAccessCheck()) return;
+  document.getElementById('bottomNav').classList.add('visible');
+  goTo('home');
+  renderFrases(); renderDesafios(); renderTrinta(); loadSavedResults();
+  renderPerfil();
+  checkAniversario();
+}
+
+function doLogout() {
+  if (!confirm('Deseja sair da sua conta?')) return;
+  document.getElementById('bottomNav').classList.remove('visible');
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  showScreen('boasVindas');
+  showToast('Até logo! 💑');
+}
+
+// PERFIL
+function renderPerfil() {
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  const nome = p.nome || 'Casal';
+  const email = p.email || currentUser?.email || '—';
+  document.getElementById('perfilNomeEl').textContent = nome;
+  document.getElementById('pfNome').textContent = nome;
+  document.getElementById('pfEmail').textContent = email;
+
+  if (p.dataRel) {
+    const d = new Date(p.dataRel + 'T12:00:00');
+    document.getElementById('pfDataRel').textContent = d.toLocaleDateString('pt-BR');
+    document.getElementById('perfilSinceEl').textContent = 'Juntos desde ' + d.toLocaleDateString('pt-BR', {month:'long',year:'numeric'});
+
+    // Cálculos
+    const hoje = new Date(); hoje.setHours(0,0,0,0);
+    const inicio = new Date(p.dataRel + 'T00:00:00');
+    const diasJuntos = Math.floor((hoje - inicio) / 86400000);
+    const anos = Math.floor(diasJuntos / 365);
+    document.getElementById('perfilDiasJuntos').textContent = diasJuntos.toLocaleString('pt-BR');
+    document.getElementById('perfilAnosJuntos').textContent = anos;
+
+    // Próximo aniversário
+    const proxAniv = proximoAniversario(p.dataRel);
+    const diasAniv = Math.round((proxAniv - hoje) / 86400000);
+    document.getElementById('perfilDiasAniv').textContent = diasAniv === 0 ? '🎉' : diasAniv;
+
+    // Card countdown
+    const anivCard = document.getElementById('anivCard');
+    anivCard.style.display = 'block';
+    document.getElementById('anivCountdown').textContent = diasAniv === 0 ? '🎉' : diasAniv;
+    document.getElementById('anivCardLabel').textContent = diasAniv === 0 ? 'Feliz aniversário!' : 'dias para o aniversário';
+    document.getElementById('anivCardDate').textContent = proxAniv.toLocaleDateString('pt-BR', {day:'2-digit',month:'long'});
+  } else {
+    document.getElementById('pfDataRel').textContent = 'Não informado';
+    document.getElementById('perfilSinceEl').textContent = 'Adicione sua data especial';
+  }
+
+  if (p.dataTerapia) {
+    const d = new Date(p.dataTerapia + 'T12:00:00');
+    document.getElementById('pfDataTerapia').textContent = d.toLocaleDateString('pt-BR');
+  } else {
+    document.getElementById('pfDataTerapia').textContent = 'Não informado';
+  }
+}
+
+function proximoAniversario(dataStr) {
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const orig = new Date(dataStr + 'T00:00:00');
+  const proxAniv = new Date(hoje.getFullYear(), orig.getMonth(), orig.getDate());
+  if (proxAniv < hoje) proxAniv.setFullYear(hoje.getFullYear() + 1);
+  return proxAniv;
+}
+
+function checkAniversario() {
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  const cfg = JSON.parse(localStorage.getItem('ceg_config') || '{"aniv":true}');
+  if (!p.dataRel || !cfg.aniv) return;
+
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const proxAniv = proximoAniversario(p.dataRel);
+  const diasFaltam = Math.round((proxAniv - hoje) / 86400000);
+  const orig = new Date(p.dataRel + 'T00:00:00');
+  const anos = hoje.getFullYear() - orig.getFullYear() + (diasFaltam === 0 ? 0 : 1);
+
+  const notif = document.getElementById('anivNotif');
+  const banner = document.getElementById('anivBanner');
+  const title = document.getElementById('anivBannerTitle');
+  const text = document.getElementById('anivBannerText');
+
+  const DICAS_VESPERA = [
+    'Que tal reservar um restaurante especial? Ligue agora antes que lote!',
+    'Prepare uma mensagem de amor para entregar amanhã de manhã. Palavras escritas ficam para sempre.',
+    'Combine um programa surpresa — um passeio, um filme, um jantar em casa com velas.',
+    'Compre ou faça um pequeno presente com significado. Não precisa ser caro, precisa ser pensado.',
+    'Relembre juntos a história de vocês: primeiro encontro, primeiro beijo, momentos marcantes.'
+  ];
+
+  const FRASES_ANIVERSARIO = [
+    'Que cada ano juntos seja mais bonito que o anterior. Vocês são a prova de que o amor verdadeiro existe.',
+    'Amor não é encontrar alguém perfeito. É aprender a enxergar a perfeição numa pessoa imperfeita.',
+    'Dois são melhores do que um — porque têm uma boa recompensa pelo seu trabalho.',
+    'O amor não consiste em olhar um para o outro, mas em olhar juntos na mesma direção.',
+    'Cada dia ao seu lado é um presente que escolho receber com gratidão.'
+  ];
+
+  if (diasFaltam === 0) {
+    banner.className = 'aniv-banner day';
+    title.textContent = `🎉 Feliz ${anos}º aniversário, ${p.nome || 'casal'}!`;
+    text.textContent = FRASES_ANIVERSARIO[Math.floor(Math.random() * FRASES_ANIVERSARIO.length)];
+    notif.classList.add('show');
+  } else if (diasFaltam === 1) {
+    banner.className = 'aniv-banner eve';
+    title.textContent = `💍 Amanhã é o aniversário de vocês!`;
+    text.textContent = DICAS_VESPERA[Math.floor(Math.random() * DICAS_VESPERA.length)];
+    notif.classList.add('show');
+  }
+}
+
+function openEditPerfil() {
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  document.getElementById('editNome').value = p.nome || '';
+  document.getElementById('editDataRel').value = p.dataRel || '';
+  document.getElementById('editDataTerapia').value = p.dataTerapia || '';
+  document.getElementById('editPerfilModal').classList.add('show');
+}
+
+function closeEditPerfil() {
+  document.getElementById('editPerfilModal').classList.remove('show');
+}
+
+function salvarPerfil() {
+  const nome = document.getElementById('editNome').value.trim();
+  const dataRel = document.getElementById('editDataRel').value;
+  const dataTerapia = document.getElementById('editDataTerapia').value;
+  if (!nome) { showToast('Preencha o nome do casal'); return; }
+  const p = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+  p.nome = nome;
+  p.dataRel = dataRel;
+  p.dataTerapia = dataTerapia;
+  localStorage.setItem('ceg_perfil', JSON.stringify(p));
+  closeEditPerfil();
+  renderPerfil();
+  checkAniversario();
+  showToast('✓ Perfil salvo!');
+}
+
+function editarFoto() {
+  showToast('Upload de foto disponível com Firebase');
+}
+
+// CONFIGURAÇÕES
+function toggleConfig(key, btn) {
+  const cfg = JSON.parse(localStorage.getItem('ceg_config') || '{}');
+  cfg[key] = !cfg[key];
+  localStorage.setItem('ceg_config', JSON.stringify(cfg));
+  btn.classList.toggle('on', cfg[key]);
+}
+
+function showTermsFromConfig() {
+  document.getElementById('termsModal').classList.add('show');
+}
+
+function confirmarApagarDados() {
+  if (confirm('Tem certeza? Todos os seus registros serão apagados permanentemente.')) {
+    const email = currentUser?.email;
+    const senha = currentUser?.senha;
+    localStorage.clear();
+    if (email) localStorage.setItem('ceg_user', JSON.stringify({email, senha}));
+    showToast('✓ Dados apagados');
+    goTo('home');
+  }
+}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
