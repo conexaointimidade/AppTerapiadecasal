@@ -177,11 +177,26 @@ canvas#moodChartMonth{width:100%!important;height:160px!important;}
 .frase-add-text{font-size:13px;color:var(--rose-dark);font-weight:500;}
 .add-frase-form{background:white;border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:12px;}
 .form-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;display:block;}
-.time-inputs{display:flex;gap:10px;align-items:center;margin-bottom:14px;}
+.time-inputs{display:flex;gap:10px;align-items:center;margin-bottom:8px;}
 input[type=time]{flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--cream);outline:none;}
+input[type=date]{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--cream);outline:none;margin-bottom:8px;}
+input[type=date]:focus,input[type=time]:focus{border-color:var(--rose);}
 .btn-add-time{padding:10px 14px;border:1px solid var(--rose);border-radius:var(--radius-sm);background:var(--rose-light);color:var(--rose-dark);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;}
-.time-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.time-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
 .time-tag{padding:4px 10px;background:var(--rose-light);border-radius:20px;font-size:12px;color:var(--rose-dark);display:flex;align-items:center;gap:4px;}
+.repeat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+.repeat-btn{padding:8px 4px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;cursor:pointer;background:white;font-family:'DM Sans',sans-serif;color:var(--text-muted);text-align:center;transition:all .15s;}
+.repeat-btn.active{border-color:var(--rose);background:var(--rose-light);color:var(--rose-dark);font-weight:500;}
+.personalizado-wrap{background:var(--cream);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px;border:1px solid var(--border);}
+.dias-semana{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.dia-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);font-size:11px;cursor:pointer;background:white;font-family:'DM Sans',sans-serif;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-weight:500;}
+.dia-btn.active{border-color:var(--rose);background:var(--rose);color:white;}
+.frase-item{background:white;border-radius:var(--radius);padding:14px 16px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.frase-meta{flex:1;}
+.frase-text{font-size:14px;color:var(--text);line-height:1.5;margin-bottom:4px;}
+.frase-info{font-size:11px;color:var(--text-muted);}
+.frase-repeat-badge{display:inline-block;padding:2px 8px;background:var(--rose-light);border-radius:10px;font-size:11px;color:var(--rose-dark);margin-left:4px;}
+.frase-delete{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:18px;padding:0;}
 /* DESAFIOS */
 .desafio-active{background:linear-gradient(135deg,var(--rose-light),var(--gold-light));border-radius:var(--radius);padding:18px;margin-bottom:12px;border:1px solid rgba(193,123,138,.2);}
 .desafio-active-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--rose-dark);margin-bottom:6px;font-weight:500;}
@@ -361,7 +376,7 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
 .config-toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:white;top:3px;left:3px;transition:transform .2s;}
 .config-toggle.on::after{transform:translateX(20px);}
 /* MODAL EDITAR PERFIL */
-#editPerfilModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:600;align-items:flex-end;justify-content:center;}
+#editPerfilModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:700;align-items:flex-end;justify-content:center;}
 #editPerfilModal.show{display:flex;}
 .edit-sheet{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:420px;padding:24px 24px 40px;max-height:90vh;overflow-y:auto;}
 .edit-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
@@ -379,6 +394,13 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
 .aniv-banner.eve .aniv-banner-text{color:var(--text-muted);}
 .aniv-banner.day .aniv-banner-text{color:rgba(253,250,246,0.7);}
 .aniv-close{float:right;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted);margin-top:-4px;}
+
+#editFraseModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:700;align-items:flex-end;justify-content:center;}
+#editFraseModal.show{display:flex;}
+.frase-actions{display:flex;gap:6px;margin-top:6px;}
+.frase-action-btn{padding:5px 10px;border-radius:20px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--border);background:white;color:var(--text-muted);}
+.frase-action-btn.edit{border-color:var(--rose);color:var(--rose);}
+.frase-action-btn.del{border-color:#E24B4A;color:#E24B4A;}
 </style>
 </head>
 <body>
@@ -676,11 +698,45 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
   <div style="padding:0 20px;">
     <div class="frase-add-card" id="fraseAddCard" onclick="showFraseForm()"><div class="frase-add-icon">✍️</div><div class="frase-add-text">Adicionar nova frase</div></div>
     <div class="add-frase-form" id="fraseForm" style="display:none;">
-      <label class="form-label">Sua frase</label>
+      <label class="form-label">Sua frase ou tarefa</label>
       <textarea class="note-input" id="fraseInput" placeholder="Ex: Hoje eu escolho reagir com amor..." style="margin-bottom:14px;"></textarea>
-      <label class="form-label">Horários de lembrete</label>
-      <div class="time-inputs"><input type="time" id="timeInput" value="08:00"><button class="btn-add-time" onclick="addTime()">+ Horário</button></div>
+
+      <label class="form-label">Horário</label>
+      <div class="time-inputs">
+        <input type="time" id="timeInput" value="08:00">
+        <button class="btn-add-time" onclick="addTime()">+ Adicionar</button>
+      </div>
       <div class="time-tags" id="timeTags"></div>
+
+      <label class="form-label">Data de início</label>
+      <input type="date" id="fraseDataInicio">
+
+      <label class="form-label">Data de término (opcional)</label>
+      <input type="date" id="fraseDataFim">
+
+      <label class="form-label">Repetir</label>
+      <div class="repeat-grid">
+        <button class="repeat-btn active" data-rep="nao" onclick="selectRepeat('nao',this)">Não repetir</button>
+        <button class="repeat-btn" data-rep="diario" onclick="selectRepeat('diario',this)">Diariamente</button>
+        <button class="repeat-btn" data-rep="semanal" onclick="selectRepeat('semanal',this)">Semanalmente</button>
+        <button class="repeat-btn" data-rep="mensal" onclick="selectRepeat('mensal',this)">Mensalmente</button>
+        <button class="repeat-btn" data-rep="anual" onclick="selectRepeat('anual',this)">Anualmente</button>
+        <button class="repeat-btn" data-rep="personalizado" onclick="selectRepeat('personalizado',this)">Personalizado</button>
+      </div>
+
+      <div class="personalizado-wrap" id="personalizadoWrap" style="display:none;">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Selecione os dias da semana:</div>
+        <div class="dias-semana">
+          <button class="dia-btn" data-dia="0" onclick="toggleDia(this)">Dom</button>
+          <button class="dia-btn" data-dia="1" onclick="toggleDia(this)">Seg</button>
+          <button class="dia-btn" data-dia="2" onclick="toggleDia(this)">Ter</button>
+          <button class="dia-btn" data-dia="3" onclick="toggleDia(this)">Qua</button>
+          <button class="dia-btn" data-dia="4" onclick="toggleDia(this)">Qui</button>
+          <button class="dia-btn" data-dia="5" onclick="toggleDia(this)">Sex</button>
+          <button class="dia-btn" data-dia="6" onclick="toggleDia(this)">Sáb</button>
+        </div>
+      </div>
+
       <button class="btn-primary" onclick="saveFrase()">Salvar lembrete</button>
       <button class="btn-secondary" onclick="hideFraseForm()">Cancelar</button>
     </div>
@@ -744,7 +800,9 @@ let frases=JSON.parse(localStorage.getItem('ceg_frases')||'[]');
 let trintaDone=JSON.parse(localStorage.getItem('ceg_trinta')||'[]');
 let currentDay=parseInt(localStorage.getItem('ceg_day')||'1');
 let savedLangResults=JSON.parse(localStorage.getItem('ceg_lang_results')||'[]');
-let chartInstance=null,currentTimes=[],chartPeriod='7';
+let chartInstance=null,currentTimes=[],chartPeriod='7',currentRepeat='nao',currentDias=[];
+const REPEAT_LABELS={'nao':'Não repete','diario':'Todo dia','semanal':'Toda semana','mensal':'Todo mês','anual':'Todo ano','personalizado':'Personalizado'};
+const DIAS_NOMES=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 
 // ---- QUIZ DATA ----
 const QUIZ_MARIDO=[
@@ -1192,16 +1250,27 @@ function saveFrase(){
 function renderFrases(){
   const el=document.getElementById('frasesList');
   if(!frases.length){el.innerHTML='<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">Nenhum lembrete ainda.<br>Adicione sua primeira frase!</div>';return;}
-  el.innerHTML=frases.map((f,i)=>`
-    <div class="frase-item">
-      <div style="font-size:22px;">💭</div>
-      <div style="flex:1;">
+  el.innerHTML=frases.map((f,i)=>{
+    const timesStr=f.times&&f.times.length?'🔔 '+f.times.join(' • '):'';
+    const repeatDesc=getRepeatDesc(f);
+    const dataStr=f.dataInicio?'📅 '+new Date(f.dataInicio+'T12:00:00').toLocaleDateString('pt-BR'):'';
+    const dataFimStr=f.dataFim?' → '+new Date(f.dataFim+'T12:00:00').toLocaleDateString('pt-BR'):'';
+    return `<div class="frase-item">
+      <div style="font-size:22px;flex-shrink:0;">💭</div>
+      <div class="frase-meta">
         <div class="frase-text">"${f.text}"</div>
-        <div class="frase-time">${f.times&&f.times.length?'🔔 '+f.times.join(' • '):'Sem horário definido'}</div>
+        <div class="frase-info">
+          ${timesStr}
+          ${repeatDesc?`<span class="frase-repeat-badge">↻ ${repeatDesc}</span>`:''}
+          ${dataStr?`<br>${dataStr}${dataFimStr}`:''}
+        </div>
+        <div class="frase-actions">
+          <button class="frase-action-btn edit" onclick="openEditFrase(${i})">✏️ Editar</button>
+          <button class="frase-action-btn del" onclick="deleteFrase(${i})">🗑️ Excluir</button>
+        </div>
       </div>
-      <button class="frase-delete" onclick="deleteFrase(${i})">×</button>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 function deleteFrase(i){frases.splice(i,1);localStorage.setItem('ceg_frases',JSON.stringify(frases));renderFrases();}
 
@@ -1831,6 +1900,106 @@ function confirmarApagarDados() {
   }
 }
 
+
+/* ============ EDITAR LEMBRETE ============ */
+let editFraseIdx = -1;
+let editCurrentTimes = [];
+let editCurrentRepeat = 'nao';
+let editCurrentDias = [];
+
+function openEditFrase(i) {
+  editFraseIdx = i;
+  const f = frases[i];
+  editCurrentTimes = [...(f.times||[])];
+  editCurrentRepeat = f.repeat || 'nao';
+  editCurrentDias = [...(f.dias||[])];
+
+  document.getElementById('editFraseText').value = f.text || '';
+  document.getElementById('editFraseDataInicio').value = f.dataInicio || '';
+  document.getElementById('editFraseDataFim').value = f.dataFim || '';
+
+  // Render times
+  renderEditTimeTags();
+
+  // Set repeat buttons
+  document.querySelectorAll('#editFraseModal .repeat-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.rep === editCurrentRepeat);
+  });
+  document.getElementById('editPersonalizadoWrap').style.display =
+    editCurrentRepeat === 'personalizado' ? 'block' : 'none';
+
+  // Set dias buttons
+  document.querySelectorAll('#editDiasSemana .dia-btn').forEach(b => {
+    b.classList.toggle('active', editCurrentDias.includes(parseInt(b.dataset.dia)));
+  });
+
+  document.getElementById('editFraseModal').classList.add('show');
+}
+
+function closeEditFrase() {
+  document.getElementById('editFraseModal').classList.remove('show');
+  editFraseIdx = -1;
+}
+
+function editAddTime() {
+  const t = document.getElementById('editTimeInput').value;
+  if (t && !editCurrentTimes.includes(t)) {
+    editCurrentTimes.push(t);
+    renderEditTimeTags();
+  }
+}
+
+function renderEditTimeTags() {
+  document.getElementById('editTimeTags').innerHTML = editCurrentTimes.map((t,i) =>
+    `<div class="time-tag">🔔 ${t} <span style="cursor:pointer;font-weight:500;" onclick="editRemoveTime(${i})">×</span></div>`
+  ).join('');
+}
+
+function editRemoveTime(i) {
+  editCurrentTimes.splice(i, 1);
+  renderEditTimeTags();
+}
+
+function editSelectRepeat(rep, btn) {
+  editCurrentRepeat = rep;
+  document.querySelectorAll('#editFraseModal .repeat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('editPersonalizadoWrap').style.display =
+    rep === 'personalizado' ? 'block' : 'none';
+}
+
+function editToggleDia(btn) {
+  const dia = parseInt(btn.dataset.dia);
+  btn.classList.toggle('active');
+  if (btn.classList.contains('active')) {
+    if (!editCurrentDias.includes(dia)) editCurrentDias.push(dia);
+  } else {
+    editCurrentDias = editCurrentDias.filter(d => d !== dia);
+  }
+}
+
+function saveEditFrase() {
+  if (editFraseIdx < 0) return;
+  const text = document.getElementById('editFraseText').value.trim();
+  if (!text) { showToast('Escreva a frase'); return; }
+  if (editCurrentTimes.length === 0) { showToast('Adicione pelo menos um horário'); return; }
+
+  frases[editFraseIdx] = {
+    ...frases[editFraseIdx],
+    text,
+    times: [...editCurrentTimes],
+    repeat: editCurrentRepeat,
+    dias: editCurrentRepeat === 'personalizado' ? [...editCurrentDias] : [],
+    dataInicio: document.getElementById('editFraseDataInicio').value,
+    dataFim: document.getElementById('editFraseDataFim').value,
+  };
+
+  localStorage.setItem('ceg_frases', JSON.stringify(frases));
+  closeEditFrase();
+  renderFrases();
+  showToast('✓ Lembrete atualizado!');
+}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
@@ -1993,6 +2162,59 @@ window.acceptTermsOrig = window.acceptTerms;
     Falar com o psicólogo
   </button>
   <div class="exp-credit">psicologogabrielaguilar.com.br · @psi.gabrielaguilar</div>
+</div>
+
+<!-- MODAL EDITAR LEMBRETE -->
+<div id="editFraseModal">
+  <div class="edit-sheet">
+    <div class="edit-handle"></div>
+    <div class="edit-title">Editar lembrete</div>
+    <div class="form-group">
+      <label class="form-label">Frase ou tarefa</label>
+      <textarea class="note-input" id="editFraseText" placeholder="Ex: Hoje eu escolho reagir com amor..." style="margin-bottom:4px;"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Horários</label>
+      <div class="time-inputs">
+        <input type="time" id="editTimeInput" value="08:00">
+        <button class="btn-add-time" onclick="editAddTime()">+ Adicionar</button>
+      </div>
+      <div class="time-tags" id="editTimeTags"></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Data de início</label>
+      <input type="date" id="editFraseDataInicio">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Data de término (opcional)</label>
+      <input type="date" id="editFraseDataFim">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Repetir</label>
+      <div class="repeat-grid">
+        <button class="repeat-btn" data-rep="nao" onclick="editSelectRepeat('nao',this)">Não repetir</button>
+        <button class="repeat-btn" data-rep="diario" onclick="editSelectRepeat('diario',this)">Diariamente</button>
+        <button class="repeat-btn" data-rep="semanal" onclick="editSelectRepeat('semanal',this)">Semanalmente</button>
+        <button class="repeat-btn" data-rep="mensal" onclick="editSelectRepeat('mensal',this)">Mensalmente</button>
+        <button class="repeat-btn" data-rep="anual" onclick="editSelectRepeat('anual',this)">Anualmente</button>
+        <button class="repeat-btn" data-rep="personalizado" onclick="editSelectRepeat('personalizado',this)">Personalizado</button>
+      </div>
+      <div class="personalizado-wrap" id="editPersonalizadoWrap" style="display:none;">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Selecione os dias da semana:</div>
+        <div class="dias-semana" id="editDiasSemana">
+          <button class="dia-btn" data-dia="0" onclick="editToggleDia(this)">Dom</button>
+          <button class="dia-btn" data-dia="1" onclick="editToggleDia(this)">Seg</button>
+          <button class="dia-btn" data-dia="2" onclick="editToggleDia(this)">Ter</button>
+          <button class="dia-btn" data-dia="3" onclick="editToggleDia(this)">Qua</button>
+          <button class="dia-btn" data-dia="4" onclick="editToggleDia(this)">Qui</button>
+          <button class="dia-btn" data-dia="5" onclick="editToggleDia(this)">Sex</button>
+          <button class="dia-btn" data-dia="6" onclick="editToggleDia(this)">Sáb</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="saveEditFrase()">Salvar alterações</button>
+    <button class="btn-secondary" onclick="closeEditFrase()">Cancelar</button>
+  </div>
 </div>
 </body>
 </html>
