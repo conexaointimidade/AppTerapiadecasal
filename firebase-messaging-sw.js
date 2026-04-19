@@ -2,7 +2,7 @@ importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js
 importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js');
 
 firebase.initializeApp({
-  apiKey: "AIzaSyADaWVvsl13Oqi0zM-RcUByWB8535WC184",
+  apiKey: "AIzaSyADaWVvsll3Oqi0zM-RcUByWB8535WC184",
   authDomain: "casamento-em-graca.firebaseapp.com",
   projectId: "casamento-em-graca",
   storageBucket: "casamento-em-graca.firebasestorage.app",
