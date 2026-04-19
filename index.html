@@ -484,12 +484,19 @@ body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inse
   _auth.onAuthStateChanged((user) => {
     if (user) {
       window.FB_USER = user;
+      window.FB_UID = user.uid;
       if (window.onFirebaseUserReady) window.onFirebaseUserReady(user);
     } else {
       window.FB_USER = null;
+      window.FB_UID = null;
       if (window.onFirebaseUserSignedOut) window.onFirebaseUserSignedOut();
     }
   });
+
+  // Helper — always returns current user uid reliably
+  window.getUID = () => {
+    return window.FB_UID || window.FB_USER?.uid || _auth.currentUser?.uid || null;
+  };
 
   console.log('Firebase initialized ✅');
 </script>
@@ -2404,11 +2411,164 @@ function requestAndScheduleNotifications() {
 
 
 
-async function saveModuloToFirebase(modulo, data) {
-  const user = window.FB_USER || window.FB_AUTH?.currentUser;
-  if (!window.FB_DB || !user) return;
+
+/* ============================================
+   FUNÇÕES RESTAURADAS
+   ============================================ */
+
+// Seleção de repetição nos lembretes
+function selectRepeat(rep, btn) {
+  currentRepeat = rep;
+  document.querySelectorAll('#fraseForm .repeat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('personalizadoWrap').style.display = rep === 'personalizado' ? 'block' : 'none';
+}
+
+// Toggle dias da semana nos lembretes
+function toggleDia(btn) {
+  const dia = parseInt(btn.dataset.dia);
+  btn.classList.toggle('active');
+  if (btn.classList.contains('active')) {
+    if (!currentDias.includes(dia)) currentDias.push(dia);
+  } else {
+    currentDias = currentDias.filter(d => d !== dia);
+  }
+}
+
+// Descrição de repetição para exibição
+function getRepeatDesc(f) {
+  if (!f.repeat || f.repeat === 'nao') return '';
+  if (f.repeat === 'personalizado' && f.dias && f.dias.length) {
+    return f.dias.map(d => DIAS_NOMES[d]).join(', ');
+  }
+  return REPEAT_LABELS[f.repeat] || '';
+}
+
+// Setup Firebase Push Notifications
+async function setupFirebasePush() {
+  if (!('serviceWorker' in navigator)) return;
   try {
-    await window.FB_DB.collection('usuarios').doc(user.uid).collection('modulos').doc(modulo).set({
+    const messaging = firebase.messaging();
+    const sw = await navigator.serviceWorker.ready;
+    const token = await messaging.getToken({
+      vapidKey: window.FB_VAPID,
+      serviceWorkerRegistration: sw
+    });
+    const uid = window.getUID ? window.getUID() : null;
+    if (token && uid && window.FB_DB) {
+      await window.FB_DB.collection('usuarios').doc(uid).set({
+        fcmToken: token,
+        fcmUpdated: new Date().toISOString()
+      }, { merge: true });
+      console.log('✅ FCM token salvo');
+    }
+    messaging.onMessage((payload) => {
+      showToast('🔔 ' + (payload.notification?.title || 'Lembrete'));
+    });
+  } catch(e) { console.log('FCM setup:', e.message); }
+}
+
+// Carregar dados do usuário do Firebase
+async function loadUserDataFromFirebase(uid) {
+  if (!window.FB_DB || !uid) return;
+  try {
+    const db = window.FB_DB;
+    // Perfil
+    const userDoc = await db.collection('usuarios').doc(uid).get();
+    if (userDoc.exists) {
+      const data = userDoc.data();
+      const perfil = JSON.parse(localStorage.getItem('ceg_perfil') || '{}');
+      if (data.nome) perfil.nome = data.nome;
+      if (data.email) perfil.email = data.email;
+      if (data.dataRel) perfil.dataRel = data.dataRel;
+      if (data.dataTerapia) perfil.dataTerapia = data.dataTerapia;
+      if (data.accessExpiry) localStorage.setItem('ceg_access_expiry', data.accessExpiry);
+      localStorage.setItem('ceg_perfil', JSON.stringify(perfil));
+    }
+    // Registros emocionais
+    const regSnap = await db.collection('usuarios').doc(uid).collection('registros').orderBy('ts','desc').get();
+    if (!regSnap.empty) {
+      const registros = regSnap.docs.map(d => d.data());
+      localStorage.setItem('ceg_moods', JSON.stringify(registros));
+      moodHistory = registros;
+    }
+    // Frases/Lembretes
+    const frasesSnap = await db.collection('usuarios').doc(uid).collection('frases').get();
+    if (!frasesSnap.empty) {
+      const frasesData = frasesSnap.docs.map(d => d.data());
+      localStorage.setItem('ceg_frases', JSON.stringify(frasesData));
+      frases = frasesData;
+    }
+    // Módulos
+    const modulosSnap = await db.collection('usuarios').doc(uid).collection('modulos').get();
+    modulosSnap.docs.forEach(d => {
+      const modulo = d.id;
+      const mdata = d.data().data;
+      if (modulo === 'progresso30dias' && mdata?.day) {
+        localStorage.setItem('ceg_day', mdata.day);
+        currentDay = mdata.day;
+      }
+      if (modulo === 'linguagens' && mdata) {
+        localStorage.setItem('ceg_lang_results', JSON.stringify(mdata));
+      }
+      if (modulo === 'trinta' && mdata) {
+        localStorage.setItem('ceg_trinta', JSON.stringify(mdata));
+        trintaDone = mdata;
+      }
+    });
+    console.log('✅ Dados carregados do Firebase');
+  } catch(e) { console.error('Firebase load error:', e.message); }
+}
+
+/* ============================================
+   FIREBASE — FUNÇÕES DE SAVE
+   ============================================ */
+
+async function saveRegistroToFirebase(registro) {
+  const uid = window.getUID ? window.getUID() : (window.FB_USER?.uid || window.FB_AUTH?.currentUser?.uid);
+  if (!window.FB_DB || !uid) return;
+  try {
+    await window.FB_DB.collection('usuarios').doc(uid).collection('registros').add(registro);
+    console.log('✅ Registro emocional salvo');
+  } catch(e) { console.error('Save registro error:', e.code, e.message); }
+}
+
+async function savePerfilToFirebase(perfil) {
+  const uid = window.getUID ? window.getUID() : (window.FB_USER?.uid || window.FB_AUTH?.currentUser?.uid);
+  if (!window.FB_DB || !uid) return;
+  try {
+    await window.FB_DB.collection('usuarios').doc(uid).set({
+      nome: perfil.nome || '',
+      dataRel: perfil.dataRel || null,
+      dataTerapia: perfil.dataTerapia || null,
+      email: perfil.email || ''
+    }, { merge: true });
+    console.log('✅ Perfil salvo');
+  } catch(e) { console.error('Save perfil error:', e.code, e.message); }
+}
+
+async function saveFraseToFirebase(frase) {
+  const uid = window.getUID ? window.getUID() : (window.FB_USER?.uid || window.FB_AUTH?.currentUser?.uid);
+  if (!window.FB_DB || !uid) return;
+  try {
+    await window.FB_DB.collection('usuarios').doc(uid).collection('frases').doc(String(frase.id)).set(frase);
+    console.log('✅ Lembrete salvo');
+  } catch(e) { console.error('Save frase error:', e.code, e.message); }
+}
+
+async function deleteFraseFromFirebase(fraseId) {
+  const uid = window.getUID ? window.getUID() : (window.FB_USER?.uid || window.FB_AUTH?.currentUser?.uid);
+  if (!window.FB_DB || !uid) return;
+  try {
+    await window.FB_DB.collection('usuarios').doc(uid).collection('frases').doc(String(fraseId)).delete();
+    console.log('✅ Lembrete removido do Firebase');
+  } catch(e) { console.error('Delete frase error:', e.code, e.message); }
+}
+async function saveModuloToFirebase(modulo, data) {
+  const uid = window.getUID ? window.getUID() : (window.FB_USER?.uid || window.FB_AUTH?.currentUser?.uid);
+  if (!window.FB_DB || !uid) return;
+  try {
+    await window.FB_DB.collection('usuarios').doc(uid).collection('modulos').doc(modulo).set({
       data, updatedAt: new Date().toISOString()
     });
   } catch(e) { console.log('Save modulo error:', e); }
